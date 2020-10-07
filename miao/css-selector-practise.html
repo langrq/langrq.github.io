@@ -9,27 +9,27 @@
       color: red
     }
 
-    p[class="a"]:focus {
+    p.a:focus {
       color: blue;
     }
 
-    p[class="a"]:hover {
+    p.a:hover {
       color: red;
     }
 
-    p[class="a"]:active {
+    p.a:active {
       color: green;
     }
 
-    p[class="a c"]>span:nth-child(1) {
+    p.a>span:nth-child(1) {
       color: red;
     }
 
-    p[class="a c"] span :last-child {
+    p.a span :last-child {
       color: blue;
     }
 
-    p[class="a c"] span :nth-child(1) {
+    p.a span :nth-child(1) {
       color: green;
     }
 
@@ -54,67 +54,68 @@
       font-size: 30px;
     }
 
-    div[class="a"] ul :nth-child(4) {
+    div.a ul :nth-child(4) {
+      color: red;
+      fg
+    }
+
+    div.a ul :nth-child(5) {
       color: red;
     }
 
-    div[class="a"] ul :nth-child(5) {
+    div.a ul :nth-child(6) {
       color: red;
     }
 
-    div[class="a"] ul :nth-child(6) {
-      color: red;
-    }
-
-    div[class="a"] ul :nth-child(7) {
+    div.a ul :nth-child(7) {
       color: red;
     }
 
 
 
-    div[class="b"] ul :nth-child(-n + 64) {
+    div.b ul :nth-child(-n + 64) {
       color: blue;
     }
 
-    div[class="b"] ul :nth-child(-n + 34) {
+    div.b ul :nth-child(-n + 34) {
       color: black;
     }
 
-    div[class="b"] ul :nth-last-child(-n + 50) {
+    div.b ul :nth-last-child(-n + 50) {
       color: black;
     }
 
 
 
-    div[class="b"] ul :nth-child(-n + 25) {
+    div.b ul :nth-child(-n + 25) {
       color: red;
     }
 
 
 
-    div[class="b"] ul :nth-last-child(-n + 36) {
+    div.b ul :nth-last-child(-n + 36) {
       color: green;
     }
 
-    div[class="prime"] ul :nth-child(n+2) {
+    /* div.prime ul :nth-child(n+2) {
       color: rgb(11, 211, 247);
-    }
+    } */
 
-    div[class="prime"] ul :nth-child(2n + 4) {
+    div.prime ul :not(:nth-child(1)):not(:nth-child(2n + 4)):not(:nth-child(3n + 6)):not(:nth-child(5n + 25)):not(:nth-child(7n + 49)) {
       color: red;
     }
 
-    div[class="prime"] ul :nth-child(3n + 6) {
+    /* div.prime ul :nth-child(3n + 6) {
       color: red;
     }
 
-    div[class="prime"] ul :nth-child(5n + 25) {
+    div.prime ul :nth-child(5n + 25) {
       color: red;
     }
 
-    div[class="prime"] ul :nth-child(7n + 49) {
+    div.prime ul :nth-child(7n + 49) {
       color: red;
-    }
+    } */
   </style>
 </head>
 
@@ -160,11 +161,6 @@
       <li>03</li>
       <li>04</li>
       <li>05</li>
-      <li>06</li>
-      <li>07</li>
-      <li>08</li>
-      <li>09</li>
-      <li>10</li>
       <li>06</li>
       <li>07</li>
       <li>08</li>
