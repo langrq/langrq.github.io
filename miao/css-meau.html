@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .main {
+    width: auto;
+    height: 22px;
+    background-color: grey;
+  }
+
+  .f,
+  .s,
+  .v,
+  .h {
+    width: 60px;
+  }
+
+  .e {
+    width: 150px
+  }
+
+  ul li {
+    width: 200px;
+    height: auto;
+  }
+
+  li>ul {
+    display: none;
+  }
+
+  .main>li {
+    display: inline-block;
+    position: relative;
+
+  }
+
+  .main>li:hover>ul {
+    display: block;
+    position: absolute;
+    background-color: gray;
+  }
+
+  li {
+    position: relative;
+  }
+
+  li:hover {
+    background-color: aquamarine;
+  }
+
+  .main>.f>ul>li:hover>ul {
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: gray;
+  }
+
+
+
+
+  .main>.v>ul>li:hover>ul {
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: gray;
+  }
+
+
+  .main>.v>ul>li>ul>li:hover>ul {
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: gray;
+  }
+</style>
+
+<body>
+  <ul class="main">
+    <li class="f">
+      文件(F)
+      <ul>
+        <li>新建文件 ><ul>
+            <li>aa.txt</li>
+            <li>bb.html</li>
+            <li>cc.css</li>
+            <li>dd.js</li>
+            <li>ee.java</li>
+          </ul>
+        </li>
+        <li>新建窗口 ><ul>
+            <li>aa.txt</li>
+            <li>bb.html</li>
+            <li>cc.css</li>
+            <li>dd.js</li>
+            <li>ee.java</li>
+          </ul>
+        </li>
+        <li>打开文件 > <ul>
+            <li>aa.txt</li>
+            <li>bb.html</li>
+            <li>cc.css</li>
+            <li>dd.js</li>
+            <li>ee.java</li>
+          </ul>
+        </li>
+        <li>打开最近文件>
+          <ul>
+            <li>aa.txt</li>
+            <li>bb.html</li>
+            <li>cc.css</li>
+            <li>dd.js</li>
+            <li>ee.java</li>
+          </ul>
+        </li>
+        <li>保存</li>
+        <li>另存为</li>
+        <li>关闭页面</li>
+      </ul>
+    </li>
+    <li class="e">
+      编辑文件使用工具(E)
+      <ul>
+        <li>撤销</li>
+        <li>恢复</li>
+        <li>剪切</li>
+        <li>复制</li>
+        <li>粘贴</li>
+        <li>查找</li>
+        <li>替换</li>
+      </ul>
+    </li>
+    <li class="s">
+      选择(S)
+      <ul>
+        <li>全选</li>
+        <li>向下复制</li>
+        <li>向上复制</li>
+        <li>上移一行</li>
+        <li>下移一行</li>
+        <li>重复选择</li>
+        <li>列表模式</li>
+      </ul>
+    </li>
+    <li class="v">
+      查看(V)
+      <ul>
+        <li>外观 >
+          <ul>
+            <li>全屏</li>
+            <li>居中</li>
+            <li>放大</li>
+            <li>缩小</li>
+          </ul>
+        </li>
+        <li>编辑器布局 >
+          <ul>
+            <li>上一个编辑器</li>
+            <li>下一个编辑器</li>
+            <li>组中的编辑器</li>
+            <li>使用过的编辑器>
+              <ul class="gg">
+                <li>aa</li>
+                <li>bb</li>
+                <li>cc</li>
+              </ul>
+            </li>
+          </ul>
+        <li>切换编辑器</li>
+        <li>切换组</li>
+        <li>新建断点</li>
+      </ul>
+    </li>
+    <li class="h">
+      帮助(H)
+      <ul>
+        <li>说明</li>
+        <li>检测更新</li>
+      </ul>
+
+    </li>
+  </ul>
+
+</body>
+
+</html>
