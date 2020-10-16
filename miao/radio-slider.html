@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  section {
+    width: 500px;
+    height: 300px;
+    border: solid 5px black;
+    position: relative;
+
+  }
+
+  input {
+    display: none;
+  }
+
+  section ul {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  section ul li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: 1s;
+
+  }
+
+  ul li img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  section ul li label {
+    width: 25px;
+    text-align: center;
+    line-height: 50px;
+
+  }
+
+  section ul li label:nth-last-child(2) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 50px;
+    margin: auto;
+    cursor: pointer;
+  }
+
+  section ul li label:nth-last-child(2):hover {
+    background-color: red;
+  }
+
+  section ul li label:nth-last-child(1) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    margin: auto;
+    cursor: pointer;
+  }
+
+  section ul li label:nth-last-child(1):hover {
+    background-color: red;
+  }
+
+  input:nth-child(1):checked~ul>li:nth-child(1),
+  input:nth-child(2):checked~ul>li:nth-child(2),
+  input:nth-child(3):checked~ul>li:nth-child(3),
+  input:nth-child(4):checked~ul>li:nth-child(4),
+  input:nth-child(5):checked~ul>li:nth-child(5) {
+    opacity: 1;
+    z-index: 8;
+  }
+
+  .indicator {
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+
+  }
+
+  section .indicator div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding: 2px;
+    margin: auto;
+  }
+
+  section div label {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    cursor: pointer;
+    top: 0;
+    left: 50%;
+    margin-left: 3px;
+    margin-right: 3px;
+
+  }
+
+  input:nth-child(1):checked~.indicator>div>label:nth-child(1),
+  input:nth-child(2):checked~.indicator>div>label:nth-child(2),
+  input:nth-child(3):checked~.indicator>div>label:nth-child(3),
+  input:nth-child(4):checked~.indicator>div>label:nth-child(4),
+  input:nth-child(5):checked~.indicator>div>label:nth-child(5) {
+    background-color: aqua;
+  }
+</style>
+
+<body>
+  <section>
+    <input type="radio" checked name="s1" id="s1-1">
+    <input type="radio" name="s1" id="s1-2">
+    <input type="radio" name="s1" id="s1-3">
+    <input type="radio" name="s1" id="s1-4">
+    <input type="radio" name="s1" id="s1-5">
+    <ul class="selection">
+      <li><a href="#"><img src="https://tse1-mm.cn.bing.net/th/id/OIP.m4VIYXBmA55izylXXYU5WAHaE5?pid=Api&rs=1"
+            alt=""></a>
+        <label for="s1-5">></label>
+        <label for="s1-2">
+          &lt</label>
+      </li>
+      <li><a href="#"><img src="https://tse2-mm.cn.bing.net/th/id/OIP.agnSyV7EvoDkxYISCnyueAHaEK?pid=Api&rs=1"
+            alt=""></a>
+        <label for="s1-1">></label>
+        <label for="s1-3">
+          &lt</label>
+      </li>
+      <li><a href="#"><img
+            src="http://img.pconline.com.cn/images/upload/upc/tx/itbbs/1502/01/c18/2603215_1422761042352.jpg"
+            alt=""></a>
+        <label for="s1-2">></label>
+        <label for="s1-4">
+          &lt</label>
+      </li>
+      <li><a href="#"><img src="https://img.zcool.cn/community/01605d5ab3a164a80120be146a917b.jpg@1280w_1l_2o_100sh.jpg"
+            alt=""></a>
+        <label for="s1-3">></label>
+        <label for="s1-5">
+          &lt</label>
+      </li>
+      <li><a href="#"><img src="https://tse2-mm.cn.bing.net/th/id/OIP.IwfvhoWePvXa_uKfk3MplAHaFj?pid=Api&rs=1"
+            alt=""></a>
+        <label for="s1-4">></label>
+        <label for="s1-1">
+          &lt</label>
+      </li>
+    </ul>
+    <div class="indicator">
+      <div>
+        <label for="s1-1"></label>
+        <label for="s1-2"></label>
+        <label for="s1-3"></label>
+        <label for="s1-4"></label>
+        <label for="s1-5"></label>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

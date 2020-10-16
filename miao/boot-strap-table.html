@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    margin: 0px;
+    font-size: 0px;
+  }
+
+  .row,
+  td,
+  .col {
+    padding: 15px;
+    vertical-align: middle;
+  }
+
+  table {
+    border: rgba(222, 226, 230, 1) 1px solid;
+
+  }
+
+  .table-bordered {
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+
+  .table-bordered .col {
+    border-top: rgba(222, 226, 230, 1) 1px solid;
+    border-bottom: rgba(222, 226, 230, 1) 2px solid;
+    border-left: rgba(222, 226, 230, 1) 1px solid;
+    border-right: rgba(222, 226, 230, 1) 1px solid;
+  }
+
+  .table-bordered .row,
+  .table-bordered td {
+    border: rgba(222, 226, 230, 1) 1px solid;
+
+  }
+
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+    height: 400px;
+    font-size: 15px;
+
+  }
+
+  .table .col {
+    border-top: rgba(222, 226, 230, 1) 1px solid;
+    border-bottom: rgba(222, 226, 230, 1) 2px solid;
+    height: 50px;
+    box-sizing: border-box;
+
+  }
+
+  .table .row {
+    border-top: rgba(222, 226, 230, 1) 1px solid;
+    box-sizing: border-box;
+
+
+  }
+
+  .table .row~td {
+    border-top: rgba(222, 226, 230, 1) 0px solid;
+    height: 50px;
+    box-sizing: border-box;
+
+  }
+
+  .table-borderless {
+    border-collapse: collapse;
+
+  }
+
+  .table-borderless td,
+  .table-borderless .row,
+  .table-borderless .col {
+    border-style: none;
+  }
+
+  .table-sm {
+    height: 200px !important;
+  }
+
+  .table-striped tbody tr:nth-child(odd) {
+    background-color: rgba(222, 226, 230, 0.5);
+  }
+
+  .table-dark {
+    color: blanchedalmond;
+    background-color: rgba(34, 34, 34, 0.8);
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: rgba(222, 226, 230, 0.7);
+  }
+</style>
+
+<body>
+  <table class="table table-bordered table-borderless table-hover table-striped table-dark table-sm">
+    <thead>
+      <tr>
+        <th class="col">#</th>
+        <th class="col">First</th>
+        <th class="col">Last</th>
+        <th class="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th class="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th class="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  .a td {
+    border: 10px solid gray;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 40px;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0px;
+  }
+
+  span {
+    position: absolute;
+    border: red 10px solid;
+    width: 100px;
+    height: 100px;
+    left: -10px;
+    right: 0 px;
+    top: -10px;
+    opacity: 0;
+    z-index: 7;
+    display: block;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+
+  span:hover {
+    opacity: 1;
+  }
+</style>
+
+<body>
+  <table class="a">
+    <col>
+    <col>
+    <col>
+    <thead>
+      <tr>
+        <td> 1<span></span></td>
+        <td> 2<span></span></td>
+        <td> 3<span></span></td>
+      </tr>
+      <tr>
+        <td> 4 <span></span></td>
+        <td> 5 <span></span></td>
+        <td> 6 <span></span></td>
+      </tr>
+      <tr>
+        <td> 7 <span></span></td>
+        <td> 8 <span></span></td>
+        <td> 9 <span></span></td>
+      </tr>
+      <tr>
+        <td> 10 <span></span></td>
+        <td> 11 <span></span></td>
+        <td> 12 <span></span></td>
+      </tr>
+      <tr>
+        <td> 13 <span></span></td>
+        <td> 14 <span></span></td>
+        <td> 15 <span></span></td>
+      </tr>
+    </thead>
+  </table>
+
+</body>
+
+</html>
