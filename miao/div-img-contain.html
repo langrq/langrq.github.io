@@ -7,50 +7,78 @@
   <title>Document</title>
 </head>
 <style>
+  * {
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 1px red
+  }
+
+  hr {
+    margin: 0px;
+    padding: 0px;
+  }
+
   .a {
     width: 200px;
     height: 200px;
     background-image: url(https://cn.bing.com/th?id=OHR.TrueFox_ZH-CN9267249538_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp);
     background-size: contain;
     background-repeat: no-repeat;
-    margin: 20px;
-    margin-bottom: -50px;
+    background-position: center;
   }
 
   .b {
     width: 200px;
     height: 200px;
     object-fit: contain;
-    margin: 20px;
   }
 
   .c {
     width: 200px;
     height: 200px;
-    position: relative;
-
+    line-height: 200px;
+    font-size: 0px;
   }
 
   .homework {
-    position: absolute;
     max-width: 100%;
     max-height: 100%;
-    margin-left: calc(50% - 80px);
-    margin-right: calc(50% - 80px);
+    vertical-align: middle;
+  }
+
+  .d {
+    width: 200px;
+    height: 200px;
+    position: relative;
+  }
+
+  .e {
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    margin: auto
   }
 </style>
 
 <body>
 
   <div class="a"></div>
-  <hr>
+
   <img class="b"
     src="https://cn.bing.com/th?id=OHR.TrueFox_ZH-CN9267249538_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
     alt="imge break">
-  <hr>
+
   <div class="c">
     <img class="homework" src="https://tse3-mm.cn.bing.net/th/id/OIP.ZILJxojn64iXaRoW7cLKoAHaE7?pid=Api&rs=1"
       alt="imge break">
+  </div>
+  <div class="d">
+    <img class="e" src="https://tse2-mm.cn.bing.net/th/id/OIP.RzgiRfMZU0-qs56m6q9b7QAAAA?pid=Api&rs=1" alt="imge break">
   </div>
 </body>
 
