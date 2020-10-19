@@ -35,21 +35,23 @@
 
   input:checked+label .circle {
     left: 110px;
-    transition: 1s ease-in-out 0.5s;
+    transition: 0.5s ease-in-out;
+
   }
 
   input:checked+.border {
-    background-color: aqua;
-    transition: 1s ease-in-out 0.5s;
+
+    transition: 1s ease-in-out;
+    box-shadow: rgb(2, 196, 255, 1) 0px 0px 0px 70px inset;
   }
 
   input+label .circle {
-    transition: 1s ease-in-out 0.5s;
+    transition: 1s ease-in-out;
   }
 
   input+.border {
     background-color: azure;
-    transition: 1s ease-in-out 0.5s;
+    transition: 1s ease-in-out;
   }
 </style>
 
