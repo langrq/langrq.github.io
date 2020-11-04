@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  /* 第一种办法 使用flow-root */
+  /* html {
+    height: 100%
+  }
+
+  body {
+    position: relative;
+    display: flow-root;
+    min-height: 100%;
+    width: 1226px;
+    margin: 0;
+    padding-bottom: 25px;
+    box-sizing: border-box;
+  }
+
+
+
+  p {
+    margin: 0;
+    margin-bottom: auto;
+  }
+
+  footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0; 
+  }*/
+  /* 第二种办法  使用flex*/
+  html {
+    height: 100%
+  }
+
+  body {
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 1226px;
+    margin: 0;
+
+    box-sizing: border-box;
+  }
+
+
+
+  p {
+    margin: 0;
+    margin-bottom: auto;
+  }
+
+  footer {
+    width: 100%;
+</style>
+
+<body>
+
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, delectus! Earum fuga minima tempora.
+    Aperiam, maiores Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium maiores cum alias, quae, a
+    non itaque placeat quis esse quasi architecto nesciunt labore incidunt, quia impedit provident dignissimos
+    assumenda facere?
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, delectus! Earum fuga minima tempora.
+    Aperiam, maiores Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium maiores cum alias, quae, a
+    non itaque placeat quis esse quasi architecto nesciunt labore incidunt, quia impedit provident dignissimos
+    assumenda facere?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, delectus! Earum fuga minima
+    tempora.
+    Aperiam, maiores Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium maiores cum alias, quae, a
+    non itaque placeat quis esse quasi architecto nesciunt labore incidunt, quia impedit provident dignissimos
+    assumenda facere?
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, delectus! Earum fuga minima tempora.
+    Aperiam, maiores Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium maiores cum alias, quae, a
+    non itaque placeat quis esse quasi architecto nesciunt labore incidunt, quia impedit provident dignissimos
+    assumenda facere?
+  </p>
+
+  <footer>asdsdadasdas </footer>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="fontawesome.css">
+</head>
+<style>
+  .fa-star-o:hover::before {
+    content: '\f005'
+  }
+
+  .fa-star-o:hover~.fa-star-o::before {
+    content: '\f005'
+  }
+
+  .rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  label::before {
+    content: '\f006'
+  }
+
+  input {
+    display: none;
+
+  }
+
+  .div {}
+
+  input:nth-child(1):checked~section>label:nth-child(-n + 1)::before {
+    content: '\f005';
+  }
+
+  input:nth-child(2):checked~section>label:nth-child(-n + 2)::before {
+    content: '\f005';
+  }
+
+  input:nth-child(3):checked~section>label:nth-child(-n + 3)::before {
+    content: '\f005';
+  }
+
+  input:nth-child(4):checked~section>label:nth-child(-n + 4)::before {
+    content: '\f005';
+  }
+
+  input:nth-child(5):checked~section>label:nth-child(-n + 5)::before {
+    content: '\f005';
+  }
+</style>
+
+<body>
+  <div>
+    <input type="radio" name="a" id="s1">
+    <input type="radio" name="a" id="s2">
+    <input type="radio" name="a" id="s3">
+    <input type="radio" name="a" id="s4">
+    <input type="radio" name="a" id="s5">
+    <section>
+      <label for="s1" class="fa"></label>
+      <label for="s2" class="fa"></label>
+      <label for="s3" class="fa"></label>
+      <label for="s4" class="fa"></label>
+      <label for="s5" class="fa"></label>
+    </section>
+
+  </div>
+  <span class="rating">
+    <span class="fa fa-star-o"></span>
+    <span class="fa fa-star-o"></span>
+    <span class="fa fa-star-o"></span>
+    <span class="fa fa-star-o"></span>
+    <span class="fa fa-star-o"></span>
+  </span>
+</body>
+
+</html>

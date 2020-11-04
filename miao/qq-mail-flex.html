@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: red 0 0 1px;
+  }
+
+  body,
+  html {
+    height: 100%;
+    margin: 0;
+  }
+
+  section {
+    display: flex;
+    height: 100%;
+    flex-flow: wrap;
+  }
+
+  header {
+
+    height: 50px;
+    width: 100%;
+  }
+
+  aside {
+    width: 190px;
+    height: calc(100% - 50px);
+  }
+
+  main {
+    flex-grow: 1;
+  }
+</style>
+
+<body>
+  <section>
+    <header>1</header>
+    <aside>2</aside>
+    <main>3</main>
+  </section>
+</body>
+
+</html>

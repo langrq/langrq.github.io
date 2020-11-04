@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .sink-wrapper {
+    background-color: cadetblue;
+  }
+
+  .sink {
+    width: 500px;
+    height: 200px;
+    zbackground-color: cadetblue;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+
+  }
+
+  .sink span {
+    position: relative;
+    top: 50px;
+    left: 200px;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    line-height: 100px;
+    position: absolute;
+    transform-style: preserve-3d;
+    zopacity: 0.8;
+  }
+
+  .before {
+    display: block;
+    background-image: linear-gradient(red, green);
+    transform: translatez(50px);
+    z-index: 1;
+  }
+
+  .left {
+    display: block;
+    background-image: linear-gradient(green, yellow);
+    transform: translatez(0px) translatex(-50px) rotatey(90deg);
+  }
+
+  .right {
+    display: block;
+    background-image: linear-gradient(yellow, lime);
+    transform: translatez(0px) translatex(50px) rotatey(90deg)
+  }
+
+  .top {
+    display: block;
+    background-image: linear-gradient(lime, black);
+    transform: translatez(0px) translatey(50px) rotatex(90deg)
+  }
+
+  .bottom {
+    display: block;
+    background-image: linear-gradient(green, white);
+    transform: translatez(0px) translatey(-50px) rotatex(-90deg)
+  }
+
+  .behind {
+    display: block;
+    background-image: linear-gradient(white, yellow);
+    transform: translatez(-50px);
+  }
+
+
+  .sink:hover {
+    transition: 3s;
+    transform: rotatex(180deg) rotatey(480deg) rotatez(480deg);
+    transform-style: preserve-3d;
+  }
+</style>
+
+<body>
+  <div class="sink-wrapper">
+    <div class="sink">
+      <span class="before">1</span>
+      <span class="left">2</span>
+      <span class="right">3</span>
+      <span class="top">4</span>
+      <span class="bottom">5</span>
+      <span class="behind">6</span>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+@font-face {
+  font-family: FontAwesome;
+  src: url('./fontawesome-webfont.woff2')
+}
+
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.fa-fw {
+  width: 1.3em;
+}
+.fa-lg{font-size:1.3333em;
+line-height: 0.75em;
+vertical-align: 15%;}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-music::before {
+  content: '\f001'
+}
+
+.fa-search::before {
+  content: '\f002'
+}
+
+.fa-email::before {
+  content: '\f003'
+}
+
+.fa-heart::before {
+  content: '\f004'
+}
+
+.fa-star::before {
+  content: '\f005'
+}
+.fa-star-o::before {
+  content: '\f006'
+}
+.fa-spinner:before {
+  content: "\f110";
+}
+.fa-check-square:before {
+    content: "\f14a";
+}
+.fa-spinner:before {
+  content: "\f110";
+}
+.fa-square:before {
+  content: "\f0c8";
+}
+.fa-ul {
+  padding-left: 0;
+  margin-left: 2.14285714em;
+  list-style-type: none;
+}
+.fa-li{
+  position: absolute;
+  left:0;
+  width:40px;
+  text-align: center;
+  vertical-align: 0.14285714em  ;
+}
+.fa-quote-left:before {
+  content: "\f10d";
+}
+.fa-pull-left {
+  margin-right: .3em;
+  float: left;
+}
+.fa-border {
+  padding: .2em .25em .15em;
+  border: solid 0.08em #eeeeee;
+  border-radius: .1em;
+}
+  .fa-home:before {
+    content: "\f015";
+}
+
+.fa-book:before {
+  content: "\f02d";}
+.fa-pencil:before {
+    content: "\f040";
+}
+.fa-gear:before, .fa-cog:before {
+  content: "\f013";
+}
+
+.list-group-item {
+position: relative;
+display: block;
+padding:10px;
+background-color: white;
+border:grey solid 1px;
+top:12px;
+
+color: black;
+text-decoration:none;}
+
+.list-group-item:first-child
+{border-radius: 4px 4px 0px 0px;}
+
+.list-group-item:last-child{border-radius: 0px 0px 4px 4px;}
+
+.list-group{
+margin-bottom: 12px;
+}
+
+.fa-shield::before{content: "\f132";
+}
+
+.fa-rotate-90{transform: rotate(90deg);}
+
+.fa-rotate-180{transform: rotate(180deg);}
+
+.fa-rotate-270{transform: rotate(270deg);}
+
+.fa-flip-horizontal{transform: scale(-1, 1);}
+
+.fa-flip-vertical{
+  transform: scale(1, -1);
+}
+.fa-twitter:before {
+  content: "\f099";
+}
+.fa-square-o:before {
+    content: "\f096";
+}
+.fa-stack{
+  position: relative;
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  line-height:3em;
+  vertical-align: middle;}
+
+.fa-stack{line-height: inherit;}
+.fa-stack-1x{
+  position: absolute;
+  left: 0;
+  top:8px;
+  width: 100%;
+  text-align: center;
+}
+.fa-stack-2x{ position: relative;
+  left: 0;
+  width: 100%;
+  text-align: center;}
+.fa-stack-2x {
+  font-size: 2em;
+}
