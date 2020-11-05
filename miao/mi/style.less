@@ -237,7 +237,7 @@ min-width: 1226px;
     }
     &:hover .nav-list-wrapper{ 
     transition: height 1s ,z-index  0s;
-    z-index: 10;
+    z-index: 100;
     }
     .nav-list-wrapper{
       transition: height 1s,z-index 10s;
@@ -364,6 +364,7 @@ min-width: 1226px;
     border: 1px #ff6700 solid;
     border-top:0px  ;
     box-sizing: border-box;
+    background-color: white;
     ul{
       margin-top: 0px;
       margin-left:12px;
@@ -373,6 +374,7 @@ min-width: 1226px;
       display: flex;
       flex-direction:column;
       justify-content:space-around;
+
     }
     li{
       width: 220px;
@@ -399,30 +401,135 @@ min-width: 1226px;
     width: 1226px;
     height: 460px;
     position: absolute;
-    z-index: -1;
     .slider-hidden{
     display: none;
+    // 轮播图的对应
+    &:nth-child(1):checked ~ .selection>li:nth-child(1) .shower-radio{
+      z-index: 9;
+      opacity: 1;
+    }
+    &:nth-child(1):checked ~ .selection>li:nth-child(1) label{
+      z-index: 19;
+    }
+    
+    &:nth-child(2):checked ~ .selection>li:nth-child(2) .shower-radio{
+      z-index: 9;
+      opacity: 1;
+    }
+    &:nth-child(2):checked ~ .selection>li:nth-child(2) label{
+      z-index: 19;
+      
+    }
+    &:nth-child(3):checked ~ .selection>li:nth-child(3) .shower-radio{
+      z-index: 9;
+      opacity: 1;
+    }
+    &:nth-child(3):checked ~ .selection>li:nth-child(3) label{
+      z-index: 19;
+      
+    }
+    &:nth-child(4):checked ~ .selection>li:nth-child(4) .shower-radio{
+      z-index: 9;
+      opacity: 1;
+    }
+    &:nth-child(4):checked ~ .selection>li:nth-child(4) label{
+      z-index: 19;
+      
+    }
+    // 按钮变色
+    &:nth-child(1):checked~.selection~.indicator>label:nth-child(1){
+      background: #fff3;
+      border-color: rgba(0,0,0,.4);
+    }
+    &:nth-child(2):checked~.selection~.indicator>label:nth-child(2){
+      background: #fff3;
+      border-color: rgba(0,0,0,.4);
+    }
+    &:nth-child(3):checked~.selection~.indicator>label:nth-child(3){
+      background: #fff3;
+      border-color: rgba(0,0,0,.4);
+    }
+    &:nth-child(4):checked~.selection~.indicator>label:nth-child(4){
+      background: #fff3;
+      border-color: rgba(0,0,0,.4);
+    }
+    
     }
     .selection{
-      li{
+    
+      li{ 
       .shower-radio{
-        z-index: -99;
         position: absolute;
         width:1226px;
         height: 460px;
-        
-      }
-      .pre{  
-        img{
-          position: absolute;
-        }
-      }
-      .next{
-        img{
-          position: absolute;
-        }
+        opacity: 0;
       }
     }
+    .pre{
+      z-index: 10;
+      overflow: hidden;
+      width: 41px;
+      height: 69px;
+      position: absolute;
+      top:calc(50% - 34.5px) ;
+      left:234px;
+      &:hover img{
+        left:0px;
+     }
+      img{
+        position: relative;
+        left:-83px;
+      
+      }
+    }
+    .next{
+      z-index: 10;
+      overflow: hidden;
+      width: 41px;
+      height: 69px;
+      position: absolute;
+      top:calc(50% - 34.5px) ;
+      right:0px;
+      &:hover img{
+        left:-41px;
+      }
+      img{
+       position: relative;
+       left:-123px;
+      }
+    }
+}
+.indicator {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  z-index: 100;
+  text-align: right;
+
+  label{
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+  margin:0 2px;
+  background-color:rgba(0,0,0,.4);
+  border:2px solid hsla(0,0%,100%,.3);
+  cursor: pointer;
+}
+label:hover{
+  background: #fff3;
+  border-color: rgba(0,0,0,.4);
+}
+label:checked{
+  background: #fff3;
+  border-color: rgba(0,0,0,.4);
+}
+}
+     input.slider-hidden&:nth-child(1):checked~.selection>ul>li&:nth-child(1)>.shower-radio {
+        z-index: 9;
+        opacity: 1;
 }
   }
   .site-category {
@@ -432,7 +539,10 @@ min-width: 1226px;
     height: 420px;
     padding-top: 20px;
     padding-bottom: 20px;
+    position: relative;
+    z-index: 199;
     background-color: rgba(105,101,101,0.6);
+   
     .site-category-lists{
       margin: 0px;
       padding: 0px;
@@ -442,7 +552,8 @@ min-width: 1226px;
       display: flex;
       flex-direction: column;
       justify-content:space-around;
-      .category-item{height: 42px;
+      .category-item{
+        height: 42px;
         line-height: 42px;
         vertical-align: middle;
         padding-left: 30px;
@@ -465,7 +576,8 @@ min-width: 1226px;
     }  
     .children-col{
       position: absolute;
-      right: 0px;
+      z-index: 199;
+      left: 234px;
       visibility: hidden;
       font-size: 0px;
       float: left;
