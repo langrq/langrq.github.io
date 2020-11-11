@@ -14,7 +14,7 @@
   var a = Number(prompt())
   var b = Number(prompt())
   var c = Number(prompt())
-  alert((a + b) / c);
+  alert(Math.floor((a + b) / c));
 </script>
 <script type="norun" id="ch0103/04">
   var a = Number(prompt())
@@ -35,12 +35,12 @@
   alert(c.toFixed(3) + "%");
 </script>
 <script type="norun" id="ch0103/07">
-  var a = Number(prompt()) 
-  var b = Number(prompt()) 
-  var c = Number(prompt()) 
-  var d = Number(prompt()) 
   var x = Number(prompt())
-  var  y = a * x * x * x + b * x * x + c * x + d
+  var a = Number(prompt())
+  var b = Number(prompt())
+  var c = Number(prompt())
+  var d = Number(prompt())
+  var y = a * x * x * x + b * x * x + c * x + d
   alert(y.toFixed(7));
 </script>
 <script type="norun" id="ch0103/08">
@@ -76,9 +76,9 @@
   alert(V.toFixed(2));
 </script>
 <script type="norun" id="ch0103/13">
-  var x = Number(prompt()),
-  var  a = Math.floor(x / 100).toFixed(0),
-  var  b = Math.floor((x - a * 100) / 10).toFixed(0),
+  var x = Number(prompt())
+  var a = Math.floor(x / 100).toFixed(0)
+  var b = Math.floor((x - a * 100) / 10).toFixed(0)
   var c = Math.floor(x - a * 100 - b * 10);
   alert(c + b + a); 
 </script>
@@ -162,7 +162,7 @@
 </script>
 <script type="norun" id="ch0104/04">
   var char = prompt()
-  if (char == 'a' || char == 'c' || char == 'e' || char == 'g' || char == 'i' || char == 'k' || char == 'n' || char == 'p' || char == 'r' || char == 't' || char == 'u' || char == 'w' || char == 'y') {
+  if (char == 'A' || char == 'C' || char == 'E' || char == 'G' || char == 'I' || char == 'K' || char == 'N' || char == 'P' || char == 'R' || char == 'T' || char == 'U' || char == 'W' || char == 'Y') {
     alert('YEs')
   } else {
     alert("NO")
@@ -190,12 +190,11 @@
 <script type="norun" id="ch0104/07">
   var x = Number(prompt())
   var y = Number(prompt())
-  if (x < 10) {
-    console.log("0");
-  } else if (y < 20) {
-    console.log("0");
-  } else {
-    console.log("1")
+  if (x > 10 || y > 20) {
+    console.log("1");
+  }
+  else {
+    console.log("0")
   }
 </script>
 <script type="norun" id="ch0104/08">
@@ -312,7 +311,7 @@
     var x = Number(prompt());
     result = result + x;
   }
-  console.log(result / number);
+  console.log((result / number).toFixed(2));
 </script>
 <script type="norun" id="ch0105/02">
   var counter = 1;
@@ -339,12 +338,12 @@
   var number = Number(prompt());
   var counter = 1;
   var result = Number(prompt());
-  var fix = result / number
   while (counter < number) {
     counter = counter + 1;
     var x = Number(prompt());
     result = result + x;
   }
+  var fix = result / number
   console.log((result));
   console.log((fix).toFixed(5));
 </script>
@@ -364,7 +363,7 @@
   }
   console.log(fina);
 </script>
-<script ztype="norun" id="ch0105/06">
+<script type="norun" id="ch0105/06">
   var number = Number(prompt());
   var counter = 1;
   var start = Number(prompt());
