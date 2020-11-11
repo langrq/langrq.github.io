@@ -9,267 +9,210 @@
 <style>
   * {
     background-color: rgba(0, 0, 0, 0.2);
+    margin: 0px;
+    padding: 0px;
   }
 
   div {
     position: relative;
+    display: flow-root;
+    background-color: burlywood;
   }
 
   button {
-    position: absolute;
-    left: 30%;
-    width: 180px;
+    display: block;
+    margin: 50px auto;
     padding: 10px;
-    font-size: 15px;
     font-weight: bold;
     color: #fff;
     text-align: center;
     border: none;
     border-radius: 3px;
     background: red;
-    transform-origin: center center;
   }
 
-  button:nth-child(1) {
-    top: 100px;
-    background: red;
+  [aria-label] {
+    position: relative;
+    top: 0px;
   }
 
-  button:nth-child(2) {
-    top: 200px;
-    background: blue;
+  [aria-label]::before {
+    content: attr(aria-label);
+    position: absolute;
+    border: 6px solid black;
+    border-radius: 0.2rem;
+    opacity: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+    background-color: black;
+    white-space: nowrap;
+    transition: 0.3s;
   }
 
-  button:nth-child(3) {
-    top: 300px;
-    background: lime;
+  [aria-label]::after {
+    content: '';
+    position: absolute;
+    border: 6px solid black;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
   }
 
-  button:nth-child(4) {
-    top: 500px;
-    background: gray;
+  [aria-label]:focus::before,
+  [aria-label]:focus::after {
+    opacity: 1;
+  }
+
+  [aria-label]:hover::before,
+  [aria-label]:hover::after {
+    opacity: 1;
+  }
+
+  [aria-label]:not([data-balloon-pos])::before,
+  [data-balloon-pos="up"]::before {
+    /* 父元素高度不确定 */
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translatex(-50%);
+  }
+
+  [aria-label]:not([data-balloon-pos])::after,
+  [data-balloon-pos="up"]::after {
+    border-color: black transparent transparent transparent;
+    transform: translatex(-50%);
+    left: 50%;
+    top: -10px;
   }
 
   /* up */
-  button[data-balloon-pos="up"]::before {
-    content: '';
-    position: absolute;
-    left: calc(50% - 8px);
-    top: -20%;
-    border: black 8px solid;
-    border-color: black transparent transparent transparent;
-    visibility: hidden;
-    transition: 0.5s;
+
+
+  [data-balloon-pos="up"]:hover::before,
+  [data-balloon-pos="up"]:hover::after {
+    transform: translatex(-50%) translateY(-2px);
   }
 
-  button[data-balloon-pos="up"]::after {
-    content: attr(aria-label);
-    position: absolute;
-    padding: 8px;
-    margin: auto;
-    top: -105%;
-    left: 20%;
-    right: 20%;
-    background: black;
-    white-space: nowrap;
-    visibility: hidden;
-    transition: 0.5s;
+  /* down */
+  [data-balloon-pos="down"]::before {
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translatex(-50%);
+  }
+
+  [data-balloon-pos="down"]::after {
+    border-color: transparent transparent black transparent;
+    transform: translatex(-50%);
+    left: 50%;
+    bottom: -10px;
   }
 
 
 
+  [data-balloon-pos="down"]:hover::before,
+  [data-balloon-pos="down"]:hover::after {
 
-
-
-  button[data-balloon-pos="up"]:focus::before {
-    top: -20%;
-    visibility: visible;
+    transform: translatex(-50%) translateY(2px);
   }
-
-  button[data-balloon-pos="up"]:focus::after {
-    top: -105%;
-    visibility: visible;
-  }
-
-  button[data-balloon-pos="up"]:hover::before {
-    transition: 0.5s;
-    transform: translateY(-5px);
-    visibility: visible;
-  }
-
-  button[data-balloon-pos="up"]:hover::after {
-    transition: 0.5s;
-    transform: translateY(-6px);
-    visibility: visible;
-  }
-
-
 
   /* left */
-  button[data-balloon-pos="left"]::before {
-    content: '';
-    position: absolute;
-    left: -8px;
-    top: calc(50% - 8px);
-    border: black 8px solid;
+  [data-balloon-pos="left"]::before {
+    transform: translatey(50%);
+    right: calc(100% + 10px);
+    bottom: 50%;
+  }
+
+  [data-balloon-pos="left"]::after {
     border-color: transparent transparent transparent black;
-    visibility: hidden;
-    transition: 0.5s;
-
+    transform: translatey(50%);
+    left: -10px;
+    bottom: 50%;
   }
 
-  button[data-balloon-pos="left"]::after {
-    content: attr(aria-label);
-    position: absolute;
-    padding: 8px;
-    margin: auto;
-    top: 0;
-    right: calc(100% + 6px);
-    background: black;
+  [data-balloon-pos="left"]:hover::before,
+  [data-balloon-pos="left"]:hover::after {
+    transform: translatey(50%) translatex(2px);
+  }
+
+  /* right */
+  [data-balloon-pos="right"]::before {
+    transform: translatey(50%);
+    left: calc(100% + 10px);
+    bottom: 50%;
+  }
+
+  [data-balloon-pos="right"]::after {
+    border-color: transparent black transparent transparent;
+    transform: translatey(50%);
+    right: -10px;
+    bottom: 50%;
+  }
+
+  [data-balloon-pos="right"]:hover::before,
+  [data-balloon-pos="right"]:hover::after {
+    transform: translatey(50%) translatex(2px);
+  }
+
+  /* 尺寸 */
+  [aria-label]:not([data-balloon-length])::before {
     white-space: nowrap;
-    visibility: hidden;
-    transition: 0.5s;
   }
 
-
-
-  button[data-balloon-pos="left"]:focus::before {
-
-    visibility: visible;
-  }
-
-  button[data-balloon-pos="left"]:focus::after {
-
-    visibility: visible;
-  }
-
-  button[data-balloon-pos="left"]:hover::before {
-
-    transition: 0.5s;
-    transform: translatex(-8px);
-    visibility: visible;
-    z-index: 1;
-  }
-
-  button[data-balloon-pos="left"]:hover::after {
-    transition: 0.5s;
-    transform: translatex(-8px);
-    visibility: visible;
-  }
-
-  /* up-left */
-  button[data-balloon-pos="up-left"]::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: -20%;
-    border: black 8px solid;
-    border-color: black transparent transparent transparent;
-    visibility: hidden;
-    transition: 0.5s;
-  }
-
-  button[data-balloon-pos="up-left"]::after {
-    content: attr(aria-label);
-    position: absolute;
-    padding: 8px;
-    margin: auto;
-    top: -105%;
-    left: 0;
-    right: 40%;
-    background: black;
-    white-space: nowrap;
-    visibility: hidden;
-    transition: 0.5s;
-  }
-
-
-
-  button[data-balloon-pos="up-left"]:focus::before {
-    top: -20%;
-    visibility: visible;
-  }
-
-  button[data-balloon-pos="up-left"]:focus::after {
-    top: -105%;
-    visibility: visible;
-  }
-
-  button[data-balloon-pos="up-left"]:hover::before {
-    transition: 0.5s;
-    transform: translateY(-5px);
-    visibility: visible;
-  }
-
-  button[data-balloon-pos="up-left"]:hover::after {
-    transition: 0.5s;
-    transform: translateY(-6px);
-    visibility: visible;
-  }
-
-  /* large */
-  button[data-balloon-length="large"]::before {
-    content: '';
-    position: absolute;
-    left: calc(50% - 8px);
-    top: -20%;
-    border: black 8px solid;
-    border-color: black transparent transparent transparent;
-    visibility: hidden;
-    transition: 0.5s;
-  }
-
-  button[data-balloon-length="large"]::after {
-    font-size: 12px;
-    content: attr(aria-label);
-    position: absolute;
-    padding: 8px;
-    margin: auto;
-    top: -300%;
-    bottom: 115%;
-    left: -20%;
-    right: -20%;
-    background: black;
-    display: block;
+  [data-balloon-length]::before {
     white-space: pre-wrap;
-    visibility: hidden;
-    transition: 0.5s;
   }
 
-
-
-  button[data-balloon-length="large"]:focus::before {
-    top: -20%;
-    visibility: visible;
+  [data-balloon-length="small"]::before {
+    width: 80px;
   }
 
-  button[data-balloon-length="large"]:focus::after {
-    top: -300%;
-    visibility: visible;
+  [data-balloon-length="medium"]::before {
+    width: 150px;
   }
 
-  button[data-balloon-length="large"]:hover::before {
-    transition: 0.5s;
-    transform: translateY(-5px);
-    visibility: visible;
+  [data-balloon-length="large"]::before {
+    width: 260px;
   }
 
-  button[data-balloon-length="large"]:hover::after {
-    transition: 0.5s;
-    transform: translateY(-6px);
-    visibility: visible;
+  [data-balloon-length="xlarge"]::before {
+    width: 389px;
+  }
+
+  [data-balloon-length="fit"]::before {
+    width: 100%;
+  }
+
+  [data-balloon-blunt]::before,
+  [data-balloon-blunt]::after {
+    transition: none;
+  }
+
+  [data-balloon-visible]::before,
+  [data-balloon-visible]::after {
+    opacity: 1;
   }
 </style>
 
 <body>
   <div>
-    <button aria-label="Whats up!" data-balloon-pos="up-left" data-balloon-length="large">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="up">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="down">Hover me!</button>
     <button aria-label="Whats up!" data-balloon-pos="left">Hover me!</button>
-    <button aria-label="Whats up!" data-balloon-pos="up-left">Hover me!</button>
+    <button aria-label="Whats up!" data-balloon-pos="right">Hover me!</button>
+    <button data-balloon-length="small" aria-label="Hi." data-balloon-pos="up">Hover me!</button>
+    <button data-balloon-length="medium"
+      aria-label="Now that's a super big text we have over here right? Lorem ipsum dolor sit I'm done."
+      data-balloon-pos="up">I'm a medium tooltip.</button>
     <button data-balloon-length="large"
       aria-label="What about something really big? This may surpass your window dimensions. Imagine you're on that boring class with that boring teacher and you didn't slept so well last night. Suddenly you're sleeping in class. Can you believe it?!"
       data-balloon-pos="up">I'm a large tooltip</button>
-
+    <button data-balloon-length="xlarge"
+      aria-label="What about something really big? This may surpass your window dimensions. Imagine you're on that boring class with that boring teacher and you didn't slept so well last night. Suddenly you're sleeping in class. Can you believe it?!"
+      data-balloon-pos="up">I'm a Xlarge tooltip</button>
+    <button data-balloon-length="fit"
+      aria-label="What about something really big? This may surpass your window dimensions. Imagine you're on that boring class with that boring teacher and you didn't slept so well last night. Suddenly you're sleeping in class. Can you believe it?!"
+      data-balloon-pos="up">My width will fit to element</button>
+    <button data-balloon-blunt aria-label="No animation!" data-balloon-pos="up">No animation!</button>
+    <button data-balloon-visible aria-label="I am always visible!" data-balloon-pos="up">Always visible!</button>
   </div>
 </body>
 
