@@ -163,7 +163,7 @@
 <script type="norun" id="ch0104/04">
   var char = prompt()
   if (char == 'A' || char == 'C' || char == 'E' || char == 'G' || char == 'I' || char == 'K' || char == 'N' || char == 'P' || char == 'R' || char == 'T' || char == 'U' || char == 'W' || char == 'Y') {
-    alert('YEs')
+    alert('YES')
   } else {
     alert("NO")
   }
@@ -366,16 +366,28 @@
 <script type="norun" id="ch0105/06">
   var number = Number(prompt());
   var counter = 1;
-  var start = Number(prompt());
+  var one = Number(prompt());
   while (counter < number) {
-    var result = Number(prompt());
+    var two = Number(prompt());
     counter = counter + 1;
-    if (result > start) {
-      var fina = result
-      start = result
-    } else (result < start){
-      var smal = result
-    };
+    if (one > two) {
+      var font = two
+      var big = one
+    } else if (one <= two) {
+      smal = font
+      big = two
+    }
   }
-  console.log(fina - smal)
+  console.log(big - smal)
+</script>
+<script ztype="norun" id="ch0105/07">
+  var number = Number(prompt());
+  var counter = 1;
+  var g = Number(prompt());
+  var y = Number(prompt());
+  var t = Number(prompt());
+  while (counter < number) {
+    var a = Number(prompt())
+    var gc = gc + a + g
+  }
 </script>
