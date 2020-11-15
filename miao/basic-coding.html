@@ -303,15 +303,24 @@
   }
 </script>
 <script type="norun" id="ch0105/01">
-  var number = Number(prompt());
-  var counter = 1;
-  var result = Number(prompt());
-  while (counter < number) {
-    counter = counter + 1;
-    var x = Number(prompt());
-    result = result + x;
+  // var number = Number(prompt());
+  // var counter = 1;
+  // var result = Number(prompt());
+  // while (counter < number) {
+  //   counter = counter + 1;
+  //   var x = Number(prompt());
+  //   result = result + x;
+  // }
+  // console.log((result / number).toFixed(2));自己做的 和解题相同 但我开始于1
+  var n = Number(prompt())
+  var counter = 0
+  var sum = 0
+  while (counter < n) {
+    var age = Number(prompt())
+    sum = sum + age
+    counter = counter + 1
   }
-  console.log((result / number).toFixed(2));
+  console.log((sum / n).toFixed(2))
 </script>
 <script type="norun" id="ch0105/02">
   var counter = 1;
@@ -355,39 +364,577 @@
     var result = Number(prompt());
     counter = counter + 1;
     if (result > max) {
-      var fina = result
       max = result
-    } else {
-      fina = max
     }
   }
-  console.log(fina);
+  console.log(max);
 </script>
 <script type="norun" id="ch0105/06">
+  // var number = Number(prompt());
+  // var counter = 1;
+  // var one = Number(prompt());
+  // while (counter < number) {
+  //   var two = Number(prompt());
+  //   counter = counter + 1;
+  //   if (one > two) {
+  //     var font = two
+  //     var big = one
+  //   } else (one < two)
+  //   var smal = font
+  //   big = two
+
+  // }
+  // console.log(big - smal) 自己做的做错了 最后的数会覆盖前一个数 逻辑不通 非要在外面加数 有点傻逼
+  var n = Number(prompt())
+  var c = 0
+  var max = - 9999999
+  var min = 99999999
+  while (c < n) {
+    var num = Number(prompt())
+    if (num > max) {
+      max = num
+    } //如果新数比最大值还大
+    if (num < min) {
+      min = num // 如果新数比最小值还小
+    }
+    c = c + 1
+  }
+  console.log(max - min)
+</script>
+<script type="norun" id="ch0105/07">
   var number = Number(prompt());
   var counter = 1;
-  var one = Number(prompt());
+  var g1 = Number(prompt())
+  var y1 = Number(prompt())
+  var t1 = Number(prompt())
   while (counter < number) {
-    var two = Number(prompt());
     counter = counter + 1;
-    if (one > two) {
-      var font = two
-      var big = one
-    } else if (one <= two) {
-      smal = font
-      big = two
+    var g = Number(prompt())
+    var y = Number(prompt())
+    var t = Number(prompt())
+    g1 = g1 + g
+    y1 = y1 + y
+    t1 = t1 + t
+  }
+  console.log(g1)
+  console.log(y1)
+  console.log(t1)
+  console.log(g1 + y1 + t1)
+</script>
+<script type="norun" id="ch0105/08">
+  var number = Number(prompt());
+  var counter = 2;
+  var nc = (number - 2) * 180
+  var n1 = Number(prompt())
+  while (counter < number) {
+    counter = counter + 1;
+    var n2 = Number(prompt())
+    n1 = n2 + n1
+  }
+  console.log(nc - n1) //在外的为变量 思维要转变
+</script>
+<script type="norun" id="ch0105/09">
+  var star = Number(prompt());
+  var endl = Number(prompt());
+  if (endl % 2 == 0) {
+    endl = endl + 1
+  }
+  if (star % 2 == 0) {
+    star = star
+  }
+  var c = star
+  var sum = 0
+  while (c <= endl) {
+    sum = sum + c
+    c = c + 2
+  }
+  console.log(sum)
+</script>
+<script ztype="norun" id="ch0105/10">
+  var m = Number(prompt())
+  var n = Number(prompt())
+  var sum = 0
+  // while (m <= n) {
+  //   if (m % 17 == 0) {
+  //     sum = sum + m
+  //   }
+  //   m = m + 1
+  // }
+  // console.log(sum)
+  for (var i = m; i <= n; i++) {
+    if (m % 17 == 0) {
+      sum += m
+    }
+    console.log(sum)
+  }
+</script>
+<script ztype="norun" id="ch0105/11">
+  var n = Number(prompt())
+  var c = 0
+  var c1 = 1
+  var c5 = 1
+  var c10 = 1
+  while (c < n) {
+    c = c + 1
+    var w = Number(prompt())
+    if (w == 1) {
+      c1 = c1 + 1
+    }
+    if (w == 5) {
+      c5 = c5 + 1
+    }
+    if (w == 10) {
+      c10 = c10 + 1
     }
   }
-  console.log(big - smal)
+  console.log(c1)
+  console.log(c5)
+  console.log(c10)
 </script>
-<script ztype="norun" id="ch0105/07">
-  var number = Number(prompt());
-  var counter = 1;
-  var g = Number(prompt());
-  var y = Number(prompt());
-  var t = Number(prompt());
-  while (counter < number) {
-    var a = Number(prompt())
-    var gc = gc + a + g
+<script ztype="norun" id="ch0105/12">
+  var N = Number(prompt())
+  var m = Number(prompt())
+  var counter = 0
+  for (var i = 0; i < N; i++) {
+    var w = Number(prompt())
+    if (w == m) {
+      counter += 1
+    }
   }
+  console.log(counter)
+</script>
+<script ztype="norun" id="ch0105/13">
+  var a = Number(prompt())
+  var n = Number(prompt())
+  var result = 1
+  for (var i = 0; i < n; i++) {
+    result *= a
+  }
+  console.log(result)
+</script>
+<script ztype="norun" id="ch0105/14">
+  var x = Number(prompt())
+  var n = Number(prompt())
+  for (var i = 0; i < n; i++) {
+    x *= 1.001
+  }
+  console.log(x.toFixed(4))
+</script>
+<script ztype="norun" id="ch0105/15">
+  var R = Number(prompt())
+  var M = Number(prompt())
+  var Y = Number(prompt())
+  for (var i = 0; i < Y; i++) {
+    M *= (1 + R * 0.01)
+  }
+  console.log(Math.floor(M))
+</script>
+<script ztype="norun" id="ch0105/16">
+  var N = Number(prompt())
+  var K = Number(prompt())
+  var sum = 0
+  var price = 200
+  var buied = false
+  for (var i = 1; i <= 20; i++) {
+    sum += N
+    if (sum >= price) {
+      buyed = true
+      console.log(i)
+      break
+    }
+    price *= (1 + k / 100)
+  }
+  if (!buied) {
+    console.log('Impossible')
+  }
+</script>
+<script ztype="norun" id="ch0105/17">
+  var K = Number(prompt())
+  var a = 1
+  var b = 1
+  if (K < 3) {
+    console.log(1)
+  } else {
+    for (var i = 2; i < K; i++) {
+      var c = a + b
+      a = b
+      b = c
+    }
+    console.log(c)
+  }
+</script>
+<script ztype="norun" id="ch0105/18">
+  var n = Number(prompt())
+  var haart1 = Number(prompt())
+  var haart2 = Number(prompt())
+  var x = haart2 / haart1
+  for (var i = 1; i < n; i++) {
+    var a1 = Number(prompt())
+    var a2 = Number(prompt())
+    var y = a2 / a1
+    var result = y - x
+    if (result > 0.05) {
+      console.log('better')
+    } else if (result < -0.05) {
+      console.log('worse')
+    } else console.log('same')
+  }
+</script>
+<script ztype="norun" id="ch0105/19">
+  var n = Number(prompt())
+  var sumt = 0
+  for (var i = 0; i < n; i++) {
+    var x = Number(prompt())
+    var y = Number(prompt())
+    var p = Number(prompt())
+    var L = Math.sqrt(x * x + y * y)
+    var t = L / 50 * 2 + 1 * p + 0.5 * p
+    sumt += t
+  }
+  console.log(Math.ceil(sumt))
+</script>
+<script ztype="norun" id="ch0105/20">
+  var h = Number(prompt())
+  var sumh = 0
+  var t = 0
+  for (var i = 1; i < 11; i++) {
+    t = 0.5 * h
+    h = t
+    sumh = 2 * t + h + sumh
+  } console.log(sumh - t)
+  console.log(t)
+</script>
+<script ztype="norun" id="ch0105/21">
+  var n = Number(prompt())
+  while (true) {
+    if (n == 1) {
+      console.log('End')
+      break
+    }
+    //等价于 while(n!=1) 
+    if (n % 2 == 1) {
+      var t = n * 3 + 1
+      console.log(n + '3n+1' + t)
+      n = t
+    } else if (n % 2 == 0) {
+      var t = n / 2
+      console.log(n + '/2' + t)
+      n = t
+    }
+  }
+</script>
+<script ztype="norun" id="ch0105/22">
+
+  var money = 0
+  var left = 0
+  var summ = 0
+  var flag = false
+  for (i = 1; i <= 12; i++) {
+    money += 300
+    var budget = Number(prompt())
+    money = money - budget
+
+    if (money < 0) {
+      console.log(-i)
+      flag = true
+      break
+
+    }
+    if (money >= 100) {
+      left = money % 100
+      summ = summ + money - left
+      money = left
+    }
+  }
+  if (!flag) {
+    console.log(summ * 1.2 + money)
+  }
+</script>
+<script ztype="norun" id="ch0105/23">
+  var m = Number(prompt())
+  var n = Number(prompt())
+  var sum = 0
+  var c = 0
+  for (var i = 1; i <= n; i++) {
+    var taken = Number(prompt())
+    sum = sum + taken
+    if (sum >= m) {
+      c++
+      sum = sum - taken
+    }
+  } console.log(c)
+</script>
+<script ztype="norun" id="ch0105/24">
+  var n = Number(prompt())
+  var c = 0
+  for (var i = 0; i < n; i++) {
+    var a = Number(prompt())
+    var b = Number(prompt())
+    if (a >= 90 && a <= 140 & b >= 60 && b <= 90) {
+      c++
+    }
+  }
+</script>
+<script ztype="norun" id="ch0105/25">
+  for (var i = 1; i <= 999; i++) {
+    var a7 = i % 7
+    var b7 = (i - a7) / 7 % 7
+    var c7 = (i - b7 * 7 - a7) / 7 / 7 % 7
+    var a9 = i % 9
+    var b9 = (i - a9) / 9 % 9
+    var c9 = (i - b9 * 9 - a9) / 9 / 9 % 9
+    if (a7 == c9 && c7 == a9) {
+      console.log(i)
+      break
+
+    }
+  }
+</script>
+<script ztype="norun" id="ch0105/26">
+  var n = Number(prompt())
+  var c = 0
+  for (var i = 0; i < n; i++) {
+    var p = Number(prompt())
+    var a10 = p % 10
+    var b10 = (p - a10) / 10 % 10
+    var c10 = (p - b10 * 10 - a10) / 10 / 10 % 10
+    var d10 = (p - c10 * 100 - b10 * 10 - a10) / 1000 % 10
+    if (a10 - d10 - c10 - b10 > 0) {
+      c++
+    }
+  } console.log(c)
+</script>
+<script ztype="norun" id="ch0105/27">
+  var k = Number(prompt())
+  var sn = 0
+  for (var i = 1; ; i++) {
+    sn += 1 / i
+    if (sn > k) {
+      console.log(i)
+      break
+    }
+  }
+</script>
+<script ztype="norun" id="ch0105/28">
+  var n = Number(prompt())
+  while (n > 0) {
+    var a10 = n % 10
+    console.log(a10)
+    n = (n - a10) / 10
+  }
+</script>
+<script ztype="norun" id="ch0105/29">
+  var n = Number(prompt())
+  var result = 0
+  var flag = false
+  if (n < 0) {
+    n = -n
+    flag = true
+  }
+  while (n > 0) {
+    var a10 = n % 10
+    n = (n - a10) / 10
+    result = (result + a10) * 10
+
+  }
+  if (flag = true) {
+    console.log(-result / 10)
+  } else {
+    console.log(result / 10)
+  }
+</script>
+<script ztype="norun" id="ch0105/30">
+  var m = Number(prompt())
+  var k = Number(prompt())
+  var c = 0
+  while (m > 0) {
+    if (m % 19 == 0) {
+      var digit = m % 10
+      if (digit == 3) {
+        c++
+      }
+      if (c = m) {
+        console.log('YES')
+        break
+      }
+      m = (m - digit) / 10
+    } else {
+      console.log('NO')
+      break
+    }
+  }
+
+</script>
+<script ztype="norun" id="ch0105/31">
+  var m = Number(prompt())
+  var n = Number(prompt())
+  var c = 0
+  for (var i = 1; i <= m; i++) {
+    for (var u = 1; u <= i; u++) {
+      for (var p = 1; p * u <= i; p++) {
+        if (u * p == i) {
+          c++
+        }
+      }
+    }
+    if (c % 2 == 1) {
+      console.log(u)
+    }
+  }
+</script>
+<script ztype="norun" id="ch0105/32">
+  var m = Number(prompt())
+  var p = 1
+  var q = 2
+  var sum = 0
+  for (var i = 0; i < m; i++) {
+    sum += q / p
+    q = p + q
+    p = q - p
+  }
+  console.log(sum.toFixed(4))
+</script>
+<script ztype="norun" id="ch0105/33">
+  var n = Number(prompt())
+  var k = -1
+  var sum = 0
+  for (var i = 1; i <= n; i++) {
+    k = -k
+    sum += (1 / i) * k
+  } console.log(sum.toFixed(4))
+</script>
+<script ztype="norun" id="ch0105/34">
+  var n = Number(prompt())
+  var sum = 1
+  var summ = 0
+  for (var i = 1; i <= n; i++) {
+    sum *= i
+    summ += sum
+  } console.log(summ)
+
+</script>
+<script ztype="norun" id="ch0105/35">
+  var n = Number(prompt())
+  var sum = 1
+  var summ = 1
+  for (var i = 1; i <= n; i++) {
+    sum *= i
+    summ += 1 / sum
+  } console.log(summ.toFixed(10))
+
+</script>
+<script ztype="norun" id="ch0105/36">
+  var x = Number(prompt())
+  var n = Number(prompt())
+  var sum = 1
+  var summ = 1
+
+  for (var i = 1; i <= n; i++) {
+    sum = sum * x
+    summ += sum
+  } console.log(summ.toFixed(2))
+  // for (var i = 0; i <= n; i++) {
+  //   sum += x ** i
+  // } console.log(sum.toFixed(2))
+</script>
+<script ztype="norun" id="ch0105/37">
+  var m = Number(prompt())
+  var n = Number(prompt())
+  var x = Number(prompt())
+  var t = 0
+  while (x > 0) {
+    var taken = Math.ceil(m / n)
+    var battle = Math.floor(m / n)
+    x = x - taken
+    n = n + battle
+  }
+  console.log(n)
+</script>
+<script ztype="norun" id="ch0105/38">
+  var n = Number(prompt())
+  for (var i = n; i > 0; i--) {
+    var x = Number(prompt())
+    console.log(x * i)
+  }
+</script>
+<script ztype="norun" id="ch0105/39">
+  var n = Number(prompt())
+  var sum = 0
+  for (var i = 1; i <= n; i++) {
+    if (i % 7 != 0) {
+      var u = i
+      while (u > 0) {
+        var digit = u % 10
+        u = (u - digit) / 10
+        if (digit == 7) {
+          i++
+        }
+      }
+      sum += i * i
+    }
+  } console.log(sum)
+</script>
+<script ztype="norun" id="ch0105/40">
+  var n = Number(prompt())
+  var c = 0
+  for (var i = 1; i <= n; i++) {
+    var u = i
+    while (u > 0) {
+      var digit = u % 10
+      if (digit == 1) {
+        c++
+      }
+      u = (u - digit) / 10
+    }
+  } console.log(c)
+</script>
+<script ztype="norun" id="ch0105/41">
+  var n = Number(prompt())
+  var m = Number(prompt())
+  var c = 0
+  for (var i = n; i <= m; i++) {
+    var u = i
+    while (u > 0) {
+      var digit = u % 10
+      if (digit == n) {
+        c++
+      }
+      u = (u - digit) / 10
+    }
+  } console.log(c)
+</script>
+<script ztype="norun" id="ch0105/42">
+
+</script>
+<script ztype="norun" id="ch0105/43">
+  var n = Number(prompt())
+  v = Math.sqrt(n)
+  for (var i = 2; i <= v; i++) {
+    if (n % i == 0)
+      console.log(n / i)
+  }
+</script>
+<script ztype="norun" id="ch0105/44">
+
+</script>
+<script ztype="norun" id="ch0105/45">
+  var n = Number(prompt())
+  var sum = 0
+  var day = 0
+  for (var i = 1; i <= n; i++) {
+    var p = i
+    for (var u = 1; u <= p; u++) {
+      sum += p
+    }
+    day += i
+    if (n < day && n > p) {
+      var t = (day - n) * p
+      sum = sum - t
+      break
+    }
+  } console.log(sum)
+
+
+
+
 </script>
