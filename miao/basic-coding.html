@@ -454,37 +454,30 @@
   var m = Number(prompt())
   var n = Number(prompt())
   var sum = 0
-  // while (m <= n) {
-  //   if (m % 17 == 0) {
-  //     sum = sum + m
-  //   }
-  //   m = m + 1
-  // }
-  // console.log(sum)
   for (var i = m; i <= n; i++) {
-    if (m % 17 == 0) {
-      sum += m
+    if (i % 17 == 0) {
+      sum += i
     }
-    console.log(sum)
   }
+  console.log(sum)
 </script>
 <script ztype="norun" id="ch0105/11">
   var n = Number(prompt())
   var c = 0
-  var c1 = 1
-  var c5 = 1
-  var c10 = 1
+  var c1 = 0
+  var c5 = 0
+  var c10 = 0
   while (c < n) {
-    c = c + 1
+    c++
     var w = Number(prompt())
     if (w == 1) {
-      c1 = c1 + 1
+      c1++
     }
     if (w == 5) {
-      c5 = c5 + 1
+      c5++
     }
     if (w == 10) {
-      c10 = c10 + 1
+      c10++
     }
   }
   console.log(c1)
@@ -538,11 +531,11 @@
   for (var i = 1; i <= 20; i++) {
     sum += N
     if (sum >= price) {
-      buyed = true
+      buied = true
       console.log(i)
       break
     }
-    price *= (1 + k / 100)
+    price *= (1 + K / 100)
   }
   if (!buied) {
     console.log('Impossible')
@@ -601,8 +594,8 @@
     t = 0.5 * h
     h = t
     sumh = 2 * t + h + sumh
-  } console.log(sumh - t)
-  console.log(t)
+  } console.log((sumh - t).toFixed(4))
+  console.log(t.toFixed(7))
 </script>
 <script ztype="norun" id="ch0105/21">
   var n = Number(prompt())
@@ -611,10 +604,9 @@
       console.log('End')
       break
     }
-    //等价于 while(n!=1) 
     if (n % 2 == 1) {
       var t = n * 3 + 1
-      console.log(n + '3n+1' + t)
+      console.log(n + '*3+1=' + t)
       n = t
     } else if (n % 2 == 0) {
       var t = n / 2
@@ -670,10 +662,10 @@
   for (var i = 0; i < n; i++) {
     var a = Number(prompt())
     var b = Number(prompt())
-    if (a >= 90 && a <= 140 & b >= 60 && b <= 90) {
-      c++
+    if (a > 90 && a < 140 && b >= 60 && b <= 90) {
+      c = c + 1
     }
-  }
+  } console.log(c)
 </script>
 <script ztype="norun" id="ch0105/25">
   for (var i = 1; i <= 999; i++) {
@@ -683,10 +675,9 @@
     var a9 = i % 9
     var b9 = (i - a9) / 9 % 9
     var c9 = (i - b9 * 9 - a9) / 9 / 9 % 9
-    if (a7 == c9 && c7 == a9) {
-      console.log(i)
+    if (a7 == c9 && c7 == a9 && b7 == b9) {
+      console.log(i, '' + c7 + b7 + a7, '' + c9 + b9 + a9)
       break
-
     }
   }
 </script>
@@ -904,7 +895,10 @@
   } console.log(c)
 </script>
 <script ztype="norun" id="ch0105/42">
-
+  var width = Number(prompt())
+  var height = Number(prompt())
+  var string = prompt()
+  var 
 </script>
 <script ztype="norun" id="ch0105/43">
   var n = Number(prompt())
