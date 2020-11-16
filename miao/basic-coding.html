@@ -302,6 +302,70 @@
     console.log(max)
   }
 </script>
+<script ztype="norun" id="ch0104/16">
+  var a = Number(prompt())
+  var b = Number(prompt())
+  var c = Number(prompt())
+  var max = a
+  if (b > max) {
+    max = b
+  }
+  if (c > max) {
+    max = c
+  }
+  if (max * max == a * a + b * b + c * c - max * max) {
+    console.log('yes')
+  }
+
+</script>
+<script ztype="norun" id="ch0104/17">
+  var a = Number(prompt())
+  if (a % 4 == 0 && a % 100 == 0) {
+    console.log('Y')
+  } else (console.log('N'))
+</script>
+<script ztype="norun" id="ch0104/18">
+  var x = Number(prompt())
+  var y = Number(prompt())
+  if (x <= 1 && x >= -1 && y <= 1 && y >= -1) {
+    console.log('yes')
+  }
+</script>
+<script ztype="norun" id="ch0104/19">
+  var x = Number(prompt())
+  var y = Number(prompt())
+  var z = prompt()
+  if (y == 0 && z == '/') {
+    console.log('Divided by zero')
+
+  }
+  if (z == '/') {
+    console.log(x / y)
+  }
+  if (z == '*') {
+    console.log(x * y)
+  }
+  if (z == '+') {
+    console.log(x + y)
+  }
+  if (z == '-') {
+    console.log(x - y)
+  }
+</script>
+
+<script ztype="norun" id="ch0104/20">
+  var a = Number(prompt())
+  var b = Number(prompt())
+  var c = Number(prompt())
+  var theta = b * b - 4 * a * c
+
+  var x1 = (-b + Math.sqrt(theta) / (2 * a))
+  var x2 = (-b)
+  if (theta = 0) {
+    console.log('x1=')
+  }
+</script>
+<script type="norun" id="ch0104/21"></script>
 <script type="norun" id="ch0105/01">
   // var number = Number(prompt());
   // var counter = 1;
@@ -610,7 +674,7 @@
       n = t
     } else if (n % 2 == 0) {
       var t = n / 2
-      console.log(n + '/2' + t)
+      console.log(n + '/2=' + t)
       n = t
     }
   }
@@ -676,7 +740,9 @@
     var b9 = (i - a9) / 9 % 9
     var c9 = (i - b9 * 9 - a9) / 9 / 9 % 9
     if (a7 == c9 && c7 == a9 && b7 == b9) {
-      console.log(i, '' + c7 + b7 + a7, '' + c9 + b9 + a9)
+      console.log(i)
+      console.log('' + c7 + b7 + a7)
+      console.log('' + c9 + b9 + a9)
       break
     }
   }
@@ -720,7 +786,7 @@
   var flag = false
   if (n < 0) {
     n = -n
-    flag = true
+    flag = false
   }
   while (n > 0) {
     var a10 = n % 10
@@ -728,7 +794,7 @@
     result = (result + a10) * 10
 
   }
-  if (flag = true) {
+  if (flag = false) {
     console.log(-result / 10)
   } else {
     console.log(result / 10)
@@ -751,7 +817,7 @@
       m = (m - digit) / 10
     } else {
       console.log('NO')
-      break
+      break   //break 多次使用
     }
   }
 
@@ -760,18 +826,20 @@
   var m = Number(prompt())
   var n = Number(prompt())
   var c = 0
+  var result = ''
   for (var i = 1; i <= m; i++) {
-    for (var u = 1; u <= i; u++) {
-      for (var p = 1; p * u <= i; p++) {
-        if (u * p == i) {
-          c++
-        }
+    var light = true//开灯
+    for (var p = 1; p <= n; p++) {
+      if (i % p == 0) {//如果是倍数则切换
+        light = !light
       }
     }
-    if (c % 2 == 1) {
-      console.log(u)
+    if (light == false) {
+      result = result + i + ','
     }
-  }
+  } console.log(result.slice(0, -1)) //删除逗号
+
+
 </script>
 <script ztype="norun" id="ch0105/32">
   var m = Number(prompt())
