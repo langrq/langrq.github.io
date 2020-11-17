@@ -359,13 +359,29 @@
   var c = Number(prompt())
   var theta = b * b - 4 * a * c
 
-  var x1 = (-b + Math.sqrt(theta) / (2 * a))
-  var x2 = (-b)
-  if (theta = 0) {
-    console.log('x1=')
+  var x1 = (-b + Math.sqrt(theta) / (2 * a)).toFixed(5)
+  var x2 = (-b - Math.sqrt(theta) / (2 * a)).toFixed(5)
+  var xshi = (-b / (2 * a)).toFixed(5)
+  var xxu = (Math.sqrt(4 * a * c - b * b) / (2 * a)).toFixed(5)
+
+  if (theta == 0) {
+    console.log('x1=x2=' + x1)
+  }
+  if (theta > 0) {
+    console.log('x1=' + x1 + ';x2=' + x2)
+  }
+  if (theta < 0) {
+    var result = 'x1=' + xshi + '+' + xxu + 'i;x2=' + xshi + '-' + xxu + 'i'
+    console.log(result)
   }
 </script>
-<script type="norun" id="ch0104/21"></script>
+
+<script type="norun" id="ch0103/21">
+    var n = Number(prompt()) 
+    var  x = Number(prompt()) 
+    var  y = Number(prompt());
+    alert(Math.floor(n - y / x)); 
+  </script>
 <script type="norun" id="ch0105/01">
   // var number = Number(prompt());
   // var counter = 1;
@@ -740,9 +756,8 @@
     var b9 = (i - a9) / 9 % 9
     var c9 = (i - b9 * 9 - a9) / 9 / 9 % 9
     if (a7 == c9 && c7 == a9 && b7 == b9) {
-      console.log(i)
-      console.log('' + c7 + b7 + a7)
-      console.log('' + c9 + b9 + a9)
+      console.log(i, '' + c7 + b7 + a7, '' + c9 + b9 + a9)
+
       break
     }
   }
@@ -786,7 +801,7 @@
   var flag = false
   if (n < 0) {
     n = -n
-    flag = false
+    flag = true
   }
   while (n > 0) {
     var a10 = n % 10
@@ -794,11 +809,14 @@
     result = (result + a10) * 10
 
   }
-  if (flag = false) {
+  if (flag) {
     console.log(-result / 10)
-  } else {
+  }
+  else {
     console.log(result / 10)
   }
+
+
 </script>
 <script ztype="norun" id="ch0105/30">
   var m = Number(prompt())
@@ -910,11 +928,23 @@
   console.log(n)
 </script>
 <script ztype="norun" id="ch0105/38">
-  var n = Number(prompt())
-  for (var i = n; i > 0; i--) {
-    var x = Number(prompt())
-    console.log(x * i)
+  var m = Number(prompt())
+  for (var i = 0; i < m; i++) {  //最高次数
+    var n = Number(prompt())
+    if (n == 0) {
+      var c = Number(prompt())  //常数
+      console.log(0)
+    } else {
+      for (var j = n; j >= 0; j--) {
+        var c = Number(prompt()) //系数
+        if (j) {
+          console.log(c * j)
+        }
+      }
+    }
   }
+
+
 </script>
 <script ztype="norun" id="ch0105/39">
   var n = Number(prompt())
@@ -965,8 +995,25 @@
 <script ztype="norun" id="ch0105/42">
   var width = Number(prompt())
   var height = Number(prompt())
-  var string = prompt()
-  var 
+  var char = prompt()
+  var fill = Number(prompt())
+  var a = char
+  var b = char
+  for (var i = 0; i < width - 2; i++) {
+    a += char
+    if (fill) {
+      b += char
+    }
+    b += ' '
+  }
+  a += char
+  b += char
+  var result = a
+  for (var i = 0; i < height - 2; i++) {
+    result += '\n' + b + '\n'
+  }
+  result += a
+  console.log(result)
 </script>
 <script ztype="norun" id="ch0105/43">
   var n = Number(prompt())
@@ -974,29 +1021,169 @@
   for (var i = 2; i <= v; i++) {
     if (n % i == 0)
       console.log(n / i)
+    break
   }
+
 </script>
 <script ztype="norun" id="ch0105/44">
+  //素数的两性定理： 大于3的所有素数都分布在6n+1；6n-1
+  var n = Number(prompt())
+
+  var c = 0
+  for (var i = 2; ; i++) {
+    var isprime = true
+    for (var j = 2; j < i; j++) {
+      if (i % j == 0) {
+        isprime = false
+        break
+      }
+    }
+    if (isprime) {
+      c++
+      if (c == n) {
+        console.log(i)
+        break
+      }
+    }
+  }
+
+
 
 </script>
 <script ztype="norun" id="ch0105/45">
   var n = Number(prompt())
-  var sum = 0
-  var day = 0
+  var sum = 0 //金币
+  var day = 0  //临界天
   for (var i = 1; i <= n; i++) {
-    var p = i
+    var p = i  // 金额和计数相同
     for (var u = 1; u <= p; u++) {
-      sum += p
+      sum += p // 总金额
     }
-    day += i
-    if (n < day && n > p) {
-      var t = (day - n) * p
+    day += i  // 临界日期
+    if (n < day && n > p) {  // 如果n小于临界日期
+      var t = (day - n) * p  // 扣的金额为临界日期-n 再乘金额
       sum = sum - t
       break
     }
   } console.log(sum)
 
 
+  //接受一个n 判断是否为素数
+  var isOdd = function (x) {
+    if (x % 2 == 1) {
+      return true
+    }
+    return false
+  }
 
+  //判断n 是否为素数
+  var isprime = function (n) {
+    var sqrt_n = Math.sqrt(n)
+    if (n == 2 || n == 3) {
+      return true
+    }
+    if (n % 6 != 1 && n & 6 != 5) {
+      return false
+    }
+    for (var i = 1; i <= Math.sqrt_n; i++) {
+      if (n % i == 0) {
+        return false
+      }
+    }
+    return true
+  }
+  console.log(isprime(13))
+
+  //返回数值n 的十进制位宽
+  var digitwidth = function (n) {
+    var w = 0
+    if (n == 0) {
+      return digitwidth = 1
+    }
+    while (n > 0) {
+      digit = n % 10
+      n = (n - digit) / 10
+      w++
+    }
+    return w
+  }
+
+
+
+
+
+
+  //sqrt: 求一个正数的平方根
+  var sqrt = function (n) {
+    result = Math.sqrt(n)
+    return result
+  }
+
+  //narcissistic: 写一个函数判断一个数是否为水仙花数
+  var narcissistic = function (n) {
+    var u = n
+    var sum = 0
+    var w = 0
+    while (n > 0) {
+      digit = n % 10
+      n = (n - digit) / 10
+      w++
+    }
+    n = u
+    if (w <= 2) {
+      return 'NO'
+    }
+    while (n > 0) {
+      digit = n % 10
+      sum += Math.pow(digit, w)  //次方增加
+      n = (n - digit) / 10
+    }
+    if (sum == u) {
+      return 'YES'
+    } else {
+      return 'NO'
+    }
+  }
+
+
+
+  //narcissistics: 输出10000以内的所有水仙花数
+  var narcissistics = function (n) {
+    var sum = 0
+    var w = 0
+    for (i = 0; i < n; i++) {
+      var u = i
+      while (u > 0) {
+        digit = u % 10
+        u = (u - digit) / 10
+        w++
+      }
+
+      u = i
+      while (u > 0) {
+        digit = u % 10
+        sum += Math.pow(digit, w)  //次方增加
+        u = (u - digit) / 10
+      }
+      w = 0
+      if (sum == i) {
+        console.log(i)
+      }
+    }
+  }
 
 </script>
+
+
+<!-- sqrt: 求一个正数的平方根
+narcissistic: 写一个函数判断一个数是否为水仙花数
+narcissistics: 输出10000以内的所有水仙花数
+palindrom: 写函数求阶乘
+weekday: 给写年和月，计算这个月的第一天是星期几
+complete-number: 写一个函数求一个数是否为完全数（它的因子之和等于它自己）
+complete-numbers: 输出1000以内的所有完数
+prime: 判断素数
+primes: 输出1000以内的素数
+itob: 不使用隐式类型转换将一个数字转换为字符串
+lcf: 写函数求出两个数的最大公约数
+lcm: 写函数求出两个数的最小公倍数 -->
