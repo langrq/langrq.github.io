@@ -8,4 +8,8 @@ var langrq = function () {
     }
     return result
   }
+  return {
+    compact,
+  }
+
 }()
