@@ -1354,28 +1354,8 @@ lcm: 写函数求出两个数的最小公倍数 -->
     }
     if (n % 2 == 1) {
       var sum = power(x, n >> 1)
-      return sum * sum * x
+      return sum * sum * t
 
     }
   }
-
-
-  var fibbs = [0, 1, 1, 2, 3, 5, 8]
-
-  function fibb(n) {
-    if (fibbs[n] > 0) {
-      return fibbs[n]
-    }
-    if (n < 3) {
-      return 1
-    }
-    var val = fibb(n - 1) + fibb(n - 2)
-    fibbs[n] = val
-    return val
-  }
-
-
-
-
-
 </script>

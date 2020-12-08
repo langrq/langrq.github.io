@@ -1129,9 +1129,7 @@
     }
     return (1 + r) / 2
   }
-  //牛顿法  未理解
-
-  // f(x0)/(x0-x1)=f'(x0)
+  //牛顿法 
   var sqrt = function (n) {
     var x = n
     while (Math.abs(x * x - n) > 0.00000001) {
@@ -1204,15 +1202,11 @@
   }
 
   //weekday: 给写年和月，计算这个月的第一天是星期几
-  var weekday = function (year, month) {
-    var totalDay =
-    var year = (m - year366) * 365 + year366 * 366
-
-  }
+  var weekday = function (m, n)
   //complete-number: 写一个函数求一个数是否为完全数（它的因子之和等于它自己）
   var cn = function (n) {
     var sum = 1
-    for (var i = 2; i <= n / 2; i++) {
+    for (var i = 2; i <= n; i++) {
       if (n % i == 0) {
         var j = n / i
         if (i == j) { //i和j相同时都为n的平方根
@@ -1223,10 +1217,9 @@
         if (sum > n) {
           return false
         }
-        return n == sum
       }
     }
-
+    return n == sum
   }
   // if (sum == n) {
   //   return true
@@ -1305,19 +1298,7 @@
     return result
   }
 
-  //辗转相除
-  do {
-    if (m < n) {
-      var t = m
-      m = n
-      n = t
-    }
-    m = m % n
-    if (m == 0) {
-      break
-    }
-  } while (m != 0)
-  return n 
+
 </script>
 
 
@@ -1333,49 +1314,3 @@ primes: 输出1000以内的素数
 itob: 不使用隐式类型转换将一个数字转换为字符串
 lcf: 写函数求出两个数的最大公约数
 lcm: 写函数求出两个数的最小公倍数 -->
-<script>
-
-  function s(n) {
-    if (n == 1)
-      return a(1);
-    elsesn
-    return a(n) + s(n - 1)
-  }
-
-
-
-  function power(x, n) {
-    if (n == 0) {
-      return n = 1
-    }
-    if (n % 2 == 0) {
-      var sum = power(x, n >> 1)
-      return sum * sum
-    }
-    if (n % 2 == 1) {
-      var sum = power(x, n >> 1)
-      return sum * sum * x
-
-    }
-  }
-
-
-  var fibbs = [0, 1, 1, 2, 3, 5, 8]
-
-  function fibb(n) {
-    if (fibbs[n] > 0) {
-      return fibbs[n]
-    }
-    if (n < 3) {
-      return 1
-    }
-    var val = fibb(n - 1) + fibb(n - 2)
-    fibbs[n] = val
-    return val
-  }
-
-
-
-
-
-</script>

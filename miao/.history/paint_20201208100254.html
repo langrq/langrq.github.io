@@ -247,16 +247,13 @@
 <!-- 
 </script> -->
 <script src="lena.js">
-
-</script>
-<script>
-  for (var x = 0; x < lena.length; x++) {
-    for (var y = 0; y < lena[x].length; y++) {
-      var point = lena[x][y]
+  for (var y = 0; y < lena.length; y++) {
+    for (var x = 0; x < lena[y].length; x++) {
+      var point = lena[y][x]
       var r = point[0]
       var g = point[1]
       var b = point[2]
-      dot(x, y, 'rgb(' + r + ',' + g + ',' + b + ')')
+      dot(x, y, "rgb" + r + ',' + "rgb" + g + ',' + 'rgb' + b + ',')
     }
   }
 </script>

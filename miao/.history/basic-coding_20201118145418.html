@@ -1204,8 +1204,8 @@
   }
 
   //weekday: 给写年和月，计算这个月的第一天是星期几
-  var weekday = function (year, month) {
-    var totalDay =
+  var weekday = function (m, n) {
+    var year366 = Math.floor(m / 4 - (m / 100) + (m / 400))
     var year = (m - year366) * 365 + year366 * 366
 
   }
@@ -1316,8 +1316,7 @@
     if (m == 0) {
       break
     }
-  } while (m != 0)
-  return n 
+  } while (m != n)
 </script>
 
 
@@ -1333,49 +1332,3 @@ primes: 输出1000以内的素数
 itob: 不使用隐式类型转换将一个数字转换为字符串
 lcf: 写函数求出两个数的最大公约数
 lcm: 写函数求出两个数的最小公倍数 -->
-<script>
-
-  function s(n) {
-    if (n == 1)
-      return a(1);
-    elsesn
-    return a(n) + s(n - 1)
-  }
-
-
-
-  function power(x, n) {
-    if (n == 0) {
-      return n = 1
-    }
-    if (n % 2 == 0) {
-      var sum = power(x, n >> 1)
-      return sum * sum
-    }
-    if (n % 2 == 1) {
-      var sum = power(x, n >> 1)
-      return sum * sum * x
-
-    }
-  }
-
-
-  var fibbs = [0, 1, 1, 2, 3, 5, 8]
-
-  function fibb(n) {
-    if (fibbs[n] > 0) {
-      return fibbs[n]
-    }
-    if (n < 3) {
-      return 1
-    }
-    var val = fibb(n - 1) + fibb(n - 2)
-    fibbs[n] = val
-    return val
-  }
-
-
-
-
-
-</script>
