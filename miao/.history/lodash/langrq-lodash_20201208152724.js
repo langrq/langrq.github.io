@@ -1,5 +1,5 @@
-var langrq = function () {
-  function compact(ary) {
+var langrq = {
+  compact: function (ary) {
     var result = []
     for (var i = 0; i < ary.length; i++) {
       if (ary[i]) {
@@ -8,4 +8,4 @@ var langrq = function () {
     }
     return result
   }
-}()
+}

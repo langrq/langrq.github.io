@@ -1,5 +1,5 @@
 var langrq = function () {
-  function compact(ary) {
+  compact: function (ary) {
     var result = []
     for (var i = 0; i < ary.length; i++) {
       if (ary[i]) {
