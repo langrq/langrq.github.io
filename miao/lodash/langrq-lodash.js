@@ -25,21 +25,12 @@ var langrq = function () {
     return result
   }
 
-  function compact(ary) {
-    var result = []
-    for (var i = 0; i < ary.length; i++) {
-      if (typeof ary[i] === "number" && ary[i] != 0) {
-        result.push(ary[i])
-      }
-    }
-    return result
-  }
 
 
   function join(ary, n) {
     var result = ''
     for (var i = 0; i < ary.length - 1; i++) {
-      result += ary[i] + n
+      result += ary[i] + '' + n
     }
     result = result + ary[i]
     return result
@@ -74,6 +65,7 @@ var langrq = function () {
 
 
 
+
   return {
     chunk,
     compact,
@@ -81,6 +73,7 @@ var langrq = function () {
     join,
     last,
     lastIndexOf,
+    drop,
   }
 
 }()
