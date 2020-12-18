@@ -466,19 +466,10 @@ var langrq = function () {
 
     function xor(...array) {                            //数组或集
         var ary = [].concat(...array)
-        var map = {}
-        var result = []
-        for (var digit of ary) {
-            if (!map[digit]) {
-                map[digit] = 1
-            } else {
-                map[digit]++
-            }
-        }
-        for (var digit in map) {
-            if (map[digit] == 1) result.push(Number(digit))
-        }
-        return result
+        ary.filter(item => {
+            item.includes(array)
+        })
+
     }
 
     function zip(...array) {        //创建一个分组元素数组，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
@@ -496,25 +487,6 @@ var langrq = function () {
         }
         return result
     }
-
-    function zipObject(props = [], values = [], _) {   //创建一个分组元素对象，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
-        var map = {}
-        var i = 0
-        for (var key of props) {
-            map[key] = values[i]
-            i++
-        }
-        return map
-    }
-
-    function zipWith(...array) {
-        var iteratee = array.pop()
-        var result = zip(...array)
-        return res = result.map(item => iteratee(...item))
-    }
-
-
-
 
 
     function forOwn(obj, iterator) {
@@ -560,33 +532,6 @@ var langrq = function () {
         uniq,
         xor,
         without,
-        zip,
-        zipWith,
-        zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
     }
 
 }()

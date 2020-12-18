@@ -585,8 +585,6 @@ var langrq = function () {
         tail,
         take,
         takeRight,
-        differenceBy,
-        differenceWith,
     }
 
 }()

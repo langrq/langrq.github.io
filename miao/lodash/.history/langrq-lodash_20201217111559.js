@@ -509,8 +509,7 @@ var langrq = function () {
 
     function zipWith(...array) {
         var iteratee = array.pop()
-        var result = zip(...array)
-        return res = result.map(item => iteratee(...item))
+        array.zip(...)
     }
 
 
@@ -560,33 +559,8 @@ var langrq = function () {
         uniq,
         xor,
         without,
-        zip,
-        zipWith,
+        zip
         zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
     }
 
 }()

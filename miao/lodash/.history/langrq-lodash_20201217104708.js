@@ -501,16 +501,14 @@ var langrq = function () {
         var map = {}
         var i = 0
         for (var key of props) {
-            map[key] = values[i]
             i++
+            if (!map[key]) {
+                map[key] = valus[i]
+            }
+
+
         }
         return map
-    }
-
-    function zipWith(...array) {
-        var iteratee = array.pop()
-        var result = zip(...array)
-        return res = result.map(item => iteratee(...item))
     }
 
 
@@ -560,33 +558,7 @@ var langrq = function () {
         uniq,
         xor,
         without,
-        zip,
-        zipWith,
         zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
     }
 
 }()

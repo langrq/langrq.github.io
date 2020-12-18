@@ -510,7 +510,11 @@ var langrq = function () {
     function zipWith(...array) {
         var iteratee = array.pop()
         var result = zip(...array)
-        return res = result.map(item => iteratee(...item))
+        var res = []
+        for (var i = 0; i < result.length; i++) {
+            res.push(array.map(item => iteratee(...item)
+        }
+        return res
     }
 
 
@@ -563,30 +567,6 @@ var langrq = function () {
         zip,
         zipWith,
         zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
     }
 
 }()

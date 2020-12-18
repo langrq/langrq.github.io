@@ -504,89 +504,58 @@ var langrq = function () {
             map[key] = values[i]
             i++
         }
-        return map
     }
-
-    function zipWith(...array) {
-        var iteratee = array.pop()
-        var result = zip(...array)
-        return res = result.map(item => iteratee(...item))
-    }
+    return map
+}
 
 
 
 
 
-    function forOwn(obj, iterator) {
-        var hasOwn = object.prototype.hasOwnproperty
-        for (var key in obj) {
-            if (hasOwn.call(obj, k)) {
-                if (iterator(obj[key], key, obj) == false) break
-            }
-        }
-        return obj
-    }
-
-    function bind(f, thisArg, ...fixedArgs) {
-        return function (...args) {
-
-            return f.call(thisArg, ...fixedArgs, ...args)
+function forOwn(obj, iterator) {
+    var hasOwn = object.prototype.hasOwnproperty
+    for (var key in obj) {
+        if (hasOwn.call(obj, k)) {
+            if (iterator(obj[key], key, obj) == false) break
         }
     }
+    return obj
+}
 
+function bind(f, thisArg, ...fixedArgs) {
+    return function (...args) {
 
-    function mapValues(obj, mapper) {
-        for (var key in obj) {
-            var val = obj[key]
-            result[key] = mapper(val, key, obj)
-
-        }
-        return result
+        return f.call(thisArg, ...fixedArgs, ...args)
     }
-    return {
-        chunk,
-        compact,
-        compact,
-        join,
-        last,
-        lastIndexOf,
-        drop,
-        dropRight,
-        fill,
-        findIndex,
-        findLastindex,
-        flatten,
-        flattenDeep,
-        uniq,
-        xor,
-        without,
-        zip,
-        zipWith,
-        zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
+}
+
+
+function mapValues(obj, mapper) {
+    for (var key in obj) {
+        var val = obj[key]
+        result[key] = mapper(val, key, obj)
+
     }
+    return result
+}
+return {
+    chunk,
+    compact,
+    compact,
+    join,
+    last,
+    lastIndexOf,
+    drop,
+    dropRight,
+    fill,
+    findIndex,
+    findLastindex,
+    flatten,
+    flattenDeep,
+    uniq,
+    xor,
+    without,
+    zipObject,
+}
 
 }()

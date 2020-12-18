@@ -499,18 +499,16 @@ var langrq = function () {
 
     function zipObject(props = [], values = [], _) {   //创建一个分组元素对象，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
         var map = {}
-        var i = 0
-        for (var key of props) {
-            map[key] = values[i]
-            i++
+        for (var key in map) {
+            for (var i = 0; i < props.length; i++) {
+                if (!map[props[i]]) {
+                    map[key] = values[i]
+                }
+            }
+
+
         }
         return map
-    }
-
-    function zipWith(...array) {
-        var iteratee = array.pop()
-        var result = zip(...array)
-        return res = result.map(item => iteratee(...item))
     }
 
 
@@ -560,33 +558,7 @@ var langrq = function () {
         uniq,
         xor,
         without,
-        zip,
-        zipWith,
         zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
     }
 
 }()
