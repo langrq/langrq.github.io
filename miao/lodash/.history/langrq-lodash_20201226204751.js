@@ -708,7 +708,6 @@ var langrq = function () {
             for (var key of array) {
                 if (!comparator(array[j], key) && result.indexOf(key) == -1) {
                     result.push(array[j])
-                    break
                 }
             }
         }
@@ -810,24 +809,16 @@ var langrq = function () {
 
     function xorWith(objects, others, comparator) {
         var result = []
-        var res = []
         var array = objects.concat(others)
-        for (var key of objects) {
-            for (var item of others) {
-                if (comparator(key, item)) {
-                    result.push(key)
+        for (var j = 0; j < array.length; j++) {
+            for (var key of array) {
+                if (!(comparator(array[j], key)) && result.indexOf(key) == -1) {
+                    result.push(array[j])
                 }
             }
         }
-        for (var key of result) {
-            for (var i = 0; i < array.length; i++) {
-                if (!comparator(key, array[i])) {
-                    res.push(array[i])
-                }
-            }
-        }
-        return res
 
+        return result
     }
 
 
@@ -863,22 +854,6 @@ var langrq = function () {
         var result = zip(...array)
         return res = result.map(item => iteratee(...item))
     }
-    //collection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     function bind(f, thisArg, ...partials) {
         return function (...args) {

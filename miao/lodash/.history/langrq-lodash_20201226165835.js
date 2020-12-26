@@ -705,10 +705,9 @@ var langrq = function () {
     function uniqWith(array, comparator) {
         var result = []
         for (var j = 0; j < array.length; j++) {
-            for (var key of array) {
-                if (!comparator(array[j], key) && result.indexOf(key) == -1) {
+            for (var i = j + 1; i < array.length; i++) {
+                if (!comparator(array[j], array[i])) {
                     result.push(array[j])
-                    break
                 }
             }
         }
@@ -774,9 +773,9 @@ var langrq = function () {
         return result
     }
 
-    function xorBy(...array) {                                 //复制
+    function xorBy(arrays, [iteratee = _.identity]) {
         if (Array.isArray(array[array.length - 1])) {
-            return xor(array[0], ...(array.slice(1)))
+            return uniq(array[0], ...(array.slice(1)))
         }
 
         var after = array.pop()
@@ -795,7 +794,7 @@ var langrq = function () {
                 var nel2 = after(item)
                 ary2.push(nel2)
             }
-            var result = xor(ary1, ary2)
+            var result = uniq(ary1, ary2)
 
             var res = []
             var results = ary1.concat(ary2)
@@ -807,29 +806,6 @@ var langrq = function () {
             return res
         }
     }
-
-    function xorWith(objects, others, comparator) {
-        var result = []
-        var res = []
-        var array = objects.concat(others)
-        for (var key of objects) {
-            for (var item of others) {
-                if (comparator(key, item)) {
-                    result.push(key)
-                }
-            }
-        }
-        for (var key of result) {
-            for (var i = 0; i < array.length; i++) {
-                if (!comparator(key, array[i])) {
-                    res.push(array[i])
-                }
-            }
-        }
-        return res
-
-    }
-
 
 
     function zip(...array) {        //创建一个分组元素数组，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
@@ -863,22 +839,6 @@ var langrq = function () {
         var result = zip(...array)
         return res = result.map(item => iteratee(...item))
     }
-    //collection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     function bind(f, thisArg, ...partials) {
         return function (...args) {
@@ -1151,8 +1111,6 @@ var langrq = function () {
         uniqWith,
         add,
         unzipWith,
-        xorBy,
-        xorWith,
     }
 
 }()

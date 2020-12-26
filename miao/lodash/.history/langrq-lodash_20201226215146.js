@@ -821,12 +821,12 @@ var langrq = function () {
         }
         for (var key of result) {
             for (var i = 0; i < array.length; i++) {
-                if (!comparator(key, array[i])) {
+                if (!array[i] == key) {
                     res.push(array[i])
+                    break
                 }
             }
         }
-        return res
 
     }
 
@@ -863,22 +863,6 @@ var langrq = function () {
         var result = zip(...array)
         return res = result.map(item => iteratee(...item))
     }
-    //collection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     function bind(f, thisArg, ...partials) {
         return function (...args) {

@@ -631,528 +631,331 @@ var langrq = function () {
                 ary2.push(nel2)
             }
             var result = union(ary1, ary2)
-
             var res = []
-            var results = ary1.concat(ary2)
-            var back = target.concat(differ)
-            for (var key of result) {
-                res.push(back[results.indexOf(key)])
-            }
+            for (var i = 0; i < target.length - 1; i++) {
 
-            return res
-        }
-
-    }
-
-    function unionWith(...arys) {
-
-        let comparator = arys.pop()
-        let left = arys.shift()
-        let right = [].concat(...arys)
-        for (let key of left) {
-            right = right.filter(res => !comparator(res, key))
-        }
-        return left.concat(right)
-
-    }
-
-    function uniq(array) {                         //单数组去重
-        var map = {}
-        var result = []
-        for (var ary of array) {
-            if (!map[ary]) {
-                map[ary] = 1
-                result.push(ary)
-            }
-        }
-        return result
-    }
-
-    function uniqBy(...array) {                            //unionBy直接复制
-        if (Array.isArray(array[array.length - 1])) {
-            return uniq(array[0], ...(array.slice(1)))
-        }
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = uniq(ary1, ary2)
-
-            var res = []
-            var results = ary1.concat(ary2)
-            var back = target.concat(differ)
-            for (var key of result) {
-                res.push(back[results.indexOf(key)])
-            }
-
-            return res
-        }
-    }
-
-    function uniqWith(array, comparator) {
-        var result = []
-        for (var j = 0; j < array.length; j++) {
-            for (var key of array) {
-                if (!comparator(array[j], key) && result.indexOf(key) == -1) {
-                    result.push(array[j])
-                    break
-                }
             }
         }
 
-        return result
 
-    }
-
-
-    function unzip(array) {           //将zip组合成的函数的反解构
-        var max = 0
-        var result = []
-        array.forEach(item => (max = max > item.length ? max : item.length))
-        for (var i = 0; i < max; i++) {
-            var single = []
+        function uniq(array) {                         //单数组去重
+            var map = {}
+            var result = []
             for (var ary of array) {
-                single.push(ary[i])
-            }
-            result.push(single)
-        }
-        return result
-    }
-
-    function unzipWith(array, comparator) {
-        var result = []
-        for (var i = 0; i < array[0].length; i++) {
-            var digit = comparator(array[0][i], array[1][i])
-            result.push(digit)
-        }
-        return result
-    }
-
-
-
-    function without(array, ...vals) {                          //使用SameValueZero创建排除了所有给定值的数组。
-        var result = []
-        for (key of array) {
-            if (!vals.includes(key)) {
-                result.push(key)
-            }
-        }
-        return result
-
-
-        // return array.filter(it => !val.includes(it))      //高阶函数
-
-    }
-
-    function xor(...array) {                            //数组或集
-        var ary = [].concat(...array)
-        var map = {}
-        var result = []
-        for (var digit of ary) {
-            if (!map[digit]) {
-                map[digit] = 1
-            } else {
-                map[digit]++
-            }
-        }
-        for (var digit in map) {
-            if (map[digit] == 1) result.push(Number(digit))
-        }
-        return result
-    }
-
-    function xorBy(...array) {                                 //复制
-        if (Array.isArray(array[array.length - 1])) {
-            return xor(array[0], ...(array.slice(1)))
-        }
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = xor(ary1, ary2)
-
-            var res = []
-            var results = ary1.concat(ary2)
-            var back = target.concat(differ)
-            for (var key of result) {
-                res.push(back[results.indexOf(key)])
-            }
-
-            return res
-        }
-    }
-
-    function xorWith(objects, others, comparator) {
-        var result = []
-        var res = []
-        var array = objects.concat(others)
-        for (var key of objects) {
-            for (var item of others) {
-                if (comparator(key, item)) {
-                    result.push(key)
+                if (!map[ary]) {
+                    map[ary] = 1
+                    result.push(ary)
                 }
             }
+            return result
         }
-        for (var key of result) {
-            for (var i = 0; i < array.length; i++) {
-                if (!comparator(key, array[i])) {
-                    res.push(array[i])
+
+        function unzip(array) {           //将zip组合成的函数的反解构
+            var max = 0
+            var result = []
+            array.forEach(item => (max = max > item.length ? max : item.length))
+            for (var i = 0; i < max; i++) {
+                var single = []
+                for (var ary of array) {
+                    single.push(ary[i])
                 }
+                result.push(single)
             }
+            return result
         }
-        return res
 
-    }
-
-
-
-    function zip(...array) {        //创建一个分组元素数组，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
-        var max = 0
-        var result = []
-
-        array.forEach(item => (max = max > item.length ? max : item.length))
-        for (var i = 0; i < max; i++) {
-            var single = []
-            for (var ary of array) {
-                single.push(ary[i])
-            }
-            result.push(single)
-
+        function without(array, ...vals) {              //使用SameValueZero创建排除了所有给定值的数组。
+            var result = vals.filter(item => {
+                !(array.includes(item))
+            });
+            return result
         }
-        return result
-    }
 
-    function zipObject(props = [], values = [], _) {   //创建一个分组元素对象，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
-        var map = {}
-        var i = 0
-        for (var key of props) {
-            map[key] = values[i]
-            i++
-        }
-        return map
-    }
-
-    function zipWith(...array) {
-        var iteratee = array.pop()
-        var result = zip(...array)
-        return res = result.map(item => iteratee(...item))
-    }
-    //collection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function bind(f, thisArg, ...partials) {
-        return function (...args) {
-            var copy = partials.slice()
-            for (var i = 0; i < copy.length; i++) {
-                if (copy[i] === window) {
-                    copy[i] = args.shift()
-                }
-            }
-            return f.call(thisArg, ...copy, ...args)
-        }
-        // 调用方式  f2 = bind(f,null,window,window,value )
-    }
-
-
-    //Math    
-    function add(augend, addend) {
-        return result = augend + addend
-    }
-
-
-
-
-    function matchesProperty(iteratee) {
-        return function (obj) {
-            return obj[iteratee[0]] === iteratee[1];
-        }
-    }
-
-    function isMatch(obj, src) {                      //判断src是否在obj内包含存在
-        for (var key in src) {
-            if (src[key] && typeof src[key] == 'object') {
-                if (!isMatch(src[key], obj[key])) {
-                    return false
-                }
-            } else {
-                if (obj[key] !== src[key]) {
-                    return false
-                }
-            }
-
-        }
-        return true
-    }
-
-
-    function matches(src) {                                //isMathch的绑定第二个参数的方式就是matches
-        return bind(isMatch, null, window, src)
-    }
-
-
-
-    function get(object, path, defaultValue) {    //获取对象路径上的值。如果未定义已解析的值，则默认值将在其位置返回。
-        var digitname = path.split(".")
-        for (var name of digitname) {
-            if (name in Object(object)) {
-                object = object[name]
-            } else {
-                return defaultValue
-            }
-        }
-        return object
-
-
-        //reduce做法  返回有问题
-        // var names = path.split('.')
-        // return names.reduce((object, name) => {
-        //     if (name in object) {
-        //         return object[name]
-        //     } else {
-        //         return defaultValue
-        //     }
-        // }, object)
-
-        //递归写法
-        // if (path.length == 0) {
-        //     return object
-        // }
-        // if(object == null){
-        //     return defaultValue
-        // }
-        // return get(object[name[0], names.slice(1)], defaultValue) 
-    }
-
-
-    function property(path) {                 //返回目标obj上的 path的值 //高阶函数
-        var names = path.split('.')
-        return function (obj) {
-            for (var name of names) {
-                if (name in Object(obj)) {
-                    obj = obj[name]
+        function xor(...array) {                            //数组或集
+            var ary = [].concat(...array)
+            var map = {}
+            var result = []
+            for (var digit of ary) {
+                if (!map[digit]) {
+                    map[digit] = 1
                 } else {
-                    return
+                    map[digit]++
+                }
+            }
+            for (var digit in map) {
+                if (map[digit] == 1) result.push(Number(digit))
+            }
+            return result
+        }
+
+        function zip(...array) {        //创建一个分组元素数组，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
+            var max = 0
+            var result = []
+
+            array.forEach(item => (max = max > item.length ? max : item.length))
+            for (var i = 0; i < max; i++) {
+                var single = []
+                for (var ary of array) {
+                    single.push(ary[i])
+                }
+                result.push(single)
+
+            }
+            return result
+        }
+
+        function zipObject(props = [], values = [], _) {   //创建一个分组元素对象，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
+            var map = {}
+            var i = 0
+            for (var key of props) {
+                map[key] = values[i]
+                i++
+            }
+            return map
+        }
+
+        function zipWith(...array) {
+            var iteratee = array.pop()
+            var result = zip(...array)
+            return res = result.map(item => iteratee(...item))
+        }
+
+        function bind(f, thisArg, ...partials) {
+            return function (...args) {
+                var copy = partials.slice()
+                for (var i = 0; i < copy.length; i++) {
+                    if (copy[i] === window) {
+                        copy[i] = args.shift()
+                    }
+                }
+                return f.call(thisArg, ...copy, ...args)
+            }
+            // 调用方式  f2 = bind(f,null,window,window,value )
+        }
+
+        function matchesProperty(iteratee) {
+            return function (obj) {
+                return obj[iteratee[0]] === iteratee[1];
+            }
+        }
+
+        function isMatch(obj, src) {                      //判断src是否在obj内包含存在
+            for (var key in src) {
+                if (src[key] && typeof src[key] == 'object') {
+                    if (!isMatch(src[key], obj[key])) {
+                        return false
+                    }
+                } else {
+                    if (obj[key] !== src[key]) {
+                        return false
+                    }
+                }
+
+            }
+            return true
+        }
+
+
+        function matches(src) {                                //isMathch的绑定第二个参数的方式就是matches
+            return bind(isMatch, null, window, src)
+        }
+
+
+
+        function get(object, path, defaultValue) {    //获取对象路径上的值。如果未定义已解析的值，则默认值将在其位置返回。
+            var digitname = path.split(".")
+            for (var name of digitname) {
+                if (name in Object(object)) {
+                    object = object[name]
+                } else {
+                    return defaultValue
+                }
+            }
+            return object
+
+
+            //reduce做法  返回有问题
+            // var names = path.split('.')
+            // return names.reduce((object, name) => {
+            //     if (name in object) {
+            //         return object[name]
+            //     } else {
+            //         return defaultValue
+            //     }
+            // }, object)
+
+            //递归写法
+            // if (path.length == 0) {
+            //     return object
+            // }
+            // if(object == null){
+            //     return defaultValue
+            // }
+            // return get(object[name[0], names.slice(1)], defaultValue) 
+        }
+
+
+        function property(path) {                 //返回目标obj上的 path的值 //高阶函数
+            var names = path.split('.')
+            return function (obj) {
+                for (var name of names) {
+                    if (name in Object(obj)) {
+                        obj = obj[name]
+                    } else {
+                        return
+                    }
+                }
+                return obj
+            }
+
+            //用get的写法
+            // return function (obj) {
+            //     return get(obj, path)
+            // }
+        }
+
+
+
+
+
+        function forOwn(obj, iterator) {
+            var hasOwn = object.prototype.hasOwnproperty
+            for (var key in obj) {
+                if (hasOwn.call(obj, k)) {
+                    if (iterator(obj[key], key, obj) == false) break
                 }
             }
             return obj
         }
 
-        //用get的写法
-        // return function (obj) {
-        //     return get(obj, path)
+        // function bind(f, thisArg, ...fixedArgs) {
+        //     return function (...args) {
+
+        //         return f.call(thisArg, ...fixedArgs, ...args)
+        //     }
         // }
-    }
 
-    function isEqual(value, other) {
 
-        if (value === other) return true;         //直接比对
+        function mapValues(obj, mapper) {
+            for (var key in obj) {
+                var val = obj[key]
+                result[key] = mapper(val, key, obj)
 
-        if (value !== value && other !== other) return true;//NaN
-
-        if (value == null || typeof value != "object" || other == null || typeof other != "object")  //为空
-            return false;
-
-        if (Object.keys(value).length !== Object.keys(other).length) {        //获得索引值 返回长度对比
-            return false
+            }
+            return result
         }
-        for (let key in value) {                                              //返回索引内的匹配
-            if (!(key in other) || !isEqual(value[key], other[key])) {
-                return false
+
+        function ary(f, n = f.length) {
+            return function (...args) {
+                return f(...args.sliece(0, n))
             }
         }
-        return true
 
-    }
-
-
-
-    function forOwn(obj, iterator) {
-        var hasOwn = object.prototype.hasOwnproperty
-        for (var key in obj) {
-            if (hasOwn.call(obj, k)) {
-                if (iterator(obj[key], key, obj) == false) break
+        function before(n, func) {
+            var c = 0
+            var reuslt = 0
+            return function (...args) {
+                if (c < n) {
+                    result = func.call(this, ...args)
+                } else {
+                    return
+                }
+                r++
             }
         }
-        return obj
-    }
 
-    // function bind(f, thisArg, ...fixedArgs) {
-    //     return function (...args) {
-
-    //         return f.call(thisArg, ...fixedArgs, ...args)
-    //     }
-    // }
-
-
-    function mapValues(obj, mapper) {
-        for (var key in obj) {
-            var val = obj[key]
-            result[key] = mapper(val, key, obj)
+        function after(n, func) {
 
         }
-        return result
-    }
-
-    function ary(f, n = f.length) {
-        return function (...args) {
-            return f(...args.sliece(0, n))
-        }
-    }
-
-    function before(n, func) {
-        var c = 0
-        var reuslt = 0
-        return function (...args) {
-            if (c < n) {
-                result = func.call(this, ...args)
-            } else {
-                return
-            }
-            r++
-        }
-    }
-
-    function after(n, func) {
-
-    }
 
 
-    function flip(func) {
-        return function (...args) {
-            return func(...args.reverse())
-        }
-    }
-
-    function negate(predicate) {
-        return function () {
-            return !predicate(...args)
-        }
-    }
-    function spread(func) {
-        return function (ary) {
-            return func.apply(this, ary)
-        }
-    }
-
-
-    function curry(f, length = f.length) {
-        return function (...args) {
-            if (args.length < length) {
-                return curry(f.bind(null, ...args), length - args.length)
-            } else {
-                return f(...args)
+        function flip(func) {
+            return function (...args) {
+                return func(...args.reverse())
             }
         }
-    }
+
+        function negate(predicate) {
+            return function () {
+                return !predicate(...args)
+            }
+        }
+        function spread(func) {
+            return function (ary) {
+                return func.apply(this, ary)
+            }
+        }
 
 
-    return {
-        chunk,
-        compact,
-        compact,
-        join,
-        last,
-        lastIndexOf,
-        drop,
-        dropRight,
-        fill,
-        findIndex,
-        findLastIndex,
-        flatten,
-        flattenDeep,
-        uniq,
-        xor,
-        without,
-        zip,
-        zipWith,
-        zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
-        forEach,
-        get,
-        bind,
-        iteratee,
-        dropRightWhile,
-        dropWhile,
-        intersectionBy,
-        intersectionWith,
-        pullAllBy,
-        sortedIndexBy,
-        sortedLastIndexBy,
-        takeRightWhile,
-        takeWhile,
-        unionBy,
-        unionWith,
-        isEqual,
-        pullAllWith,
-        uniqBy,
-        uniqWith,
-        add,
-        unzipWith,
-        xorBy,
-        xorWith,
-    }
+        function curry(f, length = f.length) {
+            return function (...args) {
+                if (args.length < length) {
+                    return curry(f.bind(null, ...args), length - args.length)
+                } else {
+                    return f(...args)
+                }
+            }
+        }
 
-}()
+
+        return {
+            chunk,
+            compact,
+            compact,
+            join,
+            last,
+            lastIndexOf,
+            drop,
+            dropRight,
+            fill,
+            findIndex,
+            findLastIndex,
+            flatten,
+            flattenDeep,
+            uniq,
+            xor,
+            without,
+            zip,
+            zipWith,
+            zipObject,
+            difference,
+            unzip,
+            union,
+            flattenDepth,
+            fromPairs,
+            head,
+            indexOf,
+            initial,
+            intersection,
+            nth,
+            pull,
+            pullAll,
+            reverse,
+            sortedIndex,
+            sortedIndexOf,
+            sortedLastIndex,
+            sortedLastIndexOf,
+            sortedUniq,
+            sortedUniqBy,
+            tail,
+            take,
+            takeRight,
+            differenceBy,
+            differenceWith,
+            forEach,
+            get,
+            bind,
+            iteratee,
+            dropRightWhile,
+            dropWhile,
+            intersectionBy,
+            intersectionWith,
+            pullAllBy,
+            sortedIndexBy,
+            sortedLastIndexBy,
+            takeRightWhile,
+            takeWhile,
+            unionBy,
+        }
+
+    } ()

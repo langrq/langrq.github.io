@@ -863,22 +863,6 @@ var langrq = function () {
         var result = zip(...array)
         return res = result.map(item => iteratee(...item))
     }
-    //collection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     function bind(f, thisArg, ...partials) {
         return function (...args) {

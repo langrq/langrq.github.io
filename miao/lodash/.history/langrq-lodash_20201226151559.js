@@ -668,9 +668,9 @@ var langrq = function () {
         return result
     }
 
-    function uniqBy(...array) {                            //unionBy直接复制
+    function uniqBy(...array) {
         if (Array.isArray(array[array.length - 1])) {
-            return uniq(array[0], ...(array.slice(1)))
+            return union(array[0], ...(array.slice(1)))
         }
 
         var after = array.pop()
@@ -689,7 +689,7 @@ var langrq = function () {
                 var nel2 = after(item)
                 ary2.push(nel2)
             }
-            var result = uniq(ary1, ary2)
+            var result = union(ary1, ary2)
 
             var res = []
             var results = ary1.concat(ary2)
@@ -702,20 +702,6 @@ var langrq = function () {
         }
     }
 
-    function uniqWith(array, comparator) {
-        var result = []
-        for (var j = 0; j < array.length; j++) {
-            for (var key of array) {
-                if (!comparator(array[j], key) && result.indexOf(key) == -1) {
-                    result.push(array[j])
-                    break
-                }
-            }
-        }
-
-        return result
-
-    }
 
 
     function unzip(array) {           //将zip组合成的函数的反解构
@@ -732,29 +718,11 @@ var langrq = function () {
         return result
     }
 
-    function unzipWith(array, comparator) {
-        var result = []
-        for (var i = 0; i < array[0].length; i++) {
-            var digit = comparator(array[0][i], array[1][i])
-            result.push(digit)
-        }
+    function without(array, ...vals) {              //使用SameValueZero创建排除了所有给定值的数组。
+        var result = vals.filter(item => {
+            !(array.includes(item))
+        });
         return result
-    }
-
-
-
-    function without(array, ...vals) {                          //使用SameValueZero创建排除了所有给定值的数组。
-        var result = []
-        for (key of array) {
-            if (!vals.includes(key)) {
-                result.push(key)
-            }
-        }
-        return result
-
-
-        // return array.filter(it => !val.includes(it))      //高阶函数
-
     }
 
     function xor(...array) {                            //数组或集
@@ -773,64 +741,6 @@ var langrq = function () {
         }
         return result
     }
-
-    function xorBy(...array) {                                 //复制
-        if (Array.isArray(array[array.length - 1])) {
-            return xor(array[0], ...(array.slice(1)))
-        }
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = xor(ary1, ary2)
-
-            var res = []
-            var results = ary1.concat(ary2)
-            var back = target.concat(differ)
-            for (var key of result) {
-                res.push(back[results.indexOf(key)])
-            }
-
-            return res
-        }
-    }
-
-    function xorWith(objects, others, comparator) {
-        var result = []
-        var res = []
-        var array = objects.concat(others)
-        for (var key of objects) {
-            for (var item of others) {
-                if (comparator(key, item)) {
-                    result.push(key)
-                }
-            }
-        }
-        for (var key of result) {
-            for (var i = 0; i < array.length; i++) {
-                if (!comparator(key, array[i])) {
-                    res.push(array[i])
-                }
-            }
-        }
-        return res
-
-    }
-
-
 
     function zip(...array) {        //创建一个分组元素数组，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
         var max = 0
@@ -863,22 +773,6 @@ var langrq = function () {
         var result = zip(...array)
         return res = result.map(item => iteratee(...item))
     }
-    //collection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     function bind(f, thisArg, ...partials) {
         return function (...args) {
@@ -892,15 +786,6 @@ var langrq = function () {
         }
         // 调用方式  f2 = bind(f,null,window,window,value )
     }
-
-
-    //Math    
-    function add(augend, addend) {
-        return result = augend + addend
-    }
-
-
-
 
     function matchesProperty(iteratee) {
         return function (obj) {
@@ -1147,12 +1032,6 @@ var langrq = function () {
         unionWith,
         isEqual,
         pullAllWith,
-        uniqBy,
-        uniqWith,
-        add,
-        unzipWith,
-        xorBy,
-        xorWith,
     }
 
 }()

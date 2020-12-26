@@ -310,8 +310,8 @@ var langrq = function () {
 
     function intersectionWith(objects, others, comparator) {
         var result = []
-        for (var ary of objects) {
-            for (var val of others) {
+        for (var ary of array) {
+            for (var val of values) {
                 if (comparator(ary, val)) {
                     result.push(ary)
                 }
@@ -387,49 +387,6 @@ var langrq = function () {
         return result
     }
 
-    function pullAllBy(...array) {
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = pullAll(ary1, ary2)
-            var res = []
-            for (var k in ary1) {
-                for (var it of result)
-                    if (ary1[k] == it) {
-                        res.push(target[k])
-                    }
-            }
-            return res
-        }
-    }
-
-
-    function pullAllWith(array, values, comparator) {
-        var result = []
-        for (var ary of array) {
-            for (var val of values) {
-                if (!comparator(ary, val)) {
-                    result.push(ary)
-                }
-            }
-        }
-        return result
-    }
-
     function reverse(array) {              //反转数组的值
         var n = array.length
         for (var i = 0; i < n / 2; i++) {
@@ -448,34 +405,6 @@ var langrq = function () {
         return array.length
     }
 
-    function sortedIndexBy(...array) {
-        if (Array.isArray(array[array.length - 1])) {
-            return sortedIndex(array[0], ...(array.slice(1)))
-        }
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-
-
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = sortedIndex(ary1, ary2)
-
-            return result
-        }
-    }
 
     function sortedIndexOf(array, value) {    //在排序数列中  可以获得插入的值的索引位置，不在范围内则返回-1
         var n = array.length
@@ -494,46 +423,25 @@ var langrq = function () {
         return array.length
     }
 
-    function sortedLastIndexBy(...array) {
-        if (Array.isArray(array[array.length - 1])) {
-            return sortedLastIndex(array[0], ...(array.slice(1)))
-        }
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = sortedLastIndex(ary1, ary2)
-
-            return result
-        }
-    }
-
-
     function sortedLastIndexOf(array, value) {    //在排序数列中  从后向前可以获得插入的值的索引位置，不在范围内则返回-1
         var n = array.length
         if (array[0] > value) return -1
-        for (var i = n - 1; i >= 0; i--) {
-            if (array[i] <= value) return i
+        for (var i = n - 1; i > 0; i--) {
+            if (array[i] >= value) return i
 
         }
         return -1
     }
 
     function sortedUniq(array) {              //排序数组中的去重
-        return uniq(array)
+        var n = array.length
+        for (var i = 0; i < n - 1; i++) {
+            if (array[i] == array[i + 1]) {
+                array[i + 1] == array[i + 2]
+                i++
+            }
+        }
+        return array
     }
 
     function sortedUniqBy(array, predicate) {    //高阶排序数组去重
@@ -551,7 +459,7 @@ var langrq = function () {
     }
 
     function tail(array) {                      //获得除第一个数的后续数组
-        return array.slice(1)
+        return array.shift()
     }
 
     function take(array, n = 1) {                 //创建一个数组切片，其中数组从头开始取n个元素。
@@ -573,29 +481,6 @@ var langrq = function () {
         return result
     }
 
-    function takeRightWhile(obj, predicate) {
-        var f = iteratee(predicate)
-        var result = []
-        for (var i = obj.length - 1; i >= 0; i--) {
-            if (!f(obj[i])) {
-                break
-            }
-            result.unshift(obj[i])
-        }
-        return result
-    }
-    function takeWhile(obj, predicate) {
-        var f = iteratee(predicate)
-        var result = []
-        for (var i = 0; i < obj.length; i++) {
-            if (!f(obj[i])) {
-                break
-            }
-            result.push(obj[i])
-        }
-        return result
-    }
-
     function union(...arrays) {                   //使用SameValueZero进行相等性比较，从所有给定的数组中依次创建唯一值的数组。
         var map = {}
         var result = []
@@ -609,53 +494,6 @@ var langrq = function () {
         return result
     }
 
-    function unionBy(...array) {
-        if (Array.isArray(array[array.length - 1])) {
-            return union(array[0], ...(array.slice(1)))
-        }
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = union(ary1, ary2)
-
-            var res = []
-            var results = ary1.concat(ary2)
-            var back = target.concat(differ)
-            for (var key of result) {
-                res.push(back[results.indexOf(key)])
-            }
-
-            return res
-        }
-
-    }
-
-    function unionWith(...arys) {
-
-        let comparator = arys.pop()
-        let left = arys.shift()
-        let right = [].concat(...arys)
-        for (let key of left) {
-            right = right.filter(res => !comparator(res, key))
-        }
-        return left.concat(right)
-
-    }
-
     function uniq(array) {                         //单数组去重
         var map = {}
         var result = []
@@ -667,56 +505,6 @@ var langrq = function () {
         }
         return result
     }
-
-    function uniqBy(...array) {                            //unionBy直接复制
-        if (Array.isArray(array[array.length - 1])) {
-            return uniq(array[0], ...(array.slice(1)))
-        }
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = uniq(ary1, ary2)
-
-            var res = []
-            var results = ary1.concat(ary2)
-            var back = target.concat(differ)
-            for (var key of result) {
-                res.push(back[results.indexOf(key)])
-            }
-
-            return res
-        }
-    }
-
-    function uniqWith(array, comparator) {
-        var result = []
-        for (var j = 0; j < array.length; j++) {
-            for (var key of array) {
-                if (!comparator(array[j], key) && result.indexOf(key) == -1) {
-                    result.push(array[j])
-                    break
-                }
-            }
-        }
-
-        return result
-
-    }
-
 
     function unzip(array) {           //将zip组合成的函数的反解构
         var max = 0
@@ -732,29 +520,11 @@ var langrq = function () {
         return result
     }
 
-    function unzipWith(array, comparator) {
-        var result = []
-        for (var i = 0; i < array[0].length; i++) {
-            var digit = comparator(array[0][i], array[1][i])
-            result.push(digit)
-        }
+    function without(array, ...vals) {              //使用SameValueZero创建排除了所有给定值的数组。
+        var result = vals.filter(item => {
+            !(array.includes(item))
+        });
         return result
-    }
-
-
-
-    function without(array, ...vals) {                          //使用SameValueZero创建排除了所有给定值的数组。
-        var result = []
-        for (key of array) {
-            if (!vals.includes(key)) {
-                result.push(key)
-            }
-        }
-        return result
-
-
-        // return array.filter(it => !val.includes(it))      //高阶函数
-
     }
 
     function xor(...array) {                            //数组或集
@@ -773,64 +543,6 @@ var langrq = function () {
         }
         return result
     }
-
-    function xorBy(...array) {                                 //复制
-        if (Array.isArray(array[array.length - 1])) {
-            return xor(array[0], ...(array.slice(1)))
-        }
-
-        var after = array.pop()
-        after = iteratee(after)
-
-        var target = array.shift()
-        var differ = [].concat(...array)
-        if (Array.isArray(target)) {
-            var ary1 = []
-            var ary2 = []
-            for (var key of target) {
-                var nel1 = after(key)
-                ary1.push(nel1)
-            }
-            for (var item of differ) {
-                var nel2 = after(item)
-                ary2.push(nel2)
-            }
-            var result = xor(ary1, ary2)
-
-            var res = []
-            var results = ary1.concat(ary2)
-            var back = target.concat(differ)
-            for (var key of result) {
-                res.push(back[results.indexOf(key)])
-            }
-
-            return res
-        }
-    }
-
-    function xorWith(objects, others, comparator) {
-        var result = []
-        var res = []
-        var array = objects.concat(others)
-        for (var key of objects) {
-            for (var item of others) {
-                if (comparator(key, item)) {
-                    result.push(key)
-                }
-            }
-        }
-        for (var key of result) {
-            for (var i = 0; i < array.length; i++) {
-                if (!comparator(key, array[i])) {
-                    res.push(array[i])
-                }
-            }
-        }
-        return res
-
-    }
-
-
 
     function zip(...array) {        //创建一个分组元素数组，其中第一个元素包含给定数组的第一个元素，第二个元素包含给定数组的第二个元素，依此类推。
         var max = 0
@@ -863,22 +575,6 @@ var langrq = function () {
         var result = zip(...array)
         return res = result.map(item => iteratee(...item))
     }
-    //collection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     function bind(f, thisArg, ...partials) {
         return function (...args) {
@@ -892,15 +588,6 @@ var langrq = function () {
         }
         // 调用方式  f2 = bind(f,null,window,window,value )
     }
-
-
-    //Math    
-    function add(augend, addend) {
-        return result = augend + addend
-    }
-
-
-
 
     function matchesProperty(iteratee) {
         return function (obj) {
@@ -983,26 +670,7 @@ var langrq = function () {
         // }
     }
 
-    function isEqual(value, other) {
 
-        if (value === other) return true;         //直接比对
-
-        if (value !== value && other !== other) return true;//NaN
-
-        if (value == null || typeof value != "object" || other == null || typeof other != "object")  //为空
-            return false;
-
-        if (Object.keys(value).length !== Object.keys(other).length) {        //获得索引值 返回长度对比
-            return false
-        }
-        for (let key in value) {                                              //返回索引内的匹配
-            if (!(key in other) || !isEqual(value[key], other[key])) {
-                return false
-            }
-        }
-        return true
-
-    }
 
 
 
@@ -1138,21 +806,6 @@ var langrq = function () {
         dropWhile,
         intersectionBy,
         intersectionWith,
-        pullAllBy,
-        sortedIndexBy,
-        sortedLastIndexBy,
-        takeRightWhile,
-        takeWhile,
-        unionBy,
-        unionWith,
-        isEqual,
-        pullAllWith,
-        uniqBy,
-        uniqWith,
-        add,
-        unzipWith,
-        xorBy,
-        xorWith,
     }
 
 }()
