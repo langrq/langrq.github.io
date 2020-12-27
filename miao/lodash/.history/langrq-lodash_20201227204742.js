@@ -1056,9 +1056,7 @@ var langrq = function () {
         return result
     }
 
-    function orderBy(array, predicate, orders) {
 
-    }
 
 
 

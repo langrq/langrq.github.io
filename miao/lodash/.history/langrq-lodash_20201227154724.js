@@ -957,7 +957,7 @@ var langrq = function () {
             }
         } else if (typeof ary == "object") {
             for (var key in ary) {
-                predicate(ary[key], key)
+                predicate(key.val, key)
             }
         }
     }
@@ -967,102 +967,12 @@ var langrq = function () {
             for (var i = ary.length - 1; i >= 0; i--) {
                 predicate(ary[i])
             }
-        } else if (typeof ary == "object") {
-            var keys = []
-            var vals = []
-            for (var key in ary) {
-                keys.push(key)
-                vals.push(ary[key])
-            }
-            for (var i = keys.length - 1; i >= 0; i--) {
-                predicate(vals[i], keys[i])
-            }
-        }
-    }
-
-    function groupBy(array, predicate) {
-        f = iteratee(predicate)
-        var map = {}
-        for (var val of array) {
-            key = f(val)
-            if (key in map) {
-                map[key].push(val)
-            } else {
-                map[key] = [val]
-            }
-        }
-        return map
-    }
-
-    function includes(array, value, fromIndex = 0) {
-        if (Array.isArray(array)) {
-            for (var i = fromIndex; i < array.length; i++) {
-                if (array[i] == value) {
-                    return true
-                }
-            }
-            return false
-        }
-        if (typeof array == "string") {
-            return Boolean(array.slice(fromIndex).match(value))
-
-        }
-        if (typeof array == "object") {
-
-            for (var key in array) {
-                fromIndex--
-                if (array[key] == value && !fromIndex) return true
-            }
-            return false
-        }
-    }
-
-    function invokeMap(array, path, ...args) {
-        var res = [];
-        if (typeof path == 'string') {
-            res = array.map(it => it[path](...args));
-        }
-        if (typeof path == 'function') {
-            res = array.map(it => path.apply(it, [...args]));
-        }
-        return res;
-    }
+        } else if (typeof ary == "object") forEachRight(Object.keys(ary))
 
 
-    function keyBy(array, predicate) {
-        var map = {}
-        f = iteratee(predicate)
-        for (var key in array) {
-            let val = array[key]
-            map[f(val)] = val
-        }
-        return map
-    }
 
-    function map(array, predicate) {
-        var result = []
-        predicate = iteratee(predicate)
-        if (Array.isArray(array)) {
-            for (var key of array) {
-                result.push(predicate(key))
-            }
-        } else if (typeof array == "object") {
-            for (var item in array) {
-                if (predicate(array[item])) {
-                    result.push(predicate(array[item]))
-                }
-            }
-        }
-        return result
-    }
-
-    function orderBy(array, predicate, orders) {
 
     }
-
-
-
-
 
 
 
@@ -1349,11 +1259,6 @@ var langrq = function () {
         flatMapDeep,
         flatMapDepth,
         forEachRight,
-        groupBy,
-        includes,
-        invokeMap,
-        keyBy,
-        map,
     }
 
 }()

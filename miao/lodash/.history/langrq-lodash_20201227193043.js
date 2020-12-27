@@ -1031,34 +1031,12 @@ var langrq = function () {
 
     function keyBy(array, predicate) {
         var map = {}
-        f = iteratee(predicate)
-        for (var key in array) {
-            let val = array[key]
-            map[f(val)] = val
-        }
-        return map
-    }
-
-    function map(array, predicate) {
-        var result = []
-        predicate = iteratee(predicate)
-        if (Array.isArray(array)) {
-            for (var key of array) {
-                result.push(predicate(key))
-            }
-        } else if (typeof array == "object") {
-            for (var item in array) {
-                if (predicate(array[item])) {
-                    result.push(predicate(array[item]))
-                }
-            }
-        }
-        return result
-    }
-
-    function orderBy(array, predicate, orders) {
 
     }
+
+
+
+
 
 
 
@@ -1352,8 +1330,6 @@ var langrq = function () {
         groupBy,
         includes,
         invokeMap,
-        keyBy,
-        map,
     }
 
 }()

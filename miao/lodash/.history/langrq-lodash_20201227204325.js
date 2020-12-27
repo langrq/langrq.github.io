@@ -1041,24 +1041,21 @@ var langrq = function () {
 
     function map(array, predicate) {
         var result = []
-        predicate = iteratee(predicate)
         if (Array.isArray(array)) {
             for (var key of array) {
                 result.push(predicate(key))
             }
         } else if (typeof array == "object") {
-            for (var item in array) {
-                if (predicate(array[item])) {
-                    result.push(predicate(array[item]))
+            for (var item of array) {
+                if (predicate(item)) {
+                    result.push(item)
                 }
             }
         }
         return result
     }
 
-    function orderBy(array, predicate, orders) {
 
-    }
 
 
 
