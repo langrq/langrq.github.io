@@ -215,10 +215,9 @@ var langrq = function () {
     }
 
 
-    function flattenDepth(ary, depth, ans = []) {   //将数组递归展平至指定深度。
-        count = 0
-        for (var i = 0; i < ary.length; i++) {
+    function flattenDepth(ary, depth, ans = [], count = 0) {   //将数组递归展平至指定深度。
 
+        for (var i = 0; i < ary.length; i++) {
             var result = ary[i]
             if (typeof result == 'object' && count < depth) {
                 count++
@@ -900,16 +899,16 @@ var langrq = function () {
     }
 
     function find(array, predicate, fromIndex = 0) {
-
+        var res = []
         var f = iteratee(predicate)
         for (var i = fromIndex; i < array.length; i++) {
             var item = f(array[i])
             if (item) {
-                return array[i]
-
+                res.push(array[i])
+                break
             }
         }
-
+        return res
     }
 
 
@@ -940,8 +939,7 @@ var langrq = function () {
 
 
     function flatMapDepth(array, predicate, depth = 1) {
-        var result = flatMap(array, predicate)
-        return res = flattenDepth(result, depth++)
+        return result = flattenDepth(flatMap(array, predicate, depth))
     }
 
     // function forEach(ary, action) {                               //可以断的foreach循环

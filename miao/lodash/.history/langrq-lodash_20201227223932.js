@@ -215,10 +215,9 @@ var langrq = function () {
     }
 
 
-    function flattenDepth(ary, depth, ans = []) {   //将数组递归展平至指定深度。
-        count = 0
-        for (var i = 0; i < ary.length; i++) {
+    function flattenDepth(ary, depth, ans = [], count = 0) {   //将数组递归展平至指定深度。
 
+        for (var i = 0; i < ary.length; i++) {
             var result = ary[i]
             if (typeof result == 'object' && count < depth) {
                 count++
