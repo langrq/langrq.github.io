@@ -1892,7 +1892,6 @@ var langrq = function () {
     }
 
 
-
     // function bind(f, thisArg, ...fixedArgs) {
     //     return function (...args) {
 

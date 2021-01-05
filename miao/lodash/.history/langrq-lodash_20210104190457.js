@@ -1467,7 +1467,7 @@ var langrq = function () {
     }
 
     function isInteger(value) {
-        return Number.isInteger(value)
+        return isInteger(value)
     }
 
     function isLength(value) {
@@ -1610,7 +1610,9 @@ var langrq = function () {
         return Number(value)
     }
 
-
+    function assign(object, ...sources) {
+        return assign(object, ...source)
+    }
 
     function toSafeInteger(val) {
         if (val > Number.MAX_SAFE_INTEGER) {
@@ -1772,126 +1774,42 @@ var langrq = function () {
 
 
     function random(lower = 0, upper = 1, floating) {
-        if (upper == undefined) {
+        var a = 1103515245
+        var c = 12345
+        var m = 2 ** 31
+        var x = 5
+
+        function rand() {
+            return x = (a * x + c) % m
+        }
+        if(upper == undefined ){
             upper = lower
-            lower = 0
-        } else if (typeof upper == "boolean") {
+            lower = 0 
+        }else if (typeof upper == "boolean"){
             floating = upper
             upper = lower
             lower = 0
         }
-        if (floating || !isInteger(lower) || !isInteger(upper)) {
-            return Math.random() * (upper - lower) + lower
-        } else {
-            return Math.floor(Math.random() * (upper - lower) + lower)
+         {
+          
         }
 
+        if (floating) {
+            return Math.floor(rand() * )
+        }
     }
     //Object
-    function assign(object, ...sources) {
-        // return Object.assign(object, ...sources)
-        sources.forEach((item) => {
-            for (var key of Object.keys(item)) {
-                object[key] = item[key]
-            }
-        })
-        return object
-    }
-
-    function assignIn(object, ...source) {
-        source.forEach((item) => {
-            for (let key in item) {
-                object[key] = item[key];
-            }
-        });
-        return object;
-    }
-
-    function defaults(...object) {
-        var map = {}
-        object.forEach((item) => {
-            for (var key of Object.keys(item)) {
-                if (key in map) {
-                    continue
-                } else {
-                    map[key] = item[key]
-                }
-            }
-        })
-        return map
-    }
-
-    function defaultsDeep(object, ...sources) {
-        var map = {}
-        sources.forEach((item) => {
-            for (var key of Object.keys(item)) {
-                if (!object[key]) {
-                    object[key] = item[key]
-                } else {
-                    if (isObject(item[key])) {
-                        defaultsDeep(item[key])
-                    } else {
-                        map[key] = item[key]
-                    }
-                }
-
-            }
-        })
-        return map
-    }
-
-    function findKey(object, predicate) {
-        var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
-            if (item) {
-                return i
-            }
-        }
-    }
-
-
-    function findLastKey(object, predicate) {
-        var result = []
-        var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
-            if (item) {
-                result.push(i)
-            }
-        }
-        return result[result.length - 1]
-    }
-
-    function forIn(object, predicate) {
-        while (object) {
-            for (var key in object) {
-                if (!predicate(object[key], key, object)) {
-                    break
-                }
-            }
-        }
-        return object
-    }
 
 
     function forOwn(obj, iterator) {
         var hasOwn = object.prototype.hasOwnproperty
         for (var key in obj) {
-            if (hasOwn.call(obj, key)) {
+            if (hasOwn.call(obj, k)) {
                 if (iterator(obj[key], key, obj) == false) break
             }
         }
         return obj
     }
-
-    //seq
-    //string
-    function endsWith(str = '', target, position = str.length) {
-        return str[position - 1] == target
-    }
-
-
 
     // function bind(f, thisArg, ...fixedArgs) {
     //     return function (...args) {
@@ -2090,16 +2008,6 @@ var langrq = function () {
         sumBy,
         clamp,
         inRange,
-        random,
-        assign,
-        assignIn,
-        defaults,
-        defaultsDeep,
-        findKey,
-        findLastKey,
-        forIn,
-        forOwn,
-        endsWith,
     }
 
 }()

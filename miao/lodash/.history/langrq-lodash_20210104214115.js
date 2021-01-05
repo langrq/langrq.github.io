@@ -1862,35 +1862,21 @@ var langrq = function () {
         }
         return result[result.length - 1]
     }
+    function forIn(object, [iteratee = _.identity]) {
 
-    function forIn(object, predicate) {
-        while (object) {
-            for (var key in object) {
-                if (!predicate(object[key], key, object)) {
-                    break
-                }
-            }
-        }
-        return object
     }
+
 
 
     function forOwn(obj, iterator) {
         var hasOwn = object.prototype.hasOwnproperty
         for (var key in obj) {
-            if (hasOwn.call(obj, key)) {
+            if (hasOwn.call(obj, k)) {
                 if (iterator(obj[key], key, obj) == false) break
             }
         }
         return obj
     }
-
-    //seq
-    //string
-    function endsWith(str = '', target, position = str.length) {
-        return str[position - 1] == target
-    }
-
 
 
     // function bind(f, thisArg, ...fixedArgs) {
@@ -2098,8 +2084,6 @@ var langrq = function () {
         findKey,
         findLastKey,
         forIn,
-        forOwn,
-        endsWith,
     }
 
 }()

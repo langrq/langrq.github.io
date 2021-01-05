@@ -1887,10 +1887,9 @@ var langrq = function () {
 
     //seq
     //string
-    function endsWith(str = '', target, position = str.length) {
+    function endsWith(str = '', target, position = string.length) {
         return str[position - 1] == target
     }
-
 
 
     // function bind(f, thisArg, ...fixedArgs) {

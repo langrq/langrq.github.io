@@ -1852,46 +1852,25 @@ var langrq = function () {
 
 
     function findLastKey(object, predicate) {
-        var result = []
         var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
+        var nel = Object.keys(object)
+        for (var i = nel.length; i >= 0; i--) {
+            var item = f({ nel[i]})
             if (item) {
-                result.push(i)
+                return nel[i]
             }
         }
-        return result[result.length - 1]
     }
-
-    function forIn(object, predicate) {
-        while (object) {
-            for (var key in object) {
-                if (!predicate(object[key], key, object)) {
-                    break
-                }
-            }
-        }
-        return object
-    }
-
 
     function forOwn(obj, iterator) {
         var hasOwn = object.prototype.hasOwnproperty
         for (var key in obj) {
-            if (hasOwn.call(obj, key)) {
+            if (hasOwn.call(obj, k)) {
                 if (iterator(obj[key], key, obj) == false) break
             }
         }
         return obj
     }
-
-    //seq
-    //string
-    function endsWith(str = '', target, position = str.length) {
-        return str[position - 1] == target
-    }
-
-
 
     // function bind(f, thisArg, ...fixedArgs) {
     //     return function (...args) {
@@ -2097,9 +2076,6 @@ var langrq = function () {
         defaultsDeep,
         findKey,
         findLastKey,
-        forIn,
-        forOwn,
-        endsWith,
     }
 
 }()

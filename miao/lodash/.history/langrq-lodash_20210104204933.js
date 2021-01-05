@@ -1823,10 +1823,10 @@ var langrq = function () {
 
     function defaultsDeep(object, ...sources) {
         var map = {}
-        sources.forEach((item) => {
+        object.forEach((item) => {
             for (var key of Object.keys(item)) {
-                if (!object[key]) {
-                    object[key] = item[key]
+                if (key in map) {
+                    continue
                 } else {
                     if (isObject(item[key])) {
                         defaultsDeep(item[key])
@@ -1840,58 +1840,17 @@ var langrq = function () {
         return map
     }
 
-    function findKey(object, predicate) {
-        var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
-            if (item) {
-                return i
-            }
-        }
-    }
-
-
-    function findLastKey(object, predicate) {
-        var result = []
-        var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
-            if (item) {
-                result.push(i)
-            }
-        }
-        return result[result.length - 1]
-    }
-
-    function forIn(object, predicate) {
-        while (object) {
-            for (var key in object) {
-                if (!predicate(object[key], key, object)) {
-                    break
-                }
-            }
-        }
-        return object
-    }
 
 
     function forOwn(obj, iterator) {
         var hasOwn = object.prototype.hasOwnproperty
         for (var key in obj) {
-            if (hasOwn.call(obj, key)) {
+            if (hasOwn.call(obj, k)) {
                 if (iterator(obj[key], key, obj) == false) break
             }
         }
         return obj
     }
-
-    //seq
-    //string
-    function endsWith(str = '', target, position = str.length) {
-        return str[position - 1] == target
-    }
-
-
 
     // function bind(f, thisArg, ...fixedArgs) {
     //     return function (...args) {
@@ -2095,11 +2054,6 @@ var langrq = function () {
         assignIn,
         defaults,
         defaultsDeep,
-        findKey,
-        findLastKey,
-        forIn,
-        forOwn,
-        endsWith,
     }
 
 }()

@@ -1821,285 +1821,240 @@ var langrq = function () {
         return map
     }
 
-    function defaultsDeep(object, ...sources) {
+    function defaultsDeep(...object) {
         var map = {}
-        sources.forEach((item) => {
+        object.forEach((item) => {
             for (var key of Object.keys(item)) {
-                if (!object[key]) {
-                    object[key] = item[key]
+                if (key in map) {
+                    continue
                 } else {
-                    if (isObject(item[key])) {
-                        defaultsDeep(item[key])
+                    if (isObject(key)) {
+                        defaultsDeep(key)
                     } else {
                         map[key] = item[key]
                     }
                 }
 
             }
+        }
         })
-        return map
-    }
+    return map
+}
 
-    function findKey(object, predicate) {
-        var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
-            if (item) {
-                return i
-            }
+
+
+function forOwn(obj, iterator) {
+    var hasOwn = object.prototype.hasOwnproperty
+    for (var key in obj) {
+        if (hasOwn.call(obj, k)) {
+            if (iterator(obj[key], key, obj) == false) break
         }
     }
+    return obj
+}
+
+// function bind(f, thisArg, ...fixedArgs) {
+//     return function (...args) {
+
+//         return f.call(thisArg, ...fixedArgs, ...args)
+//     }
+// }
 
 
-    function findLastKey(object, predicate) {
-        var result = []
-        var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
-            if (item) {
-                result.push(i)
-            }
+function mapValues(obj, mapper) {
+    var result = {}
+    for (var key in obj) {
+        var val = obj[key]
+        result[key] = mapper(val, key, obj)
+
+    }
+    return result
+}
+
+
+
+function before(n, func) {
+    var c = 0
+    var reuslt = 0
+    return function (...args) {
+        if (c < n) {
+            result = func.call(this, ...args)
+        } else {
+            return
         }
-        return result[result.length - 1]
+        r++
     }
-
-    function forIn(object, predicate) {
-        while (object) {
-            for (var key in object) {
-                if (!predicate(object[key], key, object)) {
-                    break
-                }
-            }
-        }
-        return object
-    }
-
-
-    function forOwn(obj, iterator) {
-        var hasOwn = object.prototype.hasOwnproperty
-        for (var key in obj) {
-            if (hasOwn.call(obj, key)) {
-                if (iterator(obj[key], key, obj) == false) break
-            }
-        }
-        return obj
-    }
-
-    //seq
-    //string
-    function endsWith(str = '', target, position = str.length) {
-        return str[position - 1] == target
-    }
+}
 
 
 
-    // function bind(f, thisArg, ...fixedArgs) {
-    //     return function (...args) {
-
-    //         return f.call(thisArg, ...fixedArgs, ...args)
-    //     }
-    // }
-
-
-    function mapValues(obj, mapper) {
-        var result = {}
-        for (var key in obj) {
-            var val = obj[key]
-            result[key] = mapper(val, key, obj)
-
-        }
-        return result
-    }
 
 
 
-    function before(n, func) {
-        var c = 0
-        var reuslt = 0
-        return function (...args) {
-            if (c < n) {
-                result = func.call(this, ...args)
-            } else {
-                return
-            }
-            r++
+
+
+function curry(f, length = f.length) {
+    return function (...args) {
+        if (args.length < length) {
+            return curry(f.bind(null, ...args), length - args.length)
+        } else {
+            return f(...args)
         }
     }
+}
 
 
-
-
-
-
-
-
-    function curry(f, length = f.length) {
-        return function (...args) {
-            if (args.length < length) {
-                return curry(f.bind(null, ...args), length - args.length)
-            } else {
-                return f(...args)
-            }
-        }
-    }
-
-
-    return {
-        chunk,
-        compact,
-        compact,
-        join,
-        last,
-        lastIndexOf,
-        drop,
-        dropRight,
-        fill,
-        findIndex,
-        findLastIndex,
-        flatten,
-        flattenDeep,
-        uniq,
-        xor,
-        without,
-        zip,
-        zipWith,
-        zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
-        forEach,
-        get,
-        bind,
-        iteratee,
-        dropRightWhile,
-        dropWhile,
-        intersectionBy,
-        intersectionWith,
-        pullAllBy,
-        sortedIndexBy,
-        sortedLastIndexBy,
-        takeRightWhile,
-        takeWhile,
-        unionBy,
-        unionWith,
-        isEqual,
-        pullAllWith,
-        uniqBy,
-        uniqWith,
-        add,
-        unzipWith,
-        xorBy,
-        xorWith,
-        countBy,
-        every,
-        filter,
-        find,
-        findLast,
-        flatMap,
-        flatMapDeep,
-        flatMapDepth,
-        forEachRight,
-        groupBy,
-        includes,
-        invokeMap,
-        keyBy,
-        map,
-        curry,
-        mapValues,
-        partition,
-        reduce,
-        reduceRight,
-        reject,
-        sample,
-        sampleSize,
-        shuffle,
-        size,
-        some,
-        ary,
-        bind,
-        defer,
-        delay,
-        flip,
-        negate,
-        unary,
-        castArray,
-        clone,
-        conformsTo,
-        eq,
-        gt,
-        gte,
-        isArguments,
-        isArray,
-        isArrayBuffer,
-        isArrayLike,
-        isArrayLikeObject,
-        isBoolean,
-        isDate,
-        isElement,
-        isEmpty,
-        isEqualWith,
-        isError,
-        isFinite,
-        isMatchWith,
-        isNative,
-        isNaN,
-        isNil,
-        isNull,
-        isLength,
-        isMap,
-        isFunction,
-        isNumber,
-        isObject,
-        isObjectLike,
-        toArray,
-        toFinite,
-        ceil,
-        divide,
-        floor,
-        max,
-        maxBy,
-        mean,
-        meanBy,
-        min,
-        minBy,
-        multiply,
-        round,
-        subtract,
-        sum,
-        sumBy,
-        clamp,
-        inRange,
-        random,
-        assign,
-        assignIn,
-        defaults,
-        defaultsDeep,
-        findKey,
-        findLastKey,
-        forIn,
-        forOwn,
-        endsWith,
-    }
+return {
+    chunk,
+    compact,
+    compact,
+    join,
+    last,
+    lastIndexOf,
+    drop,
+    dropRight,
+    fill,
+    findIndex,
+    findLastIndex,
+    flatten,
+    flattenDeep,
+    uniq,
+    xor,
+    without,
+    zip,
+    zipWith,
+    zipObject,
+    difference,
+    unzip,
+    union,
+    flattenDepth,
+    fromPairs,
+    head,
+    indexOf,
+    initial,
+    intersection,
+    nth,
+    pull,
+    pullAll,
+    reverse,
+    sortedIndex,
+    sortedIndexOf,
+    sortedLastIndex,
+    sortedLastIndexOf,
+    sortedUniq,
+    sortedUniqBy,
+    tail,
+    take,
+    takeRight,
+    differenceBy,
+    differenceWith,
+    forEach,
+    get,
+    bind,
+    iteratee,
+    dropRightWhile,
+    dropWhile,
+    intersectionBy,
+    intersectionWith,
+    pullAllBy,
+    sortedIndexBy,
+    sortedLastIndexBy,
+    takeRightWhile,
+    takeWhile,
+    unionBy,
+    unionWith,
+    isEqual,
+    pullAllWith,
+    uniqBy,
+    uniqWith,
+    add,
+    unzipWith,
+    xorBy,
+    xorWith,
+    countBy,
+    every,
+    filter,
+    find,
+    findLast,
+    flatMap,
+    flatMapDeep,
+    flatMapDepth,
+    forEachRight,
+    groupBy,
+    includes,
+    invokeMap,
+    keyBy,
+    map,
+    curry,
+    mapValues,
+    partition,
+    reduce,
+    reduceRight,
+    reject,
+    sample,
+    sampleSize,
+    shuffle,
+    size,
+    some,
+    ary,
+    bind,
+    defer,
+    delay,
+    flip,
+    negate,
+    unary,
+    castArray,
+    clone,
+    conformsTo,
+    eq,
+    gt,
+    gte,
+    isArguments,
+    isArray,
+    isArrayBuffer,
+    isArrayLike,
+    isArrayLikeObject,
+    isBoolean,
+    isDate,
+    isElement,
+    isEmpty,
+    isEqualWith,
+    isError,
+    isFinite,
+    isMatchWith,
+    isNative,
+    isNaN,
+    isNil,
+    isNull,
+    isLength,
+    isMap,
+    isFunction,
+    isNumber,
+    isObject,
+    isObjectLike,
+    toArray,
+    toFinite,
+    ceil,
+    divide,
+    floor,
+    max,
+    maxBy,
+    mean,
+    meanBy,
+    min,
+    minBy,
+    multiply,
+    round,
+    subtract,
+    sum,
+    sumBy,
+    clamp,
+    inRange,
+    random,
+    assign,
+    assignIn,
+    defaults,
+    defaultsDeep,
+}
 
 }()

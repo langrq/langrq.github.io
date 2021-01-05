@@ -13,117 +13,14 @@ var langrq = function () {
         }
         if (Array.isArray(predicate)) {
             return matchesProperty(predicate)
-        } else if (typeof predicate === "object") {
+        }
+        if (typeof predicate === "object") {
             return matches(predicate)
         }
         if (typeof predicate === "boolean") {
             return predicate
         }
     }
-
-
-
-    function get(object, path, defaultValue) {    //获取对象路径上的值。如果未定义已解析的值，则默认值将在其位置返回。
-        var digitname = path.split(".")
-        for (var name of digitname) {
-            if (name in Object(object)) {
-                object = object[name]
-            } else {
-                return defaultValue
-            }
-        }
-        return object
-
-
-        //reduce做法  返回有问题
-        // var names = path.split('.')
-        // return names.reduce((object, name) => {
-        //     if (name in object) {
-        //         return object[name]
-        //     } else {
-        //         return defaultValue
-        //     }
-        // }, object)
-
-        //递归写法
-        // if (path.length == 0) {
-        //     return object
-        // }    
-        // if(object == null){
-        //     return defaultValue
-        // }
-
-        //var names = path.split('.')
-        // return get(object[name[0], names.slice(1)], defaultValue) 
-    }
-
-
-
-    function property(path) {                 //返回目标obj上的 path的值 //高阶函数
-        var names = path.split(".")
-        return function (obj) {
-            for (var name of names) {
-                if (name in Object(obj)) {
-                    obj = obj[name]
-                } else {
-                    return
-                }
-            }
-            return obj
-        }
-
-        //用get的写法
-        // return function (obj) {
-        //     return get(obj, path)
-        // }
-    }
-    function matchesProperty(iteratee) {
-        return function (obj) {
-            return obj[iteratee[0]] === iteratee[1];
-        }
-    }
-
-
-    function matches(src) {                                //isMathch的绑定第二个参数的方式就是matches
-        return bind(isMatch, null, window, src)
-    }
-
-
-
-    function isMatch(obj, src) {                      //判断src是否在obj内包含存在
-        for (var key in src) {
-            if (src[key] && typeof src[key] == 'object') {
-                if (!isMatch(src[key], obj[key])) {
-                    return false
-                }
-            } else {
-                if (obj[key] !== src[key]) {
-                    return false
-                }
-            }
-
-        }
-        return true
-    }
-
-    function bind(f, thisArg, ...partials) {
-        return function (...args) {
-            var copy = partials.slice()
-            for (var i = 0; i < copy.length; i++) {
-                if (copy[i] === window) {
-                    copy[i] = args.shift()
-                }
-            }
-            return f.call(thisArg, ...copy, ...args)
-        }
-        // 调用方式  f2 = bind(f,null,window,window,value )
-    }
-
-
-
-
-
-
 
 
     // --------------------------------------
@@ -323,26 +220,27 @@ var langrq = function () {
         for (var i = 0; i < ary.length; i++) {
             var result = ary[i]
             if (typeof result == 'object' && depth > 0) {
-                ans.push(...flattenDepth(result, depth - 1))  //递归内部数组
+
+                ans.push(flattenDepth(result, depth - 1))  //递归内部数组
             } else {
                 ans.push(result)
             }
         }
         return ans
 
-    }
 
-    // function flattenDepth(ary, depth = 1) {
-    //     var res = []
-    //     for (var i = 0; i < ary.length; i++) {
-    //         if (ary[i] instanceof Array && depth > 0) {
-    //             res.push(...flattenDepth(ary[i], depth - 1))
-    //         } else {
-    //             res.push(ary[i])
-    //         }
-    //     }
-    //     return res
-    // }
+        function flattenDepth(ary, depth = 1) {
+            var res = []
+            for (var i = 0; i < ary.length; i++) {
+                if (ary[i] instanceof Array && depth > 0) {
+                    res.push(...flattenDepth(ary[i], depth - 1))
+                } else {
+                    res.push(ary[i])
+                }
+            }
+            return res
+        }
+    }
 
     function fromPairs(ary) {                         //返回对值组成的对象。
         var map = {};
@@ -1018,6 +916,7 @@ var langrq = function () {
             var item = f(array[i])
             if (item) {
                 return array[i]
+
             }
         }
 
@@ -1052,7 +951,7 @@ var langrq = function () {
 
     function flatMapDepth(array, predicate, depth = 0) {
         var result = flatMap(array, predicate)
-        return res = flattenDepth(result, depth - 1)
+        return res = flattenDepth(result, depth++)
     }
 
     // function forEach(ary, action) {                               //可以断的foreach循环
@@ -1064,24 +963,23 @@ var langrq = function () {
 
     // }
     function forEach(ary, predicate) {
-
+        var result = []
         if (Array.isArray(ary)) {
             for (var key of ary) {
-                predicate(key)
+                result.push(predicate(key))
             }
         } else if (typeof ary == "object") {
             for (var key in ary) {
-                predicate(ary[key], key)
+                result.push(predicate(ary[key], key))
             }
         }
-        return ary
     }
 
     function forEachRight(ary, predicate) {
         var result = []
         if (Array.isArray(ary)) {
             for (var i = ary.length - 1; i >= 0; i--) {
-                predicate(ary[i])
+                result.push(predicate(ary[i]))
             }
         } else if (typeof ary == "object") {
             var keys = []
@@ -1091,10 +989,9 @@ var langrq = function () {
                 vals.push(ary[key])
             }
             for (var i = keys.length - 1; i >= 0; i--) {
-                predicate(vals[i], keys[i])
+                result.push(predicate(vals[i], keys[i]))
             }
         }
-        return ary
     }
 
     function groupBy(array, predicate) {
@@ -1161,9 +1058,10 @@ var langrq = function () {
         var result = []
         predicate = iteratee(predicate)
         if (Array.isArray(array)) {
-            for (var i = 0; i < array.length; i++) {
-                result.push(predicate(array[i], i, array))
+            for (var key of array) {
+                result.push(predicate(key))
             }
+
         } else if (typeof array == "object") {
             for (var item in array) {
                 if (predicate(array[item])) {
@@ -1171,258 +1069,132 @@ var langrq = function () {
                 }
             }
         }
-
         return result
     }
 
+    function orderBy(array, predicate, orders) {
 
-    // function orderBy(array, predicate, orders) {
-
-
-    // }
-
-    function partition(collection, predicate) {
-        f = iteratee(predicate)
-        var result = [[], []]
-        collection.filter(it => {
-            if (f(it)) result[0].push(it)
-            if (!f(it)) result[1].push(it)
-        })
-        return result
     }
 
-    function reduce(collection, predicate, accumulator) {
-        for (var key in collection) {
-            if (accumulator == undefined) {
-                accumulator = collection[key]
-                continue
+
+
+
+
+
+
+
+    function bind(f, thisArg, ...partials) {
+        return function (...args) {
+            var copy = partials.slice()
+            for (var i = 0; i < copy.length; i++) {
+                if (copy[i] === window) {
+                    copy[i] = args.shift()
+                }
             }
-            accumulator = predicate(accumulator, collection[key], key)
+            return f.call(thisArg, ...copy, ...args)
         }
-        return accumulator
-    }
-
-    function reduceRight(collection, iteratee, accumulator) {
-        for (var i = collection.length; i >= 0; i--) {
-            if (accumulator == undefined) {
-                accumulator = collection[i]
-                continue
-            }
-            accumulator = iteratee(accumulator, collection[i], i)
-        }
-        return accumulator.slice(1)
+        // 调用方式  f2 = bind(f,null,window,window,value )
     }
 
 
-    function reject(array, predicate) {
-        var res = []
-        var f = iteratee(predicate)
-        for (var key of array) {
-            var item = f(key)
-            if (!item) {
-                res.push(key)
-            }
-        }
-        return res
-
+    //Math    
+    function add(augend, addend) {
+        return result = augend + addend
     }
 
-    function sample(collection) {
-        if (Array.isArray(collection)) {
-            return collection[Math.floor(Math.random() * (collection.length))]
-        } else if (typeof collection == "object") {
-            var res = []
-            for (var key in collection) {
-                res.push(collection[key])
-            }
-            return sample(res)
+
+
+
+    function matchesProperty(iteratee) {
+        return function (obj) {
+            return obj[iteratee[0]] === iteratee[1];
         }
     }
-    function sampleSize(collection, n = 1) {
-        var res = []
-        for (var i = 1; i <= n && i <= collection.length; i++) {
-            var digit = sample(collection)
-            if (res.indexOf(digit) == -1) {
-                res.push(digit)
+
+    function isMatch(obj, src) {                      //判断src是否在obj内包含存在
+        for (var key in src) {
+            if (src[key] && typeof src[key] == 'object') {
+                if (!isMatch(src[key], obj[key])) {
+                    return false
+                }
             } else {
-                i--
+                if (obj[key] !== src[key]) {
+                    return false
+                }
             }
-        }
-        return res
-    }
 
-
-    function shuffle(collection) {
-        return sampleSize(collection, collection.length)
-    }
-
-    function size(collection) {
-        if (Object.prototype.toString.call(collection) == "[object Object]") {
-            return Object.keys(collection).length;
-        }
-        return collection.length;
-    }
-
-
-    function some(collection, predicate) {
-        f = iteratee(predicate)
-        for (var key in collection) {
-            if (f(collection[key])) {
-                return true
-            }
-        }
-        return false
-    }
-
-    // function sortBy(collection, iteratees) {
-
-    // }
-
-    //function
-
-    function ary(f, n = f.length) {
-        return function (...args) {
-            return f(...args.sliece(0, n))
-        }
-    }
-
-    function defer(func, ...args) {
-        return setTimeout(func, 0, ...args) - 1;
-    }
-
-    function delay(func, wait, [args]) {
-        let timer = setTimeout(func, wait, ...args);
-        return timer - 1;
-    }
-
-    function flip(func) {
-        return function (...args) {
-            return func(...args.reverse())
-        }
-    }
-
-    // function memoize(func, resolver) {
-
-
-    // }
-
-
-    function negate(predicate) {
-        return function (...args) {
-            return !predicate(...args)
-        }
-    }
-    function spread(func, start = 0) {
-        return function (arys) {
-            return func(arys.slice(start))
-
-        }
-    }
-
-
-    // function spread(func) {
-    //     return function (ary) {
-    //         return func.apply(this, ary)
-    //     }
-    // }
-
-    function unary(func) {
-        return ary(func, 1);
-    }
-
-
-    //Lang
-    function castArray(value) {
-        if (arguments.length == 0) {
-            return []
-        } else if (Array.isArray(value)) {
-            return value
-        }
-        return [value]
-    }
-
-    function clone(value) {
-        return value
-    }
-
-    // function cloneDeep(value){
-
-    // }
-    function conformsTo(object, source) {
-        for (var key in object) {
-            if (f = source[key]) {
-                return f(object[key])
-            }
-        }
-    }
-
-
-    function eq(value, other) {
-        if (isNaN(value) && isNaN(other)) {
-            return true
-        } else {
-            return value === other
-        }
-    }
-
-    function gt(value, other) {
-        return value > other
-    }
-
-    function gte(value, other) {
-        return value >= other
-    }
-
-    function isArguments(value) {
-        return Object.prototype.toString.call(value) === '[object Arguments]'
-    }
-
-    function isArray(value) {
-        return Object.prototype.toString.call(value) === "[object Array]"
-    }
-
-    function isArrayBuffer(val) {
-        return Object.prototype.toString.call(val) === "[object ArrayBuffer]";
-    }
-
-    function isArrayLike(value) {
-        if (typeof value == "function") return false
-        if (value.length > 0 && value.length < Number.MAX_SAFE_INTEGER) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    function isArrayLikeObject(value) {
-        return (isArrayLike(value) && isArray(value))
-
-    }
-
-    function isBoolean(value) {
-        return Object.prototype.toString.call(value) === "[object Boolean]"
-    }
-
-    function isDate(value) {
-        return Object.prototype.toString.call(value) === "[object Data]"
-    }
-
-    function isElement(value) {
-        return Object.prototype.toString.call(value) === "[object HTMLBodyElement]"
-    }
-
-    function isEmpty(value) {
-        for (var i in value) {
-            return false
         }
         return true
     }
 
+
+    function matches(src) {                                //isMathch的绑定第二个参数的方式就是matches
+        return bind(isMatch, null, window, src)
+    }
+
+
+
+    function get(object, path, defaultValue) {    //获取对象路径上的值。如果未定义已解析的值，则默认值将在其位置返回。
+        var digitname = path.split(".")
+        for (var name of digitname) {
+            if (name in Object(object)) {
+                object = object[name]
+            } else {
+                return defaultValue
+            }
+        }
+        return object
+
+
+        //reduce做法  返回有问题
+        // var names = path.split('.')
+        // return names.reduce((object, name) => {
+        //     if (name in object) {
+        //         return object[name]
+        //     } else {
+        //         return defaultValue
+        //     }
+        // }, object)
+
+        //递归写法
+        // if (path.length == 0) {
+        //     return object
+        // }
+        // if(object == null){
+        //     return defaultValue
+        // }
+        // return get(object[name[0], names.slice(1)], defaultValue) 
+    }
+
+
+    function property(path) {                 //返回目标obj上的 path的值 //高阶函数
+        var names = path.split('.')
+        return function (obj) {
+            for (var name of names) {
+                if (name in Object(obj)) {
+                    obj = obj[name]
+                } else {
+                    return
+                }
+            }
+            return obj
+        }
+
+        //用get的写法
+        // return function (obj) {
+        //     return get(obj, path)
+        // }
+    }
+
     function isEqual(value, other) {
+
         if (value === other) return true;         //直接比对
+
         if (value !== value && other !== other) return true;//NaN
+
         if (value == null || typeof value != "object" || other == null || typeof other != "object")  //为空
             return false;
+
         if (Object.keys(value).length !== Object.keys(other).length) {        //获得索引值 返回长度对比
             return false
         }
@@ -1435,463 +1207,17 @@ var langrq = function () {
 
     }
 
-    function isEqualWith(value, other, customizer) {
-        if (customizer == undefined) {
-            return isEqual(value, other)
-        }
-        for (var key in value) {
-            if ((customizer(value[key], other[key])) == false) {
-                return false
-            }
-        } return true
-    }
-
-
-    function isError(value) {
-        return Object.prototype.toString.call(value) === "[object Error]"
-    }
-
-
-    function isFinite(value) {
-        if (typeof value == "number" && value + 1 != value) {
-            return true
-        }
-        return false
-    }
-
-    function isFunction(value) {
-        if (typeof value == 'function') {
-            return true
-        }
-        return false
-    }
-
-    function isInteger(value) {
-        return Number.isInteger(value)
-    }
-
-    function isLength(value) {
-        return isInteger(value) && (value > 0 && value < 2 ** 32 - 1)
-    }
-
-    function isMap(value) {
-        return Object.prototype.toString.call(value) == "[object Map]"
-    }
-
-    function isMatchWith(object, source, customizer) {
-        if (customizer == undefined) {
-            return isEqual(value, other)
-        }
-        for (var key in source) {
-            if ((customizer(object[key], source[key])) == false) {
-                return false
-            }
-        } return true
-    }
-
-    function isNaN(value) {
-        return Number.isNaN(value)
-    }
-
-    function isNative(val) {
-        return Function.prototype.toString.call(val) == "[native code]"
-
-    }
-    function isNil(value) {
-        if (value == undefined || null) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    function isNull(value) {
-        return Array.prototype.toString.call(value) == "[object Null]"
-    }
-
-    function isNumber(value) {
-        return typeof value == "number"
-    }
-
-    function isObject(value) {
-        return Array.prototype.toString.call(value) == "[object object]"
-    }
-    function isObjectLike(value) {
-        if (isNull(value) || !isObject(value)) {
-            return false
-        }
-    }
-    function isRegExp(value) {
-        return Object.prototype.toString.call(value) === '[object RegExp]'
-    }
-
-    function isSafeInteger(val) {
-        return isNumber(val) && Math.abs(val) < Number.MAX_SAFE_INTEGER && Math.abs(val) > Number.MIN_VALUE
-    }
-
-    function isSet(value) {
-        return Object.prototype.toString.call(value) == '[object Set]'
-    }
-
-    function isString(value) {
-        return Object.prototype.toString.call(value) == '[object String]'
-    }
-
-    function isSymbol(val) {
-        return Object.prototype.toString.call(val) === '[object Symbol]';
-    }
-    function isTypedArray(val) {
-        return Object.prototype.toString.call(val) === '[object Uint8Array]';
-    }
-
-    function isUndefined(val) {
-        return Object.prototype.toString.call(val) === '[object Undefined]';
-    }
-    function isWeakMap(val) {
-        return Object.prototype.toString.call(val) === '[object WeakMap]';
-    }
-    function isWeakSet(val) {
-        return Object.prototype.toString.call(val) === '[object WeakSet]';
-    }
-
-    function lt(value, other) {
-        return value < other
-    }
-
-    function lte(value, other) {
-        return value <= other
-    }
-
-    function toArray(value) {
-        var result = []
-        if (isArray(value)) {
-            return value
-        } else if (typeof value == "object") {
-            for (var it in value) {
-                result.push(value[it])
-            }
-            return result
-        } else if (typeof value == "string") {
-            for (var it of value) {
-                result.push(value[it])
-            }
-        } else if (typeof value == "number") {
-            result = []
-        }
-        return result
-    }
-
-    function toFinite(val) {
-        if (val !== val) {
-            return 0
-        }
-        if (val === Infinity) {
-            return Number.MAX_VALUE
-        } else if (val === -Infinity) {
-            return -Number.MAX_VALUE
-        } else {
-            return Number(val)
-        }
-    }
-
-
-
-    function toInteger(value) {
-        Math.floor(toFinite(value))
-    }
-
-    function toLength(val) {
-        if (val < 0) return 0;
-        if (val > 4294967295) return 4294967295;
-        return toInteger(val);
-    }
-
-    function toNumber(value) {
-        return Number(value)
-    }
-
-
-
-    function toSafeInteger(val) {
-        if (val > Number.MAX_SAFE_INTEGER) {
-            return Number.MAX_SAFE_INTEGER;
-        }
-        if (val < Number.MIN_SAFE_INTEGER) {
-            return Number.MIN_SAFE_INTEGER;
-        }
-        return toInteger(val);
-    }
-
-
-
-
-    //Math    
-    function add(augend, addend) {
-        return result = augend + addend
-    }
-
-    function ceil(number, precision = 0) {
-        return (Math.ceil(number * (10 ** precision))) / (10 ** precision)
-    }
-
-    function divide(dividend, divisor) {
-        return dividend / divisor
-    }
-
-    function floor(number, precision = 0) {
-        return (Math.floor(number * (10 ** precision))) / (10 ** precision)
-    }
-
-    function max(array) {
-        if (array.length == 0) {
-            return undefined
-        } else if (typeof (array) == "boolean") {
-            return undefined
-        }
-        var maxes = Math.max(...array)
-        for (var i = 0; i < array.length; i++) {
-            if (array[i] == true && maxes == 1) {
-                return true
-            } else if (array[i] == false && maxes == 0) {
-                return false
-            }
-        }
-        return maxes
-    }
-
-    function maxBy(array, predicate) {
-        f = iteratee(predicate)
-        var maxs = array[0]
-        for (var val of array) {
-            if (f(val) > f(maxs)) {
-                maxs = val
-            }
-        }
-        return maxs
-    }
-
-    function mean(array) {
-        var sum = 0
-        array.forEach(it => {
-            sum += it
-        });
-        return sum / array.length
-    }
-
-
-    function meanBy(array, predicate) {
-        f = iteratee(predicate)
-        var sum = 0
-        var c = 0
-        for (var val of array) {
-            sum += f(val)
-            c++
-        }
-        return sum / c
-    }
-
-
-    function min(array) {
-        if (array.length == 0) {
-            return undefined
-        } else if (typeof (array) == "boolean") {
-            return undefined
-        }
-        var mines = Math.min(...array)
-        for (var i = 0; i < array.length; i++) {
-            if (array[i] == true && mines == 1) {
-                return true
-            } else if (array[i] == false && mines == 0) {
-                return false
-            }
-        }
-        return mines
-    }
-
-    function minBy(array, predicate) {
-        f = iteratee(predicate)
-        var mins = array[0]
-        for (var val of array) {
-            if (f(val) < f(mins)) {
-                mins = val
-            }
-        }
-        return mins
-    }
-
-
-
-    function multiply(multiplier, multiplicand) {
-        return multiplicand * multiplier
-    }
-
-    function round(number, precision = 0) {
-        return (Math.round(number * (10 ** precision))) / (10 ** precision)
-    }
-
-    function subtract(minuend, subtrahend) {
-        return minuend / subtrahend
-    }
-    function sum(array) {
-        var sumres = 0
-        array.forEach(it => {
-            sumres += it
-        });
-        return sumres
-    }
-
-    function sumBy(array, predicate) {
-        f = iteratee(predicate)
-        var sum = 0
-        for (var val of array) {
-            sum += f(val)
-        }
-        return sum
-    }
-
-    //Number
-
-    function clamp(a, b, c) {
-        var low = min([a, b, c])
-        var up = max([a, b, c])
-        return sum([a, b, c]) - low - up
-    }
-
-    function inRange(number, start = 0, end) {
-        if (end == undefined) {
-            end = start
-            start = 0
-            if (number < end) return true
-        } else if (start >= end) {
-            if (number > end) return true
-        } else if (start < end) {
-            if (number < end) return true
-        }
-        return false
-    }
-
-
-    function random(lower = 0, upper = 1, floating) {
-        if (upper == undefined) {
-            upper = lower
-            lower = 0
-        } else if (typeof upper == "boolean") {
-            floating = upper
-            upper = lower
-            lower = 0
-        }
-        if (floating || !isInteger(lower) || !isInteger(upper)) {
-            return Math.random() * (upper - lower) + lower
-        } else {
-            return Math.floor(Math.random() * (upper - lower) + lower)
-        }
-
-    }
-    //Object
-    function assign(object, ...sources) {
-        // return Object.assign(object, ...sources)
-        sources.forEach((item) => {
-            for (var key of Object.keys(item)) {
-                object[key] = item[key]
-            }
-        })
-        return object
-    }
-
-    function assignIn(object, ...source) {
-        source.forEach((item) => {
-            for (let key in item) {
-                object[key] = item[key];
-            }
-        });
-        return object;
-    }
-
-    function defaults(...object) {
-        var map = {}
-        object.forEach((item) => {
-            for (var key of Object.keys(item)) {
-                if (key in map) {
-                    continue
-                } else {
-                    map[key] = item[key]
-                }
-            }
-        })
-        return map
-    }
-
-    function defaultsDeep(object, ...sources) {
-        var map = {}
-        sources.forEach((item) => {
-            for (var key of Object.keys(item)) {
-                if (!object[key]) {
-                    object[key] = item[key]
-                } else {
-                    if (isObject(item[key])) {
-                        defaultsDeep(item[key])
-                    } else {
-                        map[key] = item[key]
-                    }
-                }
-
-            }
-        })
-        return map
-    }
-
-    function findKey(object, predicate) {
-        var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
-            if (item) {
-                return i
-            }
-        }
-    }
-
-
-    function findLastKey(object, predicate) {
-        var result = []
-        var f = iteratee(predicate)
-        for (var i in object) {
-            var item = f(object[i])
-            if (item) {
-                result.push(i)
-            }
-        }
-        return result[result.length - 1]
-    }
-
-    function forIn(object, predicate) {
-        while (object) {
-            for (var key in object) {
-                if (!predicate(object[key], key, object)) {
-                    break
-                }
-            }
-        }
-        return object
-    }
 
 
     function forOwn(obj, iterator) {
         var hasOwn = object.prototype.hasOwnproperty
         for (var key in obj) {
-            if (hasOwn.call(obj, key)) {
+            if (hasOwn.call(obj, k)) {
                 if (iterator(obj[key], key, obj) == false) break
             }
         }
         return obj
     }
-
-    //seq
-    //string
-    function endsWith(str = '', target, position = str.length) {
-        return str[position - 1] == target
-    }
-
-
 
     // function bind(f, thisArg, ...fixedArgs) {
     //     return function (...args) {
@@ -1902,7 +1228,6 @@ var langrq = function () {
 
 
     function mapValues(obj, mapper) {
-        var result = {}
         for (var key in obj) {
             var val = obj[key]
             result[key] = mapper(val, key, obj)
@@ -1911,7 +1236,11 @@ var langrq = function () {
         return result
     }
 
-
+    function ary(f, n = f.length) {
+        return function (...args) {
+            return f(...args.sliece(0, n))
+        }
+    }
 
     function before(n, func) {
         var c = 0
@@ -1926,11 +1255,27 @@ var langrq = function () {
         }
     }
 
+    function after(n, func) {
+
+    }
 
 
+    function flip(func) {
+        return function (...args) {
+            return func(...args.reverse())
+        }
+    }
 
-
-
+    function negate(predicate) {
+        return function () {
+            return !predicate(...args)
+        }
+    }
+    function spread(func) {
+        return function (ary) {
+            return func.apply(this, ary)
+        }
+    }
 
 
     function curry(f, length = f.length) {
@@ -2026,80 +1371,6 @@ var langrq = function () {
         keyBy,
         map,
         curry,
-        mapValues,
-        partition,
-        reduce,
-        reduceRight,
-        reject,
-        sample,
-        sampleSize,
-        shuffle,
-        size,
-        some,
-        ary,
-        bind,
-        defer,
-        delay,
-        flip,
-        negate,
-        unary,
-        castArray,
-        clone,
-        conformsTo,
-        eq,
-        gt,
-        gte,
-        isArguments,
-        isArray,
-        isArrayBuffer,
-        isArrayLike,
-        isArrayLikeObject,
-        isBoolean,
-        isDate,
-        isElement,
-        isEmpty,
-        isEqualWith,
-        isError,
-        isFinite,
-        isMatchWith,
-        isNative,
-        isNaN,
-        isNil,
-        isNull,
-        isLength,
-        isMap,
-        isFunction,
-        isNumber,
-        isObject,
-        isObjectLike,
-        toArray,
-        toFinite,
-        ceil,
-        divide,
-        floor,
-        max,
-        maxBy,
-        mean,
-        meanBy,
-        min,
-        minBy,
-        multiply,
-        round,
-        subtract,
-        sum,
-        sumBy,
-        clamp,
-        inRange,
-        random,
-        assign,
-        assignIn,
-        defaults,
-        defaultsDeep,
-        findKey,
-        findLastKey,
-        forIn,
-        forOwn,
-        endsWith,
     }
 
 }()

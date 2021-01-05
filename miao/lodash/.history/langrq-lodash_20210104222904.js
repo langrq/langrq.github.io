@@ -1887,10 +1887,9 @@ var langrq = function () {
 
     //seq
     //string
-    function endsWith(str = '', target, position = str.length) {
-        return str[position - 1] == target
+    function endsWith(str = '', target, position = string.length) {
+        return str[str.length - 1] == target
     }
-
 
 
     // function bind(f, thisArg, ...fixedArgs) {
@@ -2099,7 +2098,6 @@ var langrq = function () {
         findLastKey,
         forIn,
         forOwn,
-        endsWith,
     }
 
 }()

@@ -1875,22 +1875,16 @@ var langrq = function () {
     }
 
 
+
     function forOwn(obj, iterator) {
         var hasOwn = object.prototype.hasOwnproperty
         for (var key in obj) {
-            if (hasOwn.call(obj, key)) {
+            if (hasOwn.call(obj, k)) {
                 if (iterator(obj[key], key, obj) == false) break
             }
         }
         return obj
     }
-
-    //seq
-    //string
-    function endsWith(str = '', target, position = str.length) {
-        return str[position - 1] == target
-    }
-
 
 
     // function bind(f, thisArg, ...fixedArgs) {
@@ -2098,8 +2092,6 @@ var langrq = function () {
         findKey,
         findLastKey,
         forIn,
-        forOwn,
-        endsWith,
     }
 
 }()
