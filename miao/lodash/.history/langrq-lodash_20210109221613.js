@@ -1950,164 +1950,12 @@ var langrq = function () {
     }
 
     function has(object, path) {
-        var reg = /\w/g
-        if (!isArray(path)) {
-            var path = path.match(reg)
-        }
-        if (toArray(object).length == 0) return false
-        for (var key of path) {
-            if (!object.hasOwnProperty(key)) {
-                return false
-            }
-            object = object[key]
-        }
-        return true
-    }
-
-    function hasIn(object, path) {
-        var reg = /\w/g
-        if (!isArray(path)) {
-            var path = path.match(reg)
-        }
-        for (var key of path) {
-            object = object[key]
-            if (object == undefined) return false
-        }
-        return true
-    }
-
-    function invert(object) {
-        var map = {}
+        var path = get(path)
         for (var key in object) {
-            map[object[key]] = key
-        }
-        return map
-    }
-    // values = []           //做成reverse 了
-    // keys = []
-    // var map = {}
-    // for (var value in object) {
-    //     values.push(object[value])
-    // }
-    // values.reverse()
-    // for (var key in object) {
-    //     keys.push(key)
-    // }
-    // for (var val of values) {
-    //     if (val in map) {
-    //         continue
-    //     } else {
-    //         for (var it of keys) {
-    //             if (val == object[it]) {
-    //                 map[val] = it
-    //             }
-    //         }
-
-    //     }
-    // }
-    // return map
-
-    function invertBy(object, predicate) {
-        var map = {}
-        f = iteratee(predicate)
-        var obj = Object.keys(object)
-        for (var key of obj) {
-            if (map[object[key]]) {
-                map[object[key]].push(key)
-            } else {
-                map[object[key]] = [key]
+            if (object.hasOwnProperty(key)) {
+                if ()
             }
         }
-        return map
-    }
-
-    function invoke(obj, path, ...args) {
-        var reg = /\w+/g
-        var path = path.match(reg)
-        var func = path[path.length - 1]
-        path = path.slice(0, path.length - 1)
-        for (var key of path) {
-            obj = obj[key]
-        }
-        return obj[func](...args)
-    }
-
-    function keys(object) {
-        var result = []
-        if (typeof object == "object") {
-            return Object.keys(object)
-        } else {
-            n = object.length
-            for (var i = 0; i < n; i++) {
-                result.push(i)
-            }
-            return result
-        }
-    }
-
-
-    function keysIn(object) {
-        var result = []
-        if (typeof object == "object") {
-            for (var key in object) {
-                result.push(key)
-            }
-        }
-        return result
-    }
-    function mapKeys(object, predicate) {
-        f = iteratee(predicate)
-        var map = {}
-        for (var key in object) {
-            var value = object[key]
-            map[f(value, key, object)] = value
-        }
-        return map
-    }
-
-
-    function mapValues(object, predicate) {
-        f = iteratee(predicate)
-        var map = {}
-        for (var key in object) {
-            var value = object[key]
-            map[key] = f(value, key, object)
-        }
-        return map
-    }
-
-
-    function merge(object, other) {
-        var map = {}
-        for (var item in other) {
-            map[item] = other[key]
-        }
-        for (var key in object) {
-
-            if (key in other) {
-                map[key] = zip(object[key], other[key])
-            } else {
-                map[key] = object[key]
-            }
-        }
-
-        return map
-
-    }
-
-    function mergeWith(object, other, predicate) {
-        f = iteratee(predicate)
-        var map = {}
-        for (var key in object) {
-            if (key in other) {
-                map[key] = f(object[key], other[key])
-            }
-        }
-        return map
-    }
-
-    function omit(object, path) {
-
     }
     //seq
     //string
@@ -2125,15 +1973,15 @@ var langrq = function () {
     // }
 
 
-    // function mapValues(obj, mapper) {
-    //     var result = {}
-    //     for (var key in obj) {
-    //         var val = obj[key]
-    //         result[key] = mapper(val, key, obj)
+    function mapValues(obj, mapper) {
+        var result = {}
+        for (var key in obj) {
+            var val = obj[key]
+            result[key] = mapper(val, key, obj)
 
-    //     }
-    //     return result
-    // }
+        }
+        return result
+    }
 
 
 
@@ -2347,15 +2195,6 @@ var langrq = function () {
         functions,
         functionsIn,
         has,
-        hasIn,
-        invert,
-        invertBy,
-        invoke,
-        keys,
-        keysIn,
-        mapKeys,
-        merge,
-        mergeWith,
     }
 
 }()

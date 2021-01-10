@@ -2071,43 +2071,8 @@ var langrq = function () {
         var map = {}
         for (var key in object) {
             var value = object[key]
-            map[key] = f(value, key, object)
+            map[f(value, key, object)] = key
         }
-        return map
-    }
-
-
-    function merge(object, other) {
-        var map = {}
-        for (var item in other) {
-            map[item] = other[key]
-        }
-        for (var key in object) {
-
-            if (key in other) {
-                map[key] = zip(object[key], other[key])
-            } else {
-                map[key] = object[key]
-            }
-        }
-
-        return map
-
-    }
-
-    function mergeWith(object, other, predicate) {
-        f = iteratee(predicate)
-        var map = {}
-        for (var key in object) {
-            if (key in other) {
-                map[key] = f(object[key], other[key])
-            }
-        }
-        return map
-    }
-
-    function omit(object, path) {
-
     }
     //seq
     //string
@@ -2125,15 +2090,15 @@ var langrq = function () {
     // }
 
 
-    // function mapValues(obj, mapper) {
-    //     var result = {}
-    //     for (var key in obj) {
-    //         var val = obj[key]
-    //         result[key] = mapper(val, key, obj)
+    function mapValues(obj, mapper) {
+        var result = {}
+        for (var key in obj) {
+            var val = obj[key]
+            result[key] = mapper(val, key, obj)
 
-    //     }
-    //     return result
-    // }
+        }
+        return result
+    }
 
 
 
@@ -2354,8 +2319,6 @@ var langrq = function () {
         keys,
         keysIn,
         mapKeys,
-        merge,
-        mergeWith,
     }
 
 }()

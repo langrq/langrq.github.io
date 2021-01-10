@@ -2098,16 +2098,18 @@ var langrq = function () {
     function mergeWith(object, other, predicate) {
         f = iteratee(predicate)
         var map = {}
+        for (var item in other) {
+            map[item] = f(object[item], other[item])
+        }
         for (var key in object) {
+
             if (key in other) {
+                map[key] = zip(f(object[key], other[key]), f(object[key], other[key]))
+            } else {
                 map[key] = f(object[key], other[key])
             }
         }
         return map
-    }
-
-    function omit(object, path) {
-
     }
     //seq
     //string

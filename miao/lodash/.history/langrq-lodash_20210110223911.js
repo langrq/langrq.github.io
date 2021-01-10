@@ -2100,14 +2100,12 @@ var langrq = function () {
         var map = {}
         for (var key in object) {
             if (key in other) {
+                map[key] = zip(f(object[key], other[key]), f(object[key], other[key]))
+            } else {
                 map[key] = f(object[key], other[key])
             }
         }
         return map
-    }
-
-    function omit(object, path) {
-
     }
     //seq
     //string

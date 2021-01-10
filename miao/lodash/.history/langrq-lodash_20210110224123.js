@@ -2105,10 +2105,6 @@ var langrq = function () {
         }
         return map
     }
-
-    function omit(object, path) {
-
-    }
     //seq
     //string
     function endsWith(str = '', target, position = str.length) {
