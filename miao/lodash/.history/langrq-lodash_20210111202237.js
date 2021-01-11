@@ -2155,23 +2155,15 @@ var langrq = function () {
     function result(object, path, defaultValue) {
         var path = toPath(path)
         var obj = object
-        for (var key of path) {
-            if (isFunction(obj[key])) {
-                obj = obj[key]();
-            } else {
-                obj = obj[key];
-            }
+        for (var key in object) {
+            obj = obj[key]
         }
-        if (isUndefined(obj)) {
-            return defaultValue()
+        if (isUndefined(obj)) return defaultValue
+        if (isFunction(obj)) {
+            return res.call(obj)
         }
-        return obj
+        return res
     }
-
-    function set(object, path, value) {
-
-    }
-
     //seq
     //string
     function endsWith(str = '', target, position = str.length) {

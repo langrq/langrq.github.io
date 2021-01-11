@@ -2021,11 +2021,6 @@ var langrq = function () {
         return map
     }
 
-    function toPath(path) {
-        var reg = /\w+/g
-        return path.match(reg)
-    }
-
     function invoke(obj, path, ...args) {
         var reg = /\w+/g
         var path = path.match(reg)
@@ -2139,37 +2134,6 @@ var langrq = function () {
             map[key] = object[key]
         }
         return map
-    }
-
-    function pickBy(object, predicate) {
-        var map = {}
-        f = iteratee(predicate)
-        for (var key in object) {
-            if (f(object[key])) {
-                map[key] = object[key]
-            }
-        }
-        return map
-    }
-
-    function result(object, path, defaultValue) {
-        var path = toPath(path)
-        var obj = object
-        for (var key of path) {
-            if (isFunction(obj[key])) {
-                obj = obj[key]();
-            } else {
-                obj = obj[key];
-            }
-        }
-        if (isUndefined(obj)) {
-            return defaultValue()
-        }
-        return obj
-    }
-
-    function set(object, path, value) {
-
     }
 
     //seq
@@ -2422,8 +2386,6 @@ var langrq = function () {
         omit,
         omitBy,
         pick,
-        pickBy,
-        result,
     }
 
 }()

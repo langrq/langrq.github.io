@@ -2021,8 +2021,7 @@ var langrq = function () {
         return map
     }
 
-    function toPath(path) {
-        var reg = /\w+/g
+    function toPath(path, reg = /\w+/g) {
         return path.match(reg)
     }
 
@@ -2152,26 +2151,9 @@ var langrq = function () {
         return map
     }
 
-    function result(object, path, defaultValue) {
-        var path = toPath(path)
-        var obj = object
-        for (var key of path) {
-            if (isFunction(obj[key])) {
-                obj = obj[key]();
-            } else {
-                obj = obj[key];
-            }
-        }
-        if (isUndefined(obj)) {
-            return defaultValue()
-        }
-        return obj
-    }
-
-    function set(object, path, value) {
+    function result(object, path, [defaultValue]) {
 
     }
-
     //seq
     //string
     function endsWith(str = '', target, position = str.length) {
@@ -2423,7 +2405,6 @@ var langrq = function () {
         omitBy,
         pick,
         pickBy,
-        result,
     }
 
 }()

@@ -2167,11 +2167,6 @@ var langrq = function () {
         }
         return obj
     }
-
-    function set(object, path, value) {
-
-    }
-
     //seq
     //string
     function endsWith(str = '', target, position = str.length) {

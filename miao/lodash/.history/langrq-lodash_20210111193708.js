@@ -2021,11 +2021,6 @@ var langrq = function () {
         return map
     }
 
-    function toPath(path) {
-        var reg = /\w+/g
-        return path.match(reg)
-    }
-
     function invoke(obj, path, ...args) {
         var reg = /\w+/g
         var path = path.match(reg)
@@ -2116,62 +2111,12 @@ var langrq = function () {
         var keyarr = keysIn(object)
         var diff = difference(keyarr, path)
         for (var key of diff) {
-            map[key] = object[key]
-        }
-        return map
-    }
-
-
-    function omitBy(object, predicate) {
-        var map = {}
-        f = iteratee(predicate)
-        for (var key in object) {
-            if (!f(object[key])) {
+            if (!key in map) {
                 map[key] = object[key]
             }
         }
         return map
     }
-
-    function pick(object, path) {
-        var map = {}
-        for (var key of path) {
-            map[key] = object[key]
-        }
-        return map
-    }
-
-    function pickBy(object, predicate) {
-        var map = {}
-        f = iteratee(predicate)
-        for (var key in object) {
-            if (f(object[key])) {
-                map[key] = object[key]
-            }
-        }
-        return map
-    }
-
-    function result(object, path, defaultValue) {
-        var path = toPath(path)
-        var obj = object
-        for (var key of path) {
-            if (isFunction(obj[key])) {
-                obj = obj[key]();
-            } else {
-                obj = obj[key];
-            }
-        }
-        if (isUndefined(obj)) {
-            return defaultValue()
-        }
-        return obj
-    }
-
-    function set(object, path, value) {
-
-    }
-
     //seq
     //string
     function endsWith(str = '', target, position = str.length) {
@@ -2420,10 +2365,6 @@ var langrq = function () {
         merge,
         mergeWith,
         omit,
-        omitBy,
-        pick,
-        pickBy,
-        result,
     }
 
 }()
