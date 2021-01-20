@@ -2449,11 +2449,11 @@ var langrq = function () {
     }
 
     function toLower(str = '') {
-        return str.toLowerCase()
+        return str.toLowerCase
     }
 
     function toUpper(str = '') {
-        return str.toUpperCase()
+        return toUpperCase(str)
     }
     function trim(str = '', chars = " ") {
         var reg = new RegExp("[" + chars + "]+", "g")

@@ -1525,9 +1525,13 @@ var langrq = function () {
     }
 
     function isObject(value) {
-        if (!isFunction(value) && value != null) return typeof (value) == "object"
-        if (isFunction(value)) return true
-        return false
+        if (value != null) return typeof (value) == "object"
+        if (isFunction(value)) {
+            return true
+        }else{
+            return false
+        }
+        
     }
 
     function isObjectLike(value) {
@@ -2012,27 +2016,16 @@ var langrq = function () {
     function invertBy(object, predicate) {
         var map = {}
         f = iteratee(predicate)
-        if (!isFunction(f)) {
-            var obj = Object.keys(object)
-            for (var key of obj) {
-                if (map[object[key]]) {
-                    map[object[key]].push(key)
-                } else {
-                    map[object[key]] = [key]
-                }
+        if (!isFunction(f)) return invert(object, predicate)
+        var obj = Object.keys(object)
+        for (var key of obj) {
+            if (map[f((object[key]))]) {
+                map[f(object[key])].push(key)
+            } else {
+                map[f(object[key])] = [key]
             }
-            return map
-        } else {
-            var obj = Object.keys(object)
-            for (var key of obj) {
-                if (map[f((object[key]))]) {
-                    map[f(object[key])].push(key)
-                } else {
-                    map[f(object[key])] = [key]
-                }
-            }
-            return map
         }
+        return map
     }
 
     function toPath(path) {
@@ -2185,7 +2178,7 @@ var langrq = function () {
             }
         }
         if (isUndefined(obj)) {
-            return defaultValue = "default"
+            return defaultValue
         }
         return obj
     }
@@ -2449,11 +2442,11 @@ var langrq = function () {
     }
 
     function toLower(str = '') {
-        return str.toLowerCase()
+        return toLowerCase(str)
     }
 
     function toUpper(str = '') {
-        return str.toUpperCase()
+        return toUpperCase(str)
     }
     function trim(str = '', chars = " ") {
         var reg = new RegExp("[" + chars + "]+", "g")

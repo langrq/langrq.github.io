@@ -2022,17 +2022,16 @@ var langrq = function () {
                 }
             }
             return map
-        } else {
-            var obj = Object.keys(object)
-            for (var key of obj) {
-                if (map[f((object[key]))]) {
-                    map[f(object[key])].push(key)
-                } else {
-                    map[f(object[key])] = [key]
-                }
-            }
-            return map
         }
+        var obj = Object.keys(object)
+        for (var key of obj) {
+            if (map[f((object[key]))]) {
+                map[f(object[key])].push(key)
+            } else {
+                map[f(object[key])] = [key]
+            }
+        }
+        return map
     }
 
     function toPath(path) {
@@ -2185,7 +2184,7 @@ var langrq = function () {
             }
         }
         if (isUndefined(obj)) {
-            return defaultValue = "default"
+            return defaultValue
         }
         return obj
     }
@@ -2449,11 +2448,11 @@ var langrq = function () {
     }
 
     function toLower(str = '') {
-        return str.toLowerCase()
+        return toLowerCase(str)
     }
 
     function toUpper(str = '') {
-        return str.toUpperCase()
+        return toUpperCase(str)
     }
     function trim(str = '', chars = " ") {
         var reg = new RegExp("[" + chars + "]+", "g")

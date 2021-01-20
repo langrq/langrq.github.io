@@ -2185,7 +2185,7 @@ var langrq = function () {
             }
         }
         if (isUndefined(obj)) {
-            return defaultValue = "default"
+            return defaultValue =default
         }
         return obj
     }
@@ -2449,11 +2449,11 @@ var langrq = function () {
     }
 
     function toLower(str = '') {
-        return str.toLowerCase()
+        return toLowerCase(str)
     }
 
     function toUpper(str = '') {
-        return str.toUpperCase()
+        return toUpperCase(str)
     }
     function trim(str = '', chars = " ") {
         var reg = new RegExp("[" + chars + "]+", "g")
