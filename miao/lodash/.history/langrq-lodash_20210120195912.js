@@ -2636,26 +2636,10 @@ var langrq = function () {
             return get(obj, path)(...args)
         }
     }
-    function constant(value) {
-        return function () {
-            return value
-        }
-    }
+
     function flow(funcs) {
-        return function (...args) {
-            var res = args
-            funcs.forEach(it => {
-                if (isArray(res)) {
-                    res = it(...res)
-                } else {
-                    res = it(res)
-                }
-            });
-            return res
-        }
-    }
-    function conforms(source) {
-        return function conformsTo(object, source) {
+        return function (funcs) {
+            return flow(funcs)
         }
     }
     // function bind(f, thisArg, ...fixedArgs) {
@@ -2956,7 +2940,6 @@ var langrq = function () {
         before,
         method,
         flow,
-        constant,
     }
 
 }()

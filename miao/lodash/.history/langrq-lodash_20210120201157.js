@@ -2654,10 +2654,6 @@ var langrq = function () {
             return res
         }
     }
-    function conforms(source) {
-        return function conformsTo(object, source) {
-        }
-    }
     // function bind(f, thisArg, ...fixedArgs) {
     //     return function (...args) {
 

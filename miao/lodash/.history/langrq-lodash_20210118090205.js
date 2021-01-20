@@ -1291,7 +1291,7 @@ var langrq = function () {
 
     function ary(f, n = f.length) {
         return function (...args) {
-            return f(args.sliece(0, n))
+            return f(...args.sliece(0, n))
         }
     }
 
@@ -2321,7 +2321,7 @@ var langrq = function () {
     //string
     function camelCase(str = '') {
         str = str.toLowerCase()
-        var reg = /\w+/g
+        var reg = /^\w/
         return str.match(reg).join("").replace(/_/g, '');
 
     }
@@ -2338,8 +2338,8 @@ var langrq = function () {
     }
 
     function escape(str = "") {
-        return str.replace(/[\&\>\<\"\']/g, it => {
-            switch (it) {
+        return str.replace(/[\&\>\<\"\']/g, (item) => {
+            switch (item) {
                 case "&":
                     return "&amp;";
                 case "<":
@@ -2353,311 +2353,13 @@ var langrq = function () {
                 case "`":
                     return "&grave;";
                 default:
-                    return it;
+                    return item;
             }
         });
     }
 
-    function escapeRegExp(str = '') {
-        return str.replace(/[\^\$\ \.\*\+\?\(\)\[\]\{\}\|]/g, it =>
-            `\\${it}`
-        )
-    }
-
-    function kebabCase(str = '') {
-        var reg = /[a-z]+|[a-zA-Z]+/g
-        return str.match(reg).join("-").toLowerCase();
-    }
-
-    function lowerCase(str = '') {
-        var reg = /[a-z]+|[a-zA-Z]+/g
-        return str.match(reg).join(' ').toLowerCase()
-    }
-    function lowerFirst(str = '') {
-        return str[0].toLowerCase() + str.slice(1)
-    }
-
-    function pad(str, length = 0, chars = ' ') {
-        var n = str.length
-        if (length <= n) return str
-        var left = Math.floor((length - n) / 2 / chars.length)
-        var rigth = Math.ceil((length - n) / 2 / chars.length)
-        return (chars.repeat(left) + str + chars.repeat(rigth)).slice(0, length)
-    }
-
-    function padEnd(str = '', length = 0, chars = ' ') {
-        var n = str.length
-        if (length <= n) return str
-        var right = Math.ceil((length - n) / chars.length)
-        return (str + chars.repeat(right)).slice(0, length)
-    }
-
-    function padStart(str = '', length = 0, chars = ' ') {
-        var n = str.length
-        if (length <= n) return str
-        var left = Math.ceil((length - n) / chars.length)
-        return chars.repeat(left).slice(0, length - n) + str
-    }
 
 
-    function parseInt(str, radix = 10) {
-        return Number.parseInt(str, radix)
-    }
-
-
-    function repeat(str = '', n = 1) {
-        var res = ''
-        for (var i = 1; i <= n; i++) {
-            res += str
-        }
-        return res
-    }
-    function replace(str, pattern, replacement) {
-        return replace(pattern, replacement)
-    }
-    function snakeCase(str = '') {
-        var reg = /[a-z]+|[a-zA-Z]+/g
-        return str.match(reg).join("_").toLowerCase();
-    }
-
-    function split(str = '', separator, limit) {
-        return split(separator, limit)
-    }
-
-    function startCase(str = '') {
-        var reg = /[a-z]+|[a-zA-Z]+/g
-        return str.match(reg).map(it => {
-            return upperFirst(it)
-        }).join(" ")
-    }
-
-
-
-    function startsWith(str = '', target, position = 0) {
-        return str[position] === target
-    }
-
-    function toLower(str = '') {
-        return toLowerCase(str)
-    }
-
-    function toUpper(str = '') {
-        return toUpperCase(str)
-    }
-    function trim(str = '', chars = " ") {
-        var reg = new RegExp("[" + chars + "]+", "g")
-        return str.replace(reg, "")
-    }
-
-    function trimEnd(str = '', chars = " ") {
-        var r = chars
-        var reg = new RegExp("[" + r + "]+$", "g")
-        return str.replace(reg, "")
-    }
-
-    function trimStart(str = '', chars = " ") {
-        var r = chars
-        var reg = new RegExp("^[" + r + "]+", "g")
-        return str.replace(reg, "")
-    }
-
-    function truncate(str = '', options = {}) {
-
-    }
-
-    function unescape(str = '') {
-        return str.replace(/(\&amp;)|(\&lt;)|(\&gt;)|(\&quot;)|(\&apos;)|(\&grave;)/, it => {
-            switch (it) {
-                case "&amp;":
-                    return "&";
-                case "&lt;":
-                    return "<";
-                case "&gt;":
-                    return ">";
-                case '&quot;':
-                    return '"';
-                case "&apos;":
-                    return "'";
-                case "&grave;":
-                    return "`";
-                default:
-                    return it;
-            }
-        });
-    }
-    function upperCase(str = '') {
-        var reg = /[a-z]+|[a-zA-Z]+/g
-        return str.match(reg).join(' ').toUpperCase()
-    }
-    function upperFirst(str = '') {
-        return str[0].toUpperCase() + str.slice(1)
-    }
-
-    function words(str = '', pattern = /\w+/g) {
-        return str.match(pattern)
-    }
-
-    function defaultTo(value, defaultValue) {
-        if (isNull(value) || isNull(value) || isUndefined(value)) {
-            return defaultValue
-        }
-        return value
-    }
-
-    function range(start = 0, end, step = 1) {
-        var res = []
-        if (isUndefined(start)) return res
-        if (isUndefined(end)) {
-            end = start
-            start = 0
-        }
-
-        if (end < 0) {
-            if (step < 0) {
-                step = step
-            } else if (step > 0) {
-                step = -step
-            }
-            for (var i = start; i > end; i = i + step) {
-                res.push(i)
-            }
-        }
-        if (step == 0) {
-            var step = 1
-            for (var i = start; i < end; i = i + step) {
-                res.push(start)
-            }
-            return res
-        }
-        for (var i = start; i < end; i = i + step) {
-            res.push(i)
-        }
-        return res
-    }
-    function rangeRight(start = 0, end, step = 1) {
-        return range(start, end, step).reverse()
-    }
-
-    function times(n, iteratee) {
-        var res = []
-        for (var i = 0; i < n; i++) {
-            res.push(iteratee(i))
-        }
-        return res
-    }
-
-    function toPath(value) {
-        var reg = /\w+/g
-        if (!isArray(value)) {
-            value = value.match(reg)
-        }
-        return value
-    }
-
-    function uniqueId(prefix = "") {
-        return prefix + random(1, 3);
-    }
-
-    function cloneDeep(obj, map = new Map()) {
-        if (map.has(obj)) {
-            return map.get(obj)
-        }
-        var result = {}
-        map.set(obj, result)
-        for (var key in obj) {
-            var val = obj[key]
-            if (val && typeof val == "object") {
-                result[key] = cloneDeep(val, map)
-            } else {
-                result[key] = val
-            }
-        }
-        return result
-    }
-
-    function identity(value) {
-        return value
-    }
-
-    function concat(ary, ...args) {
-        let res = [...ary];
-        for (let i = 0; i < args.length; i++) {
-            if (Array.isArray(args[i])) {
-                res.push(...args[i]);
-            } else {
-                res.push(args[i]);
-            }
-        }
-        return res;
-    }
-
-    function pullAt(array, indexes) {
-        let pulled = []
-        let p = array
-        for (let i = 0; i < indexes.length; i++) {
-            pulled.push(array[indexes[i]])
-        }
-        return pulled
-    }
-
-    function property(path) {
-        return function (obj) {
-            return get(obj, path)
-        }
-    }
-
-    function once(predicate) {
-        var flag = true
-        var res
-        return function (...args) {
-            if (flag) {
-                res = predicate(value)
-                flag = false
-            }
-            return res
-        }
-    }
-    function spread(func, start = 0) {
-        return function (ary) {
-            return func(...ary.slice(start));
-        };
-    }
-    function nthArg(n = 0) {
-        if (n <= 0) {
-            n = args.length - n
-        }
-        return function (...args) {
-            return nth(args, n)
-        }
-    }
-
-    function method(path, ...args) {
-        return function (obj) {
-            return get(obj, path)(...args)
-        }
-    }
-    function constant(value) {
-        return function () {
-            return value
-        }
-    }
-    function flow(funcs) {
-        return function (...args) {
-            var res = args
-            funcs.forEach(it => {
-                if (isArray(res)) {
-                    res = it(...res)
-                } else {
-                    res = it(res)
-                }
-            });
-            return res
-        }
-    }
-    function conforms(source) {
-        return function conformsTo(object, source) {
-        }
-    }
     // function bind(f, thisArg, ...fixedArgs) {
     //     return function (...args) {
 
@@ -2914,49 +2616,6 @@ var langrq = function () {
         valuesIn,
         camelCase,
         capitalize,
-        escape,
-        escapeRegExp,
-        kebabCase,
-        lowerCase,
-        lowerFirst,
-        pad,
-        padEnd,
-        padStart,
-        parseInt,
-        repeat,
-        replace,
-        snakeCase,
-        split,
-        startCase,
-        upperCase,
-        upperFirst,
-        startsWith,
-        toLower,
-        toUpper,
-        trim,
-        trimStart,
-        trimEnd,
-        unescape,
-        words,
-        defaultTo,
-        range,
-        rangeRight,
-        times,
-        toPath,
-        uniqueId,
-        cloneDeep,
-        identity,
-        concat,
-        pullAt,
-        matches,
-        property,
-        once,
-        spread,
-        nthArg,
-        before,
-        method,
-        flow,
-        constant,
     }
 
 }()

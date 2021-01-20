@@ -1291,7 +1291,7 @@ var langrq = function () {
 
     function ary(f, n = f.length) {
         return function (...args) {
-            return f(args.sliece(0, n))
+            return f(...args.sliece(0, n))
         }
     }
 
@@ -2599,364 +2599,300 @@ var langrq = function () {
         }
         return pulled
     }
+    
+    = function matches(source) {
+        return bind(isMatch, null, window, source)
+    }
+// function bind(f, thisArg, ...fixedArgs) {
+//     return function (...args) {
 
-    function property(path) {
-        return function (obj) {
-            return get(obj, path)
+//         return f.call(thisArg, ...fixedArgs, ...args)
+//     }
+// }
+
+
+// function mapValues(obj, mapper) {
+//     var result = {}
+//     for (var key in obj) {
+//         var val = obj[key]
+//         result[key] = mapper(val, key, obj)
+
+//     }
+//     return result
+// }
+
+
+
+function before(n, func) {
+    var c = 0
+    var reuslt = 0
+    return function (...args) {
+        if (c < n) {
+            result = func.call(this, ...args)
+        } else {
+            return
+        }
+        r++
+    }
+}
+
+
+
+
+
+
+
+
+function curry(f, length = f.length) {
+    return function (...args) {
+        if (args.length < length) {
+            return curry(f.bind(null, ...args), length - args.length)
+        } else {
+            return f(...args)
         }
     }
-
-    function once(predicate) {
-        var flag = true
-        var res
-        return function (...args) {
-            if (flag) {
-                res = predicate(value)
-                flag = false
-            }
-            return res
-        }
-    }
-    function spread(func, start = 0) {
-        return function (ary) {
-            return func(...ary.slice(start));
-        };
-    }
-    function nthArg(n = 0) {
-        if (n <= 0) {
-            n = args.length - n
-        }
-        return function (...args) {
-            return nth(args, n)
-        }
-    }
-
-    function method(path, ...args) {
-        return function (obj) {
-            return get(obj, path)(...args)
-        }
-    }
-    function constant(value) {
-        return function () {
-            return value
-        }
-    }
-    function flow(funcs) {
-        return function (...args) {
-            var res = args
-            funcs.forEach(it => {
-                if (isArray(res)) {
-                    res = it(...res)
-                } else {
-                    res = it(res)
-                }
-            });
-            return res
-        }
-    }
-    function conforms(source) {
-        return function conformsTo(object, source) {
-        }
-    }
-    // function bind(f, thisArg, ...fixedArgs) {
-    //     return function (...args) {
-
-    //         return f.call(thisArg, ...fixedArgs, ...args)
-    //     }
-    // }
+}
 
 
-    // function mapValues(obj, mapper) {
-    //     var result = {}
-    //     for (var key in obj) {
-    //         var val = obj[key]
-    //         result[key] = mapper(val, key, obj)
-
-    //     }
-    //     return result
-    // }
-
-
-
-    function before(n, func) {
-        var c = 0
-        var reuslt = 0
-        return function (...args) {
-            if (c < n) {
-                result = func.call(this, ...args)
-            } else {
-                return
-            }
-            r++
-        }
-    }
-
-
-
-
-
-
-
-
-    function curry(f, length = f.length) {
-        return function (...args) {
-            if (args.length < length) {
-                return curry(f.bind(null, ...args), length - args.length)
-            } else {
-                return f(...args)
-            }
-        }
-    }
-
-
-    return {
-        chunk,
-        compact,
-        compact,
-        join,
-        last,
-        lastIndexOf,
-        drop,
-        dropRight,
-        fill,
-        findIndex,
-        findLastIndex,
-        flatten,
-        flattenDeep,
-        uniq,
-        xor,
-        without,
-        zip,
-        zipWith,
-        zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
-        forEach,
-        get,
-        bind,
-        iteratee,
-        dropRightWhile,
-        dropWhile,
-        intersectionBy,
-        intersectionWith,
-        pullAllBy,
-        sortedIndexBy,
-        sortedLastIndexBy,
-        takeRightWhile,
-        takeWhile,
-        unionBy,
-        unionWith,
-        isEqual,
-        pullAllWith,
-        uniqBy,
-        uniqWith,
-        add,
-        unzipWith,
-        xorBy,
-        xorWith,
-        countBy,
-        every,
-        filter,
-        find,
-        findLast,
-        flatMap,
-        flatMapDeep,
-        flatMapDepth,
-        forEachRight,
-        groupBy,
-        includes,
-        invokeMap,
-        keyBy,
-        map,
-        curry,
-        mapValues,
-        partition,
-        reduce,
-        reduceRight,
-        reject,
-        sample,
-        sampleSize,
-        shuffle,
-        size,
-        some,
-        ary,
-        bind,
-        defer,
-        delay,
-        flip,
-        negate,
-        unary,
-        castArray,
-        clone,
-        conformsTo,
-        eq,
-        gt,
-        gte,
-        isArguments,
-        isArray,
-        isArrayBuffer,
-        isArrayLike,
-        isArrayLikeObject,
-        isBoolean,
-        isDate,
-        isElement,
-        isEmpty,
-        isEqualWith,
-        isError,
-        isFinite,
-        isMatchWith,
-        isNative,
-        isNaN,
-        isNil,
-        isNull,
-        isLength,
-        isMap,
-        isFunction,
-        isNumber,
-        isObject,
-        isObjectLike,
-        toArray,
-        toFinite,
-        ceil,
-        divide,
-        floor,
-        max,
-        maxBy,
-        mean,
-        meanBy,
-        min,
-        minBy,
-        multiply,
-        round,
-        subtract,
-        sum,
-        sumBy,
-        clamp,
-        inRange,
-        random,
-        assign,
-        assignIn,
-        defaults,
-        defaultsDeep,
-        findKey,
-        findLastKey,
-        forIn,
-        forOwn,
-        endsWith,
-        isInteger,
-        isMatch,
-        isRegExp,
-        isSafeInteger,
-        isSet,
-        isString,
-        isSymbol,
-        isTypedArray,
-        isUndefined,
-        isWeakMap,
-        isWeakSet,
-        lt,
-        lte,
-        toInteger,
-        toNumber,
-        toLength,
-        toSafeInteger,
-        at,
-        forInRight,
-        forOwnRight,
-        functions,
-        functionsIn,
-        has,
-        hasIn,
-        invert,
-        invertBy,
-        invoke,
-        keys,
-        keysIn,
-        mapKeys,
-        merge,
-        mergeWith,
-        omit,
-        omitBy,
-        pick,
-        pickBy,
-        result,
-        set,
-        setWith,
-        toPairs,
-        toPairsIn,
-        transform,
-        unset,
-        update,
-        updateWith,
-        values,
-        valuesIn,
-        camelCase,
-        capitalize,
-        escape,
-        escapeRegExp,
-        kebabCase,
-        lowerCase,
-        lowerFirst,
-        pad,
-        padEnd,
-        padStart,
-        parseInt,
-        repeat,
-        replace,
-        snakeCase,
-        split,
-        startCase,
-        upperCase,
-        upperFirst,
-        startsWith,
-        toLower,
-        toUpper,
-        trim,
-        trimStart,
-        trimEnd,
-        unescape,
-        words,
-        defaultTo,
-        range,
-        rangeRight,
-        times,
-        toPath,
-        uniqueId,
-        cloneDeep,
-        identity,
-        concat,
-        pullAt,
-        matches,
-        property,
-        once,
-        spread,
-        nthArg,
-        before,
-        method,
-        flow,
-        constant,
-    }
+return {
+    chunk,
+    compact,
+    compact,
+    join,
+    last,
+    lastIndexOf,
+    drop,
+    dropRight,
+    fill,
+    findIndex,
+    findLastIndex,
+    flatten,
+    flattenDeep,
+    uniq,
+    xor,
+    without,
+    zip,
+    zipWith,
+    zipObject,
+    difference,
+    unzip,
+    union,
+    flattenDepth,
+    fromPairs,
+    head,
+    indexOf,
+    initial,
+    intersection,
+    nth,
+    pull,
+    pullAll,
+    reverse,
+    sortedIndex,
+    sortedIndexOf,
+    sortedLastIndex,
+    sortedLastIndexOf,
+    sortedUniq,
+    sortedUniqBy,
+    tail,
+    take,
+    takeRight,
+    differenceBy,
+    differenceWith,
+    forEach,
+    get,
+    bind,
+    iteratee,
+    dropRightWhile,
+    dropWhile,
+    intersectionBy,
+    intersectionWith,
+    pullAllBy,
+    sortedIndexBy,
+    sortedLastIndexBy,
+    takeRightWhile,
+    takeWhile,
+    unionBy,
+    unionWith,
+    isEqual,
+    pullAllWith,
+    uniqBy,
+    uniqWith,
+    add,
+    unzipWith,
+    xorBy,
+    xorWith,
+    countBy,
+    every,
+    filter,
+    find,
+    findLast,
+    flatMap,
+    flatMapDeep,
+    flatMapDepth,
+    forEachRight,
+    groupBy,
+    includes,
+    invokeMap,
+    keyBy,
+    map,
+    curry,
+    mapValues,
+    partition,
+    reduce,
+    reduceRight,
+    reject,
+    sample,
+    sampleSize,
+    shuffle,
+    size,
+    some,
+    ary,
+    bind,
+    defer,
+    delay,
+    flip,
+    negate,
+    unary,
+    castArray,
+    clone,
+    conformsTo,
+    eq,
+    gt,
+    gte,
+    isArguments,
+    isArray,
+    isArrayBuffer,
+    isArrayLike,
+    isArrayLikeObject,
+    isBoolean,
+    isDate,
+    isElement,
+    isEmpty,
+    isEqualWith,
+    isError,
+    isFinite,
+    isMatchWith,
+    isNative,
+    isNaN,
+    isNil,
+    isNull,
+    isLength,
+    isMap,
+    isFunction,
+    isNumber,
+    isObject,
+    isObjectLike,
+    toArray,
+    toFinite,
+    ceil,
+    divide,
+    floor,
+    max,
+    maxBy,
+    mean,
+    meanBy,
+    min,
+    minBy,
+    multiply,
+    round,
+    subtract,
+    sum,
+    sumBy,
+    clamp,
+    inRange,
+    random,
+    assign,
+    assignIn,
+    defaults,
+    defaultsDeep,
+    findKey,
+    findLastKey,
+    forIn,
+    forOwn,
+    endsWith,
+    isInteger,
+    isMatch,
+    isRegExp,
+    isSafeInteger,
+    isSet,
+    isString,
+    isSymbol,
+    isTypedArray,
+    isUndefined,
+    isWeakMap,
+    isWeakSet,
+    lt,
+    lte,
+    toInteger,
+    toNumber,
+    toLength,
+    toSafeInteger,
+    at,
+    forInRight,
+    forOwnRight,
+    functions,
+    functionsIn,
+    has,
+    hasIn,
+    invert,
+    invertBy,
+    invoke,
+    keys,
+    keysIn,
+    mapKeys,
+    merge,
+    mergeWith,
+    omit,
+    omitBy,
+    pick,
+    pickBy,
+    result,
+    set,
+    setWith,
+    toPairs,
+    toPairsIn,
+    transform,
+    unset,
+    update,
+    updateWith,
+    values,
+    valuesIn,
+    camelCase,
+    capitalize,
+    escape,
+    escapeRegExp,
+    kebabCase,
+    lowerCase,
+    lowerFirst,
+    pad,
+    padEnd,
+    padStart,
+    parseInt,
+    repeat,
+    replace,
+    snakeCase,
+    split,
+    startCase,
+    upperCase,
+    upperFirst,
+    startsWith,
+    toLower,
+    toUpper,
+    trim,
+    trimStart,
+    trimEnd,
+    unescape,
+    words,
+    defaultTo,
+    range,
+    rangeRight,
+    times,
+    toPath,
+    uniqueId,
+    cloneDeep,
+    identity,
+    concat,
+    pullAt,
+}
 
 }()

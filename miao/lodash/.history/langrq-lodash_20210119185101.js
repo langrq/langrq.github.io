@@ -1291,7 +1291,7 @@ var langrq = function () {
 
     function ary(f, n = f.length) {
         return function (...args) {
-            return f(args.sliece(0, n))
+            return f(...args.sliece(0, n))
         }
     }
 
@@ -2431,7 +2431,13 @@ var langrq = function () {
         }).join(" ")
     }
 
-
+    function upperCase(str = '') {
+        var reg = /[a-z]+|[a-zA-Z]+/g
+        return str.match(reg).join(' ').toUpperCase()
+    }
+    function upperFirst(str = '') {
+        return str[0].toUpperCase() + str.slice(1)
+    }
 
     function startsWith(str = '', target, position = 0) {
         return str[position] === target
@@ -2445,518 +2451,300 @@ var langrq = function () {
         return toUpperCase(str)
     }
     function trim(str = '', chars = " ") {
-        var reg = new RegExp("[" + chars + "]+", "g")
+        var r = chars
+        var reg = new RegExp([{ r }] +, "g")
         return str.replace(reg, "")
     }
 
     function trimEnd(str = '', chars = " ") {
         var r = chars
-        var reg = new RegExp("[" + r + "]+$", "g")
-        return str.replace(reg, "")
-    }
+        var reg = new RegExp([^ {{ r } +} $]+, "g")
+    return str.replace(reg, "")
+}
 
-    function trimStart(str = '', chars = " ") {
-        var r = chars
-        var reg = new RegExp("^[" + r + "]+", "g")
-        return str.replace(reg, "")
-    }
+function trimStart(str = '', chars = " ") {
+    var r = chars
+    var reg = new RegExp(`[^{r}+]`, "g")
+    return str.replace(reg, "")
+}
+// function bind(f, thisArg, ...fixedArgs) {
+//     return function (...args) {
 
-    function truncate(str = '', options = {}) {
+//         return f.call(thisArg, ...fixedArgs, ...args)
+//     }
+// }
 
-    }
 
-    function unescape(str = '') {
-        return str.replace(/(\&amp;)|(\&lt;)|(\&gt;)|(\&quot;)|(\&apos;)|(\&grave;)/, it => {
-            switch (it) {
-                case "&amp;":
-                    return "&";
-                case "&lt;":
-                    return "<";
-                case "&gt;":
-                    return ">";
-                case '&quot;':
-                    return '"';
-                case "&apos;":
-                    return "'";
-                case "&grave;":
-                    return "`";
-                default:
-                    return it;
-            }
-        });
-    }
-    function upperCase(str = '') {
-        var reg = /[a-z]+|[a-zA-Z]+/g
-        return str.match(reg).join(' ').toUpperCase()
-    }
-    function upperFirst(str = '') {
-        return str[0].toUpperCase() + str.slice(1)
-    }
+// function mapValues(obj, mapper) {
+//     var result = {}
+//     for (var key in obj) {
+//         var val = obj[key]
+//         result[key] = mapper(val, key, obj)
 
-    function words(str = '', pattern = /\w+/g) {
-        return str.match(pattern)
-    }
+//     }
+//     return result
+// }
 
-    function defaultTo(value, defaultValue) {
-        if (isNull(value) || isNull(value) || isUndefined(value)) {
-            return defaultValue
+
+
+function before(n, func) {
+    var c = 0
+    var reuslt = 0
+    return function (...args) {
+        if (c < n) {
+            result = func.call(this, ...args)
+        } else {
+            return
         }
-        return value
+        r++
     }
+}
 
-    function range(start = 0, end, step = 1) {
-        var res = []
-        if (isUndefined(start)) return res
-        if (isUndefined(end)) {
-            end = start
-            start = 0
-        }
 
-        if (end < 0) {
-            if (step < 0) {
-                step = step
-            } else if (step > 0) {
-                step = -step
-            }
-            for (var i = start; i > end; i = i + step) {
-                res.push(i)
-            }
-        }
-        if (step == 0) {
-            var step = 1
-            for (var i = start; i < end; i = i + step) {
-                res.push(start)
-            }
-            return res
-        }
-        for (var i = start; i < end; i = i + step) {
-            res.push(i)
-        }
-        return res
-    }
-    function rangeRight(start = 0, end, step = 1) {
-        return range(start, end, step).reverse()
-    }
 
-    function times(n, iteratee) {
-        var res = []
-        for (var i = 0; i < n; i++) {
-            res.push(iteratee(i))
-        }
-        return res
-    }
 
-    function toPath(value) {
-        var reg = /\w+/g
-        if (!isArray(value)) {
-            value = value.match(reg)
-        }
-        return value
-    }
 
-    function uniqueId(prefix = "") {
-        return prefix + random(1, 3);
-    }
 
-    function cloneDeep(obj, map = new Map()) {
-        if (map.has(obj)) {
-            return map.get(obj)
-        }
-        var result = {}
-        map.set(obj, result)
-        for (var key in obj) {
-            var val = obj[key]
-            if (val && typeof val == "object") {
-                result[key] = cloneDeep(val, map)
-            } else {
-                result[key] = val
-            }
-        }
-        return result
-    }
 
-    function identity(value) {
-        return value
-    }
 
-    function concat(ary, ...args) {
-        let res = [...ary];
-        for (let i = 0; i < args.length; i++) {
-            if (Array.isArray(args[i])) {
-                res.push(...args[i]);
-            } else {
-                res.push(args[i]);
-            }
-        }
-        return res;
-    }
-
-    function pullAt(array, indexes) {
-        let pulled = []
-        let p = array
-        for (let i = 0; i < indexes.length; i++) {
-            pulled.push(array[indexes[i]])
-        }
-        return pulled
-    }
-
-    function property(path) {
-        return function (obj) {
-            return get(obj, path)
+function curry(f, length = f.length) {
+    return function (...args) {
+        if (args.length < length) {
+            return curry(f.bind(null, ...args), length - args.length)
+        } else {
+            return f(...args)
         }
     }
-
-    function once(predicate) {
-        var flag = true
-        var res
-        return function (...args) {
-            if (flag) {
-                res = predicate(value)
-                flag = false
-            }
-            return res
-        }
-    }
-    function spread(func, start = 0) {
-        return function (ary) {
-            return func(...ary.slice(start));
-        };
-    }
-    function nthArg(n = 0) {
-        if (n <= 0) {
-            n = args.length - n
-        }
-        return function (...args) {
-            return nth(args, n)
-        }
-    }
-
-    function method(path, ...args) {
-        return function (obj) {
-            return get(obj, path)(...args)
-        }
-    }
-    function constant(value) {
-        return function () {
-            return value
-        }
-    }
-    function flow(funcs) {
-        return function (...args) {
-            var res = args
-            funcs.forEach(it => {
-                if (isArray(res)) {
-                    res = it(...res)
-                } else {
-                    res = it(res)
-                }
-            });
-            return res
-        }
-    }
-    function conforms(source) {
-        return function conformsTo(object, source) {
-        }
-    }
-    // function bind(f, thisArg, ...fixedArgs) {
-    //     return function (...args) {
-
-    //         return f.call(thisArg, ...fixedArgs, ...args)
-    //     }
-    // }
+}
 
 
-    // function mapValues(obj, mapper) {
-    //     var result = {}
-    //     for (var key in obj) {
-    //         var val = obj[key]
-    //         result[key] = mapper(val, key, obj)
-
-    //     }
-    //     return result
-    // }
-
-
-
-    function before(n, func) {
-        var c = 0
-        var reuslt = 0
-        return function (...args) {
-            if (c < n) {
-                result = func.call(this, ...args)
-            } else {
-                return
-            }
-            r++
-        }
-    }
-
-
-
-
-
-
-
-
-    function curry(f, length = f.length) {
-        return function (...args) {
-            if (args.length < length) {
-                return curry(f.bind(null, ...args), length - args.length)
-            } else {
-                return f(...args)
-            }
-        }
-    }
-
-
-    return {
-        chunk,
-        compact,
-        compact,
-        join,
-        last,
-        lastIndexOf,
-        drop,
-        dropRight,
-        fill,
-        findIndex,
-        findLastIndex,
-        flatten,
-        flattenDeep,
-        uniq,
-        xor,
-        without,
-        zip,
-        zipWith,
-        zipObject,
-        difference,
-        unzip,
-        union,
-        flattenDepth,
-        fromPairs,
-        head,
-        indexOf,
-        initial,
-        intersection,
-        nth,
-        pull,
-        pullAll,
-        reverse,
-        sortedIndex,
-        sortedIndexOf,
-        sortedLastIndex,
-        sortedLastIndexOf,
-        sortedUniq,
-        sortedUniqBy,
-        tail,
-        take,
-        takeRight,
-        differenceBy,
-        differenceWith,
-        forEach,
-        get,
-        bind,
-        iteratee,
-        dropRightWhile,
-        dropWhile,
-        intersectionBy,
-        intersectionWith,
-        pullAllBy,
-        sortedIndexBy,
-        sortedLastIndexBy,
-        takeRightWhile,
-        takeWhile,
-        unionBy,
-        unionWith,
-        isEqual,
-        pullAllWith,
-        uniqBy,
-        uniqWith,
-        add,
-        unzipWith,
-        xorBy,
-        xorWith,
-        countBy,
-        every,
-        filter,
-        find,
-        findLast,
-        flatMap,
-        flatMapDeep,
-        flatMapDepth,
-        forEachRight,
-        groupBy,
-        includes,
-        invokeMap,
-        keyBy,
-        map,
-        curry,
-        mapValues,
-        partition,
-        reduce,
-        reduceRight,
-        reject,
-        sample,
-        sampleSize,
-        shuffle,
-        size,
-        some,
-        ary,
-        bind,
-        defer,
-        delay,
-        flip,
-        negate,
-        unary,
-        castArray,
-        clone,
-        conformsTo,
-        eq,
-        gt,
-        gte,
-        isArguments,
-        isArray,
-        isArrayBuffer,
-        isArrayLike,
-        isArrayLikeObject,
-        isBoolean,
-        isDate,
-        isElement,
-        isEmpty,
-        isEqualWith,
-        isError,
-        isFinite,
-        isMatchWith,
-        isNative,
-        isNaN,
-        isNil,
-        isNull,
-        isLength,
-        isMap,
-        isFunction,
-        isNumber,
-        isObject,
-        isObjectLike,
-        toArray,
-        toFinite,
-        ceil,
-        divide,
-        floor,
-        max,
-        maxBy,
-        mean,
-        meanBy,
-        min,
-        minBy,
-        multiply,
-        round,
-        subtract,
-        sum,
-        sumBy,
-        clamp,
-        inRange,
-        random,
-        assign,
-        assignIn,
-        defaults,
-        defaultsDeep,
-        findKey,
-        findLastKey,
-        forIn,
-        forOwn,
-        endsWith,
-        isInteger,
-        isMatch,
-        isRegExp,
-        isSafeInteger,
-        isSet,
-        isString,
-        isSymbol,
-        isTypedArray,
-        isUndefined,
-        isWeakMap,
-        isWeakSet,
-        lt,
-        lte,
-        toInteger,
-        toNumber,
-        toLength,
-        toSafeInteger,
-        at,
-        forInRight,
-        forOwnRight,
-        functions,
-        functionsIn,
-        has,
-        hasIn,
-        invert,
-        invertBy,
-        invoke,
-        keys,
-        keysIn,
-        mapKeys,
-        merge,
-        mergeWith,
-        omit,
-        omitBy,
-        pick,
-        pickBy,
-        result,
-        set,
-        setWith,
-        toPairs,
-        toPairsIn,
-        transform,
-        unset,
-        update,
-        updateWith,
-        values,
-        valuesIn,
-        camelCase,
-        capitalize,
-        escape,
-        escapeRegExp,
-        kebabCase,
-        lowerCase,
-        lowerFirst,
-        pad,
-        padEnd,
-        padStart,
-        parseInt,
-        repeat,
-        replace,
-        snakeCase,
-        split,
-        startCase,
-        upperCase,
-        upperFirst,
-        startsWith,
-        toLower,
-        toUpper,
-        trim,
-        trimStart,
-        trimEnd,
-        unescape,
-        words,
-        defaultTo,
-        range,
-        rangeRight,
-        times,
-        toPath,
-        uniqueId,
-        cloneDeep,
-        identity,
-        concat,
-        pullAt,
-        matches,
-        property,
-        once,
-        spread,
-        nthArg,
-        before,
-        method,
-        flow,
-        constant,
-    }
+return {
+    chunk,
+    compact,
+    compact,
+    join,
+    last,
+    lastIndexOf,
+    drop,
+    dropRight,
+    fill,
+    findIndex,
+    findLastIndex,
+    flatten,
+    flattenDeep,
+    uniq,
+    xor,
+    without,
+    zip,
+    zipWith,
+    zipObject,
+    difference,
+    unzip,
+    union,
+    flattenDepth,
+    fromPairs,
+    head,
+    indexOf,
+    initial,
+    intersection,
+    nth,
+    pull,
+    pullAll,
+    reverse,
+    sortedIndex,
+    sortedIndexOf,
+    sortedLastIndex,
+    sortedLastIndexOf,
+    sortedUniq,
+    sortedUniqBy,
+    tail,
+    take,
+    takeRight,
+    differenceBy,
+    differenceWith,
+    forEach,
+    get,
+    bind,
+    iteratee,
+    dropRightWhile,
+    dropWhile,
+    intersectionBy,
+    intersectionWith,
+    pullAllBy,
+    sortedIndexBy,
+    sortedLastIndexBy,
+    takeRightWhile,
+    takeWhile,
+    unionBy,
+    unionWith,
+    isEqual,
+    pullAllWith,
+    uniqBy,
+    uniqWith,
+    add,
+    unzipWith,
+    xorBy,
+    xorWith,
+    countBy,
+    every,
+    filter,
+    find,
+    findLast,
+    flatMap,
+    flatMapDeep,
+    flatMapDepth,
+    forEachRight,
+    groupBy,
+    includes,
+    invokeMap,
+    keyBy,
+    map,
+    curry,
+    mapValues,
+    partition,
+    reduce,
+    reduceRight,
+    reject,
+    sample,
+    sampleSize,
+    shuffle,
+    size,
+    some,
+    ary,
+    bind,
+    defer,
+    delay,
+    flip,
+    negate,
+    unary,
+    castArray,
+    clone,
+    conformsTo,
+    eq,
+    gt,
+    gte,
+    isArguments,
+    isArray,
+    isArrayBuffer,
+    isArrayLike,
+    isArrayLikeObject,
+    isBoolean,
+    isDate,
+    isElement,
+    isEmpty,
+    isEqualWith,
+    isError,
+    isFinite,
+    isMatchWith,
+    isNative,
+    isNaN,
+    isNil,
+    isNull,
+    isLength,
+    isMap,
+    isFunction,
+    isNumber,
+    isObject,
+    isObjectLike,
+    toArray,
+    toFinite,
+    ceil,
+    divide,
+    floor,
+    max,
+    maxBy,
+    mean,
+    meanBy,
+    min,
+    minBy,
+    multiply,
+    round,
+    subtract,
+    sum,
+    sumBy,
+    clamp,
+    inRange,
+    random,
+    assign,
+    assignIn,
+    defaults,
+    defaultsDeep,
+    findKey,
+    findLastKey,
+    forIn,
+    forOwn,
+    endsWith,
+    isInteger,
+    isMatch,
+    isRegExp,
+    isSafeInteger,
+    isSet,
+    isString,
+    isSymbol,
+    isTypedArray,
+    isUndefined,
+    isWeakMap,
+    isWeakSet,
+    lt,
+    lte,
+    toInteger,
+    toNumber,
+    toLength,
+    toSafeInteger,
+    at,
+    forInRight,
+    forOwnRight,
+    functions,
+    functionsIn,
+    has,
+    hasIn,
+    invert,
+    invertBy,
+    invoke,
+    keys,
+    keysIn,
+    mapKeys,
+    merge,
+    mergeWith,
+    omit,
+    omitBy,
+    pick,
+    pickBy,
+    result,
+    set,
+    setWith,
+    toPairs,
+    toPairsIn,
+    transform,
+    unset,
+    update,
+    updateWith,
+    values,
+    valuesIn,
+    camelCase,
+    capitalize,
+    escape,
+    escapeRegExp,
+    kebabCase,
+    lowerCase,
+    lowerFirst,
+    pad,
+    padEnd,
+    padStart,
+    parseInt,
+    repeat,
+    replace,
+    snakeCase,
+    split,
+    startCase,
+    upperCase,
+    upperFirst,
+    startsWith,
+    toLower,
+    toUpper,
+    trim,
+    trimStart,
+    trimEnd,
+}
 
 }()

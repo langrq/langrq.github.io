@@ -2636,11 +2636,7 @@ var langrq = function () {
             return get(obj, path)(...args)
         }
     }
-    function constant(value) {
-        return function () {
-            return value
-        }
-    }
+
     function flow(funcs) {
         return function (...args) {
             var res = args
@@ -2652,10 +2648,6 @@ var langrq = function () {
                 }
             });
             return res
-        }
-    }
-    function conforms(source) {
-        return function conformsTo(object, source) {
         }
     }
     // function bind(f, thisArg, ...fixedArgs) {
@@ -2956,7 +2948,6 @@ var langrq = function () {
         before,
         method,
         flow,
-        constant,
     }
 
 }()

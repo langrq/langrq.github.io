@@ -1291,7 +1291,7 @@ var langrq = function () {
 
     function ary(f, n = f.length) {
         return function (...args) {
-            return f(args.sliece(0, n))
+            return f(...args.sliece(0, n))
         }
     }
 
@@ -2600,63 +2600,8 @@ var langrq = function () {
         return pulled
     }
 
-    function property(path) {
-        return function (obj) {
-            return get(obj, path)
-        }
-    }
-
-    function once(predicate) {
-        var flag = true
-        var res
-        return function (...args) {
-            if (flag) {
-                res = predicate(value)
-                flag = false
-            }
-            return res
-        }
-    }
-    function spread(func, start = 0) {
-        return function (ary) {
-            return func(...ary.slice(start));
-        };
-    }
-    function nthArg(n = 0) {
-        if (n <= 0) {
-            n = args.length - n
-        }
-        return function (...args) {
-            return nth(args, n)
-        }
-    }
-
-    function method(path, ...args) {
-        return function (obj) {
-            return get(obj, path)(...args)
-        }
-    }
-    function constant(value) {
-        return function () {
-            return value
-        }
-    }
-    function flow(funcs) {
-        return function (...args) {
-            var res = args
-            funcs.forEach(it => {
-                if (isArray(res)) {
-                    res = it(...res)
-                } else {
-                    res = it(res)
-                }
-            });
-            return res
-        }
-    }
-    function conforms(source) {
-        return function conformsTo(object, source) {
-        }
+    function matches(source) {
+        return bind(isMatch, null, window, source)
     }
     // function bind(f, thisArg, ...fixedArgs) {
     //     return function (...args) {
@@ -2949,14 +2894,6 @@ var langrq = function () {
         concat,
         pullAt,
         matches,
-        property,
-        once,
-        spread,
-        nthArg,
-        before,
-        method,
-        flow,
-        constant,
     }
 
 }()
